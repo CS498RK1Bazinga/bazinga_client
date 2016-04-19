@@ -1,10 +1,34 @@
-var app = angular.module('mp4', ['ngRoute', 'mp4Controllers', 'mp4Services']);
+var app = angular.module('mp4', ['ngRoute', 'mp4Controllers', 'mp4Services', '720kb.datepicker']);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-    when('/firstview', {
-    templateUrl: 'partials/firstview.html',
-    controller: 'FirstController'
+    when('/users', {
+    templateUrl: 'partials/users.html',
+    controller: 'UserController'
+  }).
+  when('/users/add', {
+    templateUrl: './partials/addUser.html',
+    controller: 'AddUserController'
+  }).
+  when('/users/:userId', {
+    templateUrl: './partials/profile.html',
+    controller: 'ProfileController'
+  }).
+  when('/tasks', {
+    templateUrl: './partials/tasks.html',
+    controller: 'TaskController'
+  }).
+  when('/tasks/add', {
+    templateUrl: './partials/addTask.html',
+    controller: 'TaskController'
+  }).
+  when('/tasks/:taskId', {
+   templateUrl: 'partials/taskDetail.html',
+   controller: 'TaskDetailController'
+  }).
+  when('/editTask/:taskId', {
+  templateUrl: 'partials/editTask.html',
+  controller: 'EditTaskController'
   }).
   when('/secondview', {
     templateUrl: 'partials/secondview.html',

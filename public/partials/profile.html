@@ -1,0 +1,47 @@
+<div class="list" ng-controller='ProfileController'>
+	<form>
+    <div class="text-center">
+
+    <div class="row">
+      <!-- ng-model double binding-->
+            <h3>User Profile</h3>
+            <div class="columns large-6"><b>Name: </b>{{user.name}}</h2></div>
+            <div class="columns large-6"><b>Email: </b>{{user.email}}</h2></div>
+            <br><br>
+						<hr>
+      </div>
+			<div class="row">
+					<!--  <div class="small-12 columns">-->
+					<div class="columns small-8 small-offset-2">
+
+      <div class="row">
+        <h3>Pending Tasks</h3>
+        <br>
+        <div ng-repeat="task in pendingTaskList">
+					<hr>
+          <div class="small-4 columns"><a href="#/tasks/{{task._id}}"><b>{{task.name}}</b></a></div>
+          <div class="small-4 columns">Deadline: {{task.deadline}}</div>
+          <div class="small-4 columns"><button ng-click="markComplete($index)" class="secondary button">Completed</button></div>
+          <hr>
+        </div>
+      </div>
+		</div>
+	</div>
+
+	<div class="row">
+			<!--  <div class="small-12 columns">-->
+			<div class="columns small-8 small-offset-2">
+        <button ng-click="showCompletedList()" class="button">Show Completed Tasks</button>
+        <div class="row" ng-hide=showCompleted ng-repeat="completedTask in completedTaskList">
+					<hr>
+          <div class="small-4 columns"><a href="#/tasks/{{completedTask._id}}"><b>{{completedTask.name}}</b></a></div>
+          <div class="small-4 columns">Deadline: {{completedTask.deadline}}</div>
+					
+
+					<hr>
+
+      </div>
+      </div>
+		</div>
+  </form>
+</div>

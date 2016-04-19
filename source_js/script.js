@@ -8,9 +8,15 @@ for(var i=0; i<divs.length; i++) {
 
 function highlightThis(event) {
     //event.stopPropagation();
-  
+
     var backgroundColor = this.style.backgroundColor;
     this.style.backgroundColor='yellow';
     alert(this.className);
     this.style.backgroundColor=backgroundColor;
 }
+
+function dateFormat (format) {
+  var tempStr = new Date(format.toString()).toString().split(" ");
+  format = tempStr[1]+ " " + tempStr[2] + ", " + tempStr[3];
+  return format;
+};

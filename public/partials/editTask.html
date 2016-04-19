@@ -1,0 +1,36 @@
+<div class="list" ng-controller='EditTaskController'>
+  <form>
+    <div class="row">
+        <div class="columns small-4 small-offset-4">
+            <h3><b>Edit Task</b></h3>
+            <h5>Task name</h5>
+            <input ng-model="task.name" type="text">
+            <h5>Task deadline</h5>
+            <datepicker><input ng-model="task.deadline" type="text"/></datepicker>
+            <h5>Task assigned user</h5>
+            <label>
+              <select ng-model="userIndex" >
+                <option ng-selected="$first" ng-repeat = "user in users" value="{{$index}}">{{user.name}}</option>
+              </select>
+            </label>
+            <h5>Task description</h5>
+            <textarea ng-model="task.description" placeholder="None"></textarea>
+            <h5>Task completed</h5>
+            <label>completed <input type="checkbox" ng-model="task.completed"></label>
+            <div ng-if="errorMessage">
+              <p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">{{ errorMessage }}</p>
+            </div>
+          </div>
+      </div>
+    <div class="text-center">
+      <div class="row">
+        <div class="small-4 small-offset-4 columns">
+          <button ng-click="updateEditTask()" class="button info">Update Task</button>
+          <div ng-if="successMessage">
+            <p style="border:3px; border-style:solid; border-color:#00ff00; padding: 1em;">{{ successMessage }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,35 @@
+<div class="list" ng-controller='AddTaskController'>
+	<form>
+	  <div class="row">
+          <div class="small-4 small-offset-4 columns">
+						<h3><b>Add Task</b></h3>
+            <h5>Task name: </h5><input ng-model="data.name" required type="text" placeholder="Task name">
+                  <h5>Assigned User: </h5><label>
+                      <select ng-model="assignedUser" >
+                        <option ng-repeat = "user in users" value="{{$index}}">{{user.name}}</option>
+                      </select>
+                    </label>
+
+              <h5>Deadline:</h5><datepicker><input ng-model="data.deadline" required type="text"/></datepicker>
+
+
+            <h5>Description: </h5><textarea ng-model="data.description" placeholder="Description"></textarea>
+						<div ng-if="errorMessage">
+							<p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">{{ errorMessage }}</p>
+						</div>
+          </div>
+      </div>
+
+    <div class="text-center">
+			<div class="row">
+				<div class="small-4 small-offset-4 columns">
+	      <button ng-click="addTask()" class="button info">Add Task</button>
+				<div ng-if="successMessage">
+					<p style="border:3px; border-style:solid; border-color:#00ff00; padding: 1em;">{{ successMessage }}</p>
+				</div>
+		</div>
+	</div>
+    </div>
+
+  </form>
+</div>
