@@ -376,3 +376,20 @@ mp4Controllers.controller('LlamaListController', ['$scope', '$http', 'Llamas', '
 
 
 }]);
+
+mp4Controllers.controller('LoginController', ['$scope', function($scope) {
+
+    $scope.login = function(){
+        alert('login!');
+    };
+
+}]);
+
+
+mp4Controllers.controller('SignUpController', ['$scope', function($scope) {
+
+    $scope.signup = function(){
+        alert('signedUp!');
+    };
+
+}]);

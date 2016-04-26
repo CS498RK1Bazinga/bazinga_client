@@ -24,11 +24,30 @@
 
 <body ng-app="mp4">
 
-    <div class="row text-center">
-      <h1>Bazinga Task Manager</h1>
-      <a class="button" href="#/users">Users</a>
-      <a class="button" href="#/tasks">Tasks</a>
-    	<a class="button" href="#/settings">Settings</a>
+    <div class="top-bar">
+        <div class="top-bar-title">
+    <span data-responsive-toggle="responsive-menu" data-hide-for="medium">
+      <button class="menu-icon dark" type="button" data-toggle></button>
+    </span>
+            <strong>Foodbook</strong>
+        </div>
+        <div id="responsive-menu">
+            <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li><a href="#/settings">Settings</a></li>
+                    <li><a href="#/users">Users</a></li>
+                    <li><a href="#/tasks">Tasks</a></li>
+                    <li><a href="#/login">Login</a></li>
+
+                </ul>
+            </div>
+            <div class="top-bar-right">
+                <!--<ul class="menu">
+                    <li><input type="search" placeholder="Search"></li>
+                    <li><button type="button" class="button">Search</button></li>
+                </ul>-->
+            </div>
+        </div>
     </div>
 
     <div ng-view></div>
@@ -42,4 +61,19 @@
     </script>
     <script src="http://localhost:35729/livereload.js"></script>
 </body>
+<footer class="footer">
+    <div class="row">
+        <div class="small-12 columns">
+            <!--<p class="links">
+                <a href="#">Home</a>
+                <a href="#">Blog</a>
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+                <a href="#">Faq</a>
+                <a href="#">Contact</a>
+            </p>-->
+            <p class="copywrite">Foodbook © 2016</p>
+        </div>
+    </div>
+</footer>
 </html>

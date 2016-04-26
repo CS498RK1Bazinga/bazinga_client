@@ -49,3 +49,74 @@ textarea {
 .sortby-input {
 	width: 150px;
 }
+
+//login form
+.log-in-form {
+	border: 1px solid #cacaca;
+	padding: 1rem;
+	border-radius: 3px;
+
+}
+
+body{
+	//background-image: url(https://www.naturaltraining.com/wp-content/uploads/2015/07/salesteam.jpg);
+	background-image: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.3)), url(https://www.naturaltraining.com/wp-content/uploads/2015/07/salesteam.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	padding-bottom: 50px;
+	//opacity: 0.9;
+}
+
+//footer
+
+@mixin vertical-align {
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+
+
+.footer {
+	text-align: center;
+	font-size: 1.2rem;
+	//padding: 4rem;
+	p {
+		&.copywrite {
+			color: red;
+			font-size: 0.875rem;
+			margin: 0;
+		}
+	}
+	.links a {
+		list-style: none;
+		font-weight: bold;
+		color: blue;
+		padding: 3rem 0 2rem;
+		margin: 0;
+		&::after {
+			content: "•";
+			padding: 0 0.4rem 0 0.8rem;
+		}
+		&:last-child::after {
+			content: "";
+			padding: 0 0.4rem 0 0.8rem;
+		}
+	}
+}
+
+.footer {
+
+	position:absolute;
+
+	bottom: 0;
+
+	width: 100%;
+
+	height: 50px;
+
+}
