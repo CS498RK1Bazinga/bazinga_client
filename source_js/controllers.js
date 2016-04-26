@@ -74,6 +74,12 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
   };
 */
 
+// add user
+mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams' , function($scope, $window, $routeParams) {
+   $scope.data = {};
+ 
+}]);
+
 //task list
 mp4Controllers.controller('TaskController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
    $scope.tasks = {};

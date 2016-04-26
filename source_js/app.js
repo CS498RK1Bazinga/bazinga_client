@@ -10,6 +10,10 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: './partials/addUser.html',
     controller: 'AddUserController'
   }).
+  when('/editUser/:userId', {
+    templateUrl: './partials/editUser.html',
+    controller: 'EditUserController'
+  }).
   when('/users/:userId', {
     templateUrl: './partials/profile.html',
     controller: 'ProfileController'

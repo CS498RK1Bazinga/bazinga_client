@@ -1,32 +1,50 @@
 
 <!-- user list -->
 <div class="list" ng-controller='UserController'>
-	<form>
-	  <div class="row">
-        <!--  <div class="small-12 columns">-->
-				<div class="columns small-8 small-offset-2">
-            <!-- ng-model double binding-->
-						<div class="row">
-	            <div class="columns small-4"><h3 class="left">User List</h3></div>
-	            <div class="columns small-4"></div>
-	            <div class="columns small-4">
-								<a href="#/users/add">
-									<button class="button warning right">Add User</button>
-								</a>
-							</div>
+	<div class="row center">
+		<fieldset>
+  		    <legend>Sort by:</legend>
+  		    <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Email</label>
+  		    <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
+  		    <input type="radio" name="sortby" value="gender" id="user-gender"><label for="user-gender">Gender</label>
 
-						</div>
+  		    <br>
 
-    <div class="text-center">
-      <div class="row" ng-repeat="user in users">
-				<hr>
-       <div class="columns small-4"><a href="#/users/{{user._id}}"><b>{{user.name}}</b></a></div>
-       <div class="columns small-4"><b>{{user.email}}</b></div>
-       <div class="columns small-4"><button ng-click="deleteUser($index)" class="button alert">Delete</button></div>
-       <hr>
-      </div>
-    </div>
-	</div>
-</div>
-  </form>
+  		    <select class="sortby-input">
+ 			  <option value="ascending">Ascending</option>
+ 			  <option value="descending">Descending</option>
+ 			</select>
+  		</fieldset>
+
+  		<table class="hover">
+		  <thead>
+		    <tr>
+		      <th width="100">Name</th>
+		      <th width="100">Email</th>
+		      <th width="50">Gender</th>
+		      <th width="100">Phone Number</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td><a ng-href="#/users/123">Samuel J. Henson</a></td>
+		      <td>SamuelJHenson@hotmail.com</td>
+		      <td>Male</td>
+		      <td>806-665-9317</td>
+		    </tr>
+		    <tr>
+		      <td><a ng-href="#/users/123">Edith T. Thomas</a></td>
+		      <td>EdithTThomas@aol.com</td>
+		      <td>Male</td>
+		      <td>718-421-5583</td>
+		    </tr>
+		    <tr>
+		      <td><a ng-href="#/users/123">Rose G. Fisher</a></td>
+		      <td>RoseGFisher@gmail.com</td>
+		      <td>Female</td>
+		      <td>724-247-6007</td>
+		    </tr>
+		  </tbody>
+		</table>
+  	</div>
 </div>
