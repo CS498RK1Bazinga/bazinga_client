@@ -42,10 +42,6 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/settings.html',
     controller: 'SettingsController'
   }).
-  when('/llamalist', {
-    templateUrl: 'partials/llamalist.html',
-    controller: 'LlamaListController'
-  }).
   when('/login', {
     templateUrl: 'partials/login.html',
     controller: 'LoginController'
@@ -54,7 +50,11 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/signup.html',
     controller: 'SignUpController'
   }).
+  when('/newsFeed', {
+    templateUrl: 'partials/newsFeed.html',
+    controller: 'NewsFeedController'
+  }).
   otherwise({
-    redirectTo: '/settings'
+    redirectTo: '/login'
   });
 }]);

@@ -23,6 +23,13 @@
 </head>
 
 <body ng-app="mp4">
+    <!-- Small Navigation -->
+    <div class="title-bar" data-responsive-toggle="nav-menu" data-hide-for="medium">
+      <a class="logo-small show-for-small-only" href="#">
+        <img width="100px" src="./data/pics/foodbook_logo.png" alt="">
+      </a>
+      <button class="menu-icon" type="button" data-toggle></button>
+    </div>
 
     <nav class="top-bar navbar-fix" id="nav-menu">
         <!-- logo -->
@@ -37,10 +44,13 @@
             <li><a href="#/settings">Settings</a></li>
             <li><a href="#/users">Users</a></li>
             <li><a href="#/tasks">Tasks</a></li>
+            <li><a href="#/newsFeed">newsFeed</a></li>
             <li><a href="#/login">Login</a></li>
           </ul>
         </div>
       </nav>
+
+
     <div ng-view></div>
 
     <!-- Scripts -->

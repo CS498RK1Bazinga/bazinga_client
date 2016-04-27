@@ -13,7 +13,9 @@
 }
 
 .top-bar, .top-bar ul, .top-bar a {
+  letter-spacing: $spacing;
   background:transparent;
+  color: $super-dark;
   @extend .font-style;
 }
 
@@ -38,7 +40,35 @@
   }
 }
 
+/* Small Navigation */
+.title-bar {
+  padding: 0 .5rem;
+  background-color: $light;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  .logo-small {
+    float: right;
+  }
+}
 
+.data-responsive-toggle
+{
+  padding: 10px;
+}
+
+.menu-icon::after {
+    background: $super-dark;
+    box-shadow: 0 7px 0 $super-dark, 0 14px 0 $super-dark;
+}
+
+.menu-icon, .title-bar-title {
+  position: relative;
+  top: 10px;
+  color: $super-dark;
+}
+
+/* Medium-Up Navigation */
 @media only screen and (min-width: 40em) {
 
   .logo-wrapper {
@@ -145,16 +175,15 @@ body{
 }
 
 
-
 .footer {
 	text-align: center;
 	font-size: 1.2rem;
 	//padding: 4rem;
 	p {
 		&.copywrite {
-			color: red;
-			font-size: 0.875rem;
-			margin: 0;
+      letter-spacing: $spacing;
+      color: $super-dark;
+      @extend .font-style;
 		}
 	}
 	.links a {

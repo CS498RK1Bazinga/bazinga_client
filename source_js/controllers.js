@@ -11,6 +11,10 @@ mp4Controllers.controller('SettingsController', ['$scope' , '$window' , function
 
 }]);
 
+mp4Controllers.controller('NewsFeedController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
+  
+}]);
+
 //user list
 mp4Controllers.controller('UserController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
    $scope.users = {};
@@ -77,7 +81,7 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 // add user
 mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams' , function($scope, $window, $routeParams) {
    $scope.data = {};
- 
+
 }]);
 
 //task list
