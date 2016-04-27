@@ -12,10 +12,17 @@
   text-transform: uppercase;
 }
 
+
 h1, h2, h3, h4 {
   text-align: center;
 }
 
+a {
+  letter-spacing: $spacing;
+  background:transparent;
+  color: $super-dark;
+  @extend .font-style;
+}
 .top-bar, .top-bar ul, .top-bar a {
   letter-spacing: $spacing;
   background:transparent;
@@ -114,6 +121,9 @@ textarea {
 	margin: 0 auto;
 }
 
+.newsFeedInfo {
+  text-align: center;
+}
 
 /* User Profile */
 
@@ -153,7 +163,7 @@ textarea {
 
 .events-list > li {
   width: 400px;
-  
+
   margin: 0 auto;
   border-style: solid;
   border-width: 1px;

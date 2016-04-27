@@ -5,23 +5,34 @@
         <div class="columns small-1">
           <h4>NewsFeed </h4>
         </div>
+        <div class="columns right">
+          <fieldset>
+                <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Date</label>
+                <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
+                <select class="sortby-input">
+                  <option value="ascending">Ascending</option>
+                  <option value="descending">Descending</option>
+                </select>
+              Female <input type="checkbox">
+              Male <input type="checkbox">
+            </fieldset>
+        </div>
       </div>
          <div class="callout">
               <div class="row panel">
                 <div class="columns small-6">
-                  <img width="64px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                  <h5> Maddie <br> Female</h5>
-
+                  <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
+                  <a href="#"> &nbsp; <i class="fi-female"></i> Maddieee</a>
                 </div>
-
                 <div class="columns small-4 right">
                     <h5><i class="fi-calendar large"></i> 04/27/2016  12:30pm</h5>
                 </div>
-              </div>
-              <hr>
-           <h5>This is a callout.</h5>
-           <p>It has an easy to override visual style, and is appropriately subdued.</p>
-           <a href="#">It's dangerous to go alone, take this.</a>
+              </div><hr>
+              <div class="newsFeedInfo">
+           <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
+           <h5><i class="fi-marker large"></i> Attendee 10: Aaron, Yiming, Matthew</h5>
+           <button class="button secondary">RSVP</button>
+         </div>
           </div>
 
       </div>
