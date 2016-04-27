@@ -38,10 +38,6 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/secondview.html',
     controller: 'SecondController'
   }).
-  when('/settings', {
-    templateUrl: 'partials/settings.html',
-    controller: 'SettingsController'
-  }).
   when('/login', {
     templateUrl: 'partials/login.html',
     controller: 'LoginController'

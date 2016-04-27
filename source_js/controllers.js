@@ -1,15 +1,4 @@
 var mp4Controllers = angular.module('mp4Controllers', []);
-// setting
-mp4Controllers.controller('SettingsController', ['$scope' , '$window' , function($scope, $window) {
-  $scope.url = $window.sessionStorage.baseurl;
-
-  $scope.setUrl = function(){
-    $window.sessionStorage.baseurl = $scope.url;
-    $scope.displayText = "URL set";
-
-  };
-
-}]);
 
 mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routeParams' , '$window', function($scope, $http,$routeParams, $window) {
   $scope.data = "";
