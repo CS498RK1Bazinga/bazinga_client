@@ -1,17 +1,64 @@
 <div class="list" ng-controller='ProfileController'>
   <div class="row center">
+    <h2>Nicholasa J. Caruso</h2>
     <div class="small-6 columns">
       <div class="image-container right">
         <img src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-        <a class="button" href="#/editUser/123">Edit</a>
+        
       </div>
     </div>
     <div class="small-6 columns left">
       <ul class="profile-detail-container">
         <li><i class="fa fa-envelope-o" aria-hidden="true"></i> NJCaruso@hotmail.com</li>
-        <li><i class="fa fa-user" aria-hidden="true"></i> Nicolasa J. Caruso</li>
         <li><i class="fa fa-neuter" aria-hidden="true"></i> Male </li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> 423-365-5993</li>
+        <li><a class="button" href="#/editUser/123">Edit</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row center">
+    <div class="small-6 columns">
+      <h3>Events Hosting</h3>
+      <ul class="events-list">       
+          <li>
+            <a ng-href="#/event/123">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png  ">
+              
+              <ul class="events-list-details ">
+                <li><b>Name:</b> McDonalds</li>
+                <li><b>Setting:</b> Lunch</li>
+                <li><b>Number of Attendees:</b> 6</li>
+              </ul>
+            </a>
+          </li>
+        <li>
+          <a ng-href="#/event/123">
+            <img src="https://www.uab.edu/dining/images/NewLogos/PaneraBread.png">
+            <ul class="events-list-details ">
+              <li><b>Name:</b> Panera</li>
+              <li><b>Setting:</b> Dinner</li>
+              <li><b>Number of Attendees:</b> 3</li>
+            </ul>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="small-6 columns">
+      <h3>Events Attending</h3>
+      <ul class="events-list">
+        <li>
+          <a ng-href="#/event/123">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Jefferson_Apartment_Building_Jun_09.JPG">
+            <ul class="events-list-details ">
+              <li><b>Name:</b> Apartment Party</li>
+              <li><b>Setting:</b> Dinner</li>
+              <li><b>Number of Attendees:</b> 7</li>
+            </ul>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
