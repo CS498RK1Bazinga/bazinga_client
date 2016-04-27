@@ -11,6 +11,20 @@ mp4Controllers.controller('SettingsController', ['$scope' , '$window' , function
 
 }]);
 
+mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routeParams' , '$window', function($scope, $http,$routeParams, $window) {
+  $scope.data = "";
+  $scope.eid = $routeParams.id;
+  $scope.id = $routeParams.id;
+        //   $scope.map = new google.maps.Map(document.getElementById('map'), {
+        //   center: {lat: 40.10195230000001, lng: -88.22716149999997},
+        //   // (40.10195230000001, -88.22716149999997)
+        //   zoom: 13
+        // });
+ // $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+
+  //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
+}]);
+
 mp4Controllers.controller('NewsFeedController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
   
 }]);
