@@ -8,14 +8,14 @@
                 <div class="row column log-in-form">
                     <h4 class="text-center">Log in with your email account</h4>
                     <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
-                        <label for="email">Email <span style="color: red">*</span></label>
+                        <label for="email" class="text-center">Email <span style="color: red">*</span></label>
                         <input type="email" name="email" id="email" class="form-control" ng-model="email" required />
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-                        <label for="password">Password <span style="color: red">*</span></label>
+                        <label for="password" class="text-center">Password <span style="color: red">*</span></label>
                         <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
                     </div>
-                    <button type="submit" class="button expanded">Log In</button>
+                    <button type="submit" class="button">Log In</button>
                     <p class="text-center">New? Create an account <a ng-href="#/signup">here</a></p>
                 </div>
             </form>

@@ -281,3 +281,11 @@ textarea {
 	height: 50px;
 
 }
+
+.button{
+	border-radius: 25px;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%);
+	outline: 0 !important;
+}
