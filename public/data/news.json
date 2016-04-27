@@ -1,0 +1,139 @@
+[
+  {
+    "name": "Maddie Lin",
+    "gender": "Female",
+    "rated": "R",
+    "released": "14 Oct 1994",
+    "runtime": "142 min",
+    "genre": [
+      "Crime",
+      "Drama"
+    ],
+    "director": [
+      "Frank Darabont"
+    ],
+    "actors": [
+      "Tim Robbins",
+      "Morgan Freeman",
+      "Bob Gunton",
+      "William Sadler"
+    ],
+    "plot": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "language": [
+      "English"
+    ],
+    "country": [
+      "USA"
+    ],
+    "awards": "Nominated for 7 Oscars. Another 16 wins & 16 nominations.",
+    "metascore": 80,
+    "imdbRating": 9.3,
+    "imdbVotes": 1385423,
+    "imdbID": "tt0111161"
+  },
+  {
+    "name": "Yiming Jiang",
+    "gender": "Male",
+    "rated": "R",
+    "released": "24 Mar 1972",
+    "runtime": "175 min",
+    "genre": [
+      "Crime",
+      "Drama"
+    ],
+    "director": [
+      "Francis Ford Coppola"
+    ],
+    "actors": [
+      "Marlon Brando",
+      "Al Pacino",
+      "James Caan",
+      "Richard S. Castellano"
+    ],
+    "plot": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
+    "language": [
+      "English",
+      "Italian",
+      "Latin"
+    ],
+    "country": [
+      "USA"
+    ],
+    "awards": "Won 3 Oscars. Another 30 wins & 19 nominations.",
+    "metascore": 100,
+    "imdbRating": 9.2,
+    "imdbVotes": 948660,
+    "imdbID": "tt0068646"
+  },
+  {
+    "name": "Aaron Chiu",
+    "gender": "Male",
+    "rated": "R",
+    "released": "20 Dec 1974",
+    "runtime": "200 min",
+    "genre": [
+      "Crime",
+      "Drama"
+    ],
+    "director": [
+      "Francis Ford Coppola"
+    ],
+    "actors": [
+      "Al Pacino",
+      "Robert Duvall",
+      "Diane Keaton",
+      "Robert De Niro"
+    ],
+    "plot": "The early life and career of Vito Corleone in 1920s New York is portrayed while his son, Michael, expands and tightens his grip on his crime syndicate stretching from Lake Tahoe, Nevada to pre-revolution 1958 Cuba.",
+    "language": [
+      "English",
+      "Italian",
+      "Spanish",
+      "Latin",
+      "Sicilian"
+    ],
+    "country": [
+      "USA"
+    ],
+    "awards": "Won 6 Oscars. Another 13 wins & 16 nominations.",
+    "metascore": 80,
+    "imdbRating": 9.1,
+    "imdbVotes": 634871,
+    "imdbID": "tt0071562"
+  },
+  {
+    "name": "Matthew Ly",
+    "gender": "Male",
+    "rated": "PG-13",
+    "released": "18 Jul 2008",
+    "runtime": "152 min",
+    "genre": [
+      "Action",
+      "Crime",
+      "Drama"
+    ],
+    "director": [
+      "Christopher Nolan"
+    ],
+    "actors": [
+      "Christian Bale",
+      "Heath Ledger",
+      "Aaron Eckhart",
+      "Michael Caine"
+    ],
+    "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.",
+    "language": [
+      "English",
+      "Mandarin"
+    ],
+    "country": [
+      "USA",
+      "UK"
+    ],
+    "awards": "Won 2 Oscars. Another 131 wins & 105 nominations.",
+    "metascore": 82,
+    "imdbRating": 9,
+    "imdbVotes": 1353384,
+    "imdbID": "tt0468569"
+    }
+  ]
