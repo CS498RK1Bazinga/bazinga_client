@@ -1,22 +1,11 @@
 var mp4Services = angular.module('mp4Services', []);
 
-mp4Services.factory('CommonData', function($http, $window){
-    var data = "";
-    var baseUrl = $window.sessionStorage.baseurl;
-    return{
-        // send promise
-        getUsers : function(){
-            return $http.get(baseUrl+'/api/users');
-        },
-        getTasks : function(taskId){
-            return $http.get(baseUrl+'/api/tasks'+taskId);
-        }
-    }
-});
-
 mp4Services.factory('Users', function($http, $window) {
     var baseUrl = $window.sessionStorage.baseurl;
     return {
+        getAllUsers : function() {
+            return $http.get(baseUrl+'/api/users');
+        },
         addUser : function(data) {
             return $http.post(baseUrl+'/api/users', data);
         },
@@ -32,26 +21,35 @@ mp4Services.factory('Users', function($http, $window) {
     }
 });
 
-mp4Services.factory('Tasks', function($http, $window) {
+mp4Services.factory('Events', function($http, $window) {
     var baseUrl = $window.sessionStorage.baseurl;
     return {
-         getPendingTasks : function(userId) {
-           return $http.get(baseUrl+"/api/tasks?where={'assignedUser':'" + userId + "','completed':false}");
+        getAllEvents : function() {
+            return $http.get(baseUrl+"/api/events");
+        },
+        getEventsByHost : function(userId) {
+            return $http.get(baseUrl+"/api/events?where={'host':'" + userId + "}");
+        },
+        /*
+        *****Maybe not needed since we can just filter these out through the front-end...might be easier****
+
+         getAttendingEvents : function(userId) {
+           return $http.get(baseUrl+"/api/events?where={'assignedUser':'" + userId + "','completed':false}");
          },
-         getCompletedTasks : function(userId) {
-           return $http.get(baseUrl+"/api/tasks?where={'assignedUser':'" + userId + "','completed':true}");
+        getEventsHistory : function(userId) {
+            return $http.get(baseUrl+"/api/events?where={'assignedUser':'" + userId + "','completed':true}");
+        },*/
+         updateEvent : function(eventId, data) {
+           return $http.put(baseUrl+'/api/events/'+ eventId, data);
          },
-         updateTask : function(taskId, data) {
-           return $http.put(baseUrl+'/api/tasks/'+taskId, data);
+         deleteEvent: function(eventId) {
+           return $http.delete(baseUrl+'/api/events/'+eventId);
          },
-         deleteTask: function(taskId) {
-           return $http.delete(baseUrl+'/api/tasks/'+taskId);
+         getEvent: function(eventId) {
+           return $http.get(baseUrl+'/api/events/'+eventId);
          },
-         getTask: function(taskId) {
-           return $http.get(baseUrl+'/api/tasks/'+taskId);
-         },
-         addTask: function(data) {
-            return $http.post(baseUrl+'/api/tasks/',data);
+         addEvent: function(data) {
+            return $http.post(baseUrl+'/api/events/',data);
          }
     }
 });
