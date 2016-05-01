@@ -244,71 +244,21 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 }]);
 
 //user details
-mp4Controllers.controller('ProfileController', ['$scope', '$routeParams', 'Users', 'Tasks' , function($scope, $routeParams, Users, Tasks) {
+mp4Controllers.controller('ProfileController', ['$scope', '$routeParams', '$http' , function($scope, $routeParams, $http) {
+   // Passport.js
+   $scope.profile = false;
+   console.log("test controller");
+   $http.get('/profile').success(function(data) {
+    console.log(data);
+    if(!data.error) {
+      $scope.profile = true;
+      $scope.user = data.user;
+    }
+
+   });
+
    $scope.id = $routeParams.userId;
-   $scope.user = {};
-   $scope.showCompleted = true;
-   $scope.completedTaskList = [];
-   $scope.pendingTaskList = [];
-   Users.getUser($routeParams.userId)
-    .success(function(data) {
-      $scope.user = data.data;
-    })
-    .error(function(err) {
-      console.log(err);
-    });
-   Tasks.getPendingTasks($scope.id)
-     .success(function(data){
-       $scope.pendingTaskList = data.data;
-       for (var i = 0; i < $scope.pendingTaskList.length; i++) {
-         $scope.pendingTaskList[i].deadline = dateFormat($scope.pendingTaskList[i].deadline);
-       }
-     })
-     .error(function(err) {
-       console.log(err);
-     });
-
-   $scope.markComplete = function(index) {
-     $scope.pendingTaskList[index].completed = true;
-     Tasks.updateTask($scope.pendingTaskList[index]._id, $scope.pendingTaskList[index])
-      .success(function(data) {
-       console.log("update success");
-       $scope.pendingTaskList.splice(index, 1);
-       data.data.deadline = dateFormat(data.data.deadline);
-       $scope.completedTaskList.push(data.data);
-      })
-      .error(function(err) {
-        console.log(err);
-      });
-
-   }
-
-   $scope.showCompletedList = function(){
-     $scope.showCompleted = !$scope.showCompleted;
-   }
-
-   Tasks.getCompletedTasks($scope.id)
-     .success(function(data){
-       $scope.completedTaskList = data.data;
-       for (var i = 0; i < $scope.completedTaskList.length; i++) {
-         $scope.completedTaskList[i].deadline = dateFormat($scope.completedTaskList[i].deadline);
-       }
-     })
-     .error(function(err) {
-       console.log(err);
-     });
-
-
-   $scope.deleteUser = function(index){
-
-     Users.deleteUser($scope.users[index]._id)
-        .success(function(data) {
-          $scope.users.splice(index,1);
-        })
-        .error(function(err) {
-          console.log(err);
-        });
-   }
+   
 }]);
 
 

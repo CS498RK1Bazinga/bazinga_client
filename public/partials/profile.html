@@ -1,4 +1,43 @@
 <div class="list" ng-controller='ProfileController'>
+  <nav class="top-bar navbar" id="nav-menu">
+        
+        <!-- topbar -->
+        <div class="top-bar-center">
+          <ul class="vertical medium-horizontal menu">
+            <li><a href="#/login"><i class="fi-home"></i>Home</a></li>
+            <li><a href="#/users"><i class="fi-torsos-all"></i>User</a></li>
+            <li><a href="#/newsFeed"><i class="fi-book"></i>NewsFeed</a></li>
+            <li><a href="#/event/1"><i class="fi-comment"></i>Event</a></li>
+          </ul>
+        </div>
+    </nav>
+  
+
+<div class="row">
+        <!-- PROFILE INFORMATION -->
+            <div class="well" ng-show="profile">
+                <h3><span class="fa fa-user"></span> Profile</h3>
+
+                    <p>
+                        <strong>id</strong>: {{user._id}}<br>
+                        <strong>email</strong>: {{user.local.email}}<br>
+                        <strong>password</strong>: {{user.local.password}}<br>
+                        <strong>name</strong>: {{user.local.name}}<br>
+                        <strong>phoneNumber</strong>: {{user.local.phoneNumber}}</p>
+                        <strong>gender</strong>: {{user.local.gender}}
+
+                    </p>
+            </div>
+            <div class="jumbotron text-center" ng-hide="profile">
+                <a href="/login.html" class="button">Login</a>
+                <a href="/signup.html" class="button">Signup</a>
+            </div>
+
+            <a href="/logout" class="button">Logout</a>
+
+</div>
+
+
   <div class="row center">
     <h2>Nicholasa J. Caruso</h2>
     <div class="small-6 columns">
