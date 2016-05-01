@@ -1,0 +1,51 @@
+<div class="list" ng-controller='AddEventController'>
+	<form>
+	  <div class="row">
+          <div class="small-4 small-offset-4 columns">
+						<h3><b>Add Event</b></h3>
+            <h5>Event name: </h5><input ng-model="data.name" required type="text" placeholder="Event name">
+            <h5>Hosted By: Host</h5><!-- 
+                      <select ng-model="assignedUser" >
+                        <option ng-repeat = "user in users" value="{{$index}}">{{user.name}}</option>
+                      </select> -->
+              <!-- <h5>Date: </h5><datepicker><input required type="text"/></datepicker> -->
+               <h5>Food style: </h5></h5><select ng-model="foodStyles" >
+              			<option value="Japanese">Japanese</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Thai">Thai</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Fusion">Fusion</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Italian">Italian</option>
+                        <option value="French">French</option>
+                        <option value="Fast Food">Fast Food</option>
+                        <option value="American">American</option>
+                      </select>
+              <h5>Date: </h5>
+              <input type="date" name="time" ng-model="data.date"
+      			placeholder="yyyy-MM-dd" min="2016-05-01" required />
+              <!-- <input type="date" ng-model="data.date" min="2016-05-01"> -->
+              <h5>Time: </h5><input type="time" ng-model="data.time" />
+              <h5>Occasion: </h5><input ng-model="data.occasion" required type="text" placeholder="Event Occasion">
+              <h5>Desired Maximum Attendee: </h5><input ng-model="data.limit" required type="number" min="0" />
+            <h5>Description: </h5><textarea ng-model="data.description" placeholder="Description"></textarea>
+						<div ng-if="errorMessage">
+							<p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">{{ errorMessage }}</p>
+						</div>
+          </div>
+
+      </div>
+
+    <div class="text-center">
+			<div class="row">
+				<div class="small-4 small-offset-4 columns">
+	      <button ng-click="addEvent()" class="button info">Add Event</button>
+				<div ng-if="successMessage">
+					<p style="border:3px; border-style:solid; border-color:#00ff00; padding: 1em;">{{ successMessage }}</p>
+				</div>
+		</div>
+	</div>
+    </div>
+
+  </form>
+</div>

@@ -50,9 +50,9 @@ app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'partials/newsFeed.html',
     controller: 'NewsFeedController'
   }).
-  when('/event/:id',{
-    templateUrl: 'partials/eventDetail.html',
-    controller: 'EventDetailController'
+  when('/event',{
+    templateUrl: 'partials/addEvent.html',
+    controller: 'AddEventController'
   }).
   otherwise({
     redirectTo: '/login'

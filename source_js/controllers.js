@@ -400,3 +400,63 @@ mp4Controllers.controller('SignUpController', ['$scope', function($scope) {
     };
 
 }]);
+
+mp4Controllers.controller('AddEventController', ['$scope', '$window', '$routeParams','Events', function($scope, $window, $routeParams, Events) {
+
+$scope.data = {};
+$scope.foodStyles = 'American';
+// $scope.users = {};
+// CommonData.getUsers()
+//   .success(function(data){
+//     $scope.users = data.data;
+// });
+
+// console.log($scope.data);
+
+// $scope.parse = function(){
+//   console.log($scope.data.date);
+//   console.log('inside parse');
+//   $scope.data.date = $scope.data.date.toISOString().substr(0,10);
+// }
+
+$scope.addEvent = function(){
+  // console.log($scope.data.time);
+    $scope.data.host = 'name';
+    console.log($scope.data);
+    // console.log($scope.data.date.valueAsDate);
+    console.log($scope.data.date);
+    console.log($scope.data.time);
+    // console.log($scope.data.date.toISOString());
+    // console.log($scope.data.date.toISOString());
+    console.log($scope.data.date.toISOString().substr(0,10));
+    console.log(($scope.data.time+'').substr(16,17));
+    // console.log($scope.data.hour.toISOString());
+    // console.log($scope.data.hour.toISOString().substr(11,16));
+
+    // console.log($scope.data.hour.length);
+    // Tasks.addTask($scope.data)
+    //     .success(function(data){
+    //     $scope.errorMessage = "";
+    //     $scope.successMessage = "Event " + data.data.name + " has been added!";
+    //     if($scope.assignedUser) {
+    //         $scope.data = {};
+    //         $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
+
+    //         Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
+    //             .success(function(data){
+    //                 console.log("task added sucesssfully");
+    //             }).error(function(err){
+    //             if(err)
+    //                 console.log("fail to update user " + err);
+    //         });
+    //   }
+    // }).error(function(err){
+    //     if(err) {
+    //       $scope.errorMessage = err.message;
+    //       $scope.successMessage = "";
+    //       console.log("fail to add Eveny"+err);
+    //     }
+    // });
+
+};
+}]);
