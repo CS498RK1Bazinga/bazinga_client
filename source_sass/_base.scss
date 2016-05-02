@@ -8,7 +8,7 @@
 }
 
 .font-style {
-  font-weight: 700;
+  font-weight: $font-weight;
   text-transform: uppercase;
 }
 
@@ -20,16 +20,17 @@ h1, h2, h3, h4 {
 a {
   letter-spacing: $spacing;
   background:transparent;
-  color: $super-dark;
+  color: $light;
   @extend .font-style;
 }
 .top-bar, .top-bar ul, .top-bar a {
   letter-spacing: $spacing;
   background:transparent;
-  color: $super-dark;
+  color: $dark;
   @extend .font-style;
 }
 
+/*
 .navbar-fix {
   padding: 20px 0px;
   position: fixed;
@@ -37,7 +38,7 @@ a {
   text-align: center;
   display: inline-block;
   z-index: 1;
-}
+}*/
 
 @media(min-width:40em) {
   .navbar-fix {
@@ -55,7 +56,7 @@ a {
 .title-bar {
   padding: 0 .5rem;
   background-color: $light;
-  position: fixed;
+  //position: fixed;
   width: 100%;
   z-index: 2;
   .logo-small {
@@ -80,24 +81,103 @@ a {
 }
 
 /* Medium-Up Navigation */
-@media only screen and (min-width: 40em) {
+@media only screen and (min-width: 641px) {
 
   .logo-wrapper {
     position: relative;
     .logo {
       width: $logo-width;
-      height:  92px;
+      //height:  80px;
       position: relative;
-      left: 50%;
-      margin-left: $logo-margin;
+      float: left;
+    //  left: 50%;
+    //  margin-left: $logo-margin;
     }
   }
 }
 
+#header {
+  background-color: transparent;
+  position: absolute;
+  padding: 0 20px;
+  z-index: 1000;
+  line-height: 1em;
+  display: block;
+}
+
+.menu > li > a {
+  padding: 2rem 0.5rem;
+}
+
+/* carousel */
+@media only screen and (min-width: 641px) {
+
+  .carousel {
+    position: relative;
+    top:-100px;
+    z-index: -10000;
+  }
+}
+
+/* Arrows */
+.slick-prev:before, .slick-next:before {
+  font-size: 50px;
+}
+
+.slick-prev, .slick-next {
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: 1%;
+}
+
+[dir='rtl'] .slick-prev, .slick-next {
+  right: 1%;
+}
+
+[dir='rtl'] .slick-next {
+  left: 1%;
+}
+
+.slick-dots {
+  bottom: 0px;
+}
+
+.image {
+  position: relative;
+  height: auto;
+  max-width: 100%;
+  h2 {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    color: white;
+    padding: 10%;
+    //background-color: $super-dark;
+    opacity: $opacity-medium;
+    text-transform: uppercase;
+  }
+}
+
+.full-width {
+  max-width: 1400px;
+}
+
+@media only screen and (min-width: 641px) {
+  #header {
+    width: 100%;
+  }
+}
 /*customize top-bar position*/
-.top-bar-center {
-  width: 100%;
+.top-bar-right {
   text-align: center;
+  display: block;
   ul{
     @include breakpoint (small down) {
       background-color: $light;
@@ -106,7 +186,7 @@ a {
       text-decoration: none;
       display: inline-block !important;
       @include breakpoint(small down) {
-      padding-top: 20px;
+      padding-top: 10px;
       display: block !important;
       }
     }
@@ -128,7 +208,7 @@ textarea {
 /* User Profile */
 
 .image-container {
-	width: 160px;
+	width: 150px;
 	position: relative;
 }
 
@@ -136,7 +216,7 @@ textarea {
 	position: absolute;
 	transform: translateX(-50%);
 	left: 50%;
-	top: 170px;
+	top: 150px;
 }
 
 .image-container > img {

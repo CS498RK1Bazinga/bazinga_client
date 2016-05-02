@@ -7,6 +7,8 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./foundation6_lib/css/foundation.css">
+    <link rel="stylesheet" type="text/css" href="./lib/slick-carousel/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="./lib/slick-carousel/slick/slick-theme.css"/>
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel="stylesheet">
@@ -39,7 +41,7 @@
           </div>
         </div>
         <!-- topbar -->
-        <div class="top-bar-center">
+        <div class="top-bar-right">
           <ul class="vertical medium-horizontal menu">
             <li><a href="#/login"><i class="fi-home"></i>Home</a></li>
             <li><a href="#/users"><i class="fi-torsos-all"></i>User</a></li>
@@ -50,7 +52,7 @@
     </nav>
 
 
-    <div ng-view></div>
+    <div ng-view onload="viewLoaded()"></div>
 
     <!-- Scripts -->
     <script src="./lib/jquery-2.1.3.min/index.js"></script>
@@ -59,6 +61,7 @@
     <script>
     $(document).foundation();
     </script>
+    <script type="text/javascript" src="./lib/slick-carousel/slick/slick.min.js"></script>
     <script src="http://localhost:35729/livereload.js"></script>
 </body>
 
