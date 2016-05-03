@@ -3,12 +3,12 @@
     <div class="row signup-v-center">
         <div class="medium-6 medium-centered large-4 large-centered columns" style="background-color: white;">
     
-            <form name="form" ng-submit="signup()" role="form">
+            <form name="form" action="/signup" method="post" role="form">
                 <div class="row column log-in-form">
                     <h4 class="text-center">Sign up</h4>
-                    <div class="form-group" ng-class="{ 'has-error': form.fullname.$dirty && form.fullname.$error.required }">
-                        <label class="text-center" for="fullname">Name <span style="color: red">*</span></label>
-                        <input type="text" name="fullname" id="fullname" class="form-control" ng-model="fullname" required />
+                    <div class="form-group" ng-class="{ 'has-error': form.name.$dirty && form.name.$error.required }">
+                        <label class="text-center" for="name">Name <span style="color: red">*</span></label>
+                        <input type="text" name="name" id="name" class="form-control" ng-model="name" required />
                     </div>
                     <div class="form-group" ng-class="{ 'has-error': form.email.$dirty && form.email.$error.required }">
                         <label class="text-center" for="email">Email <span style="color: red">*</span></label>
@@ -19,9 +19,9 @@
                         <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
                     </div>
     
-                    <div class="form-group" ng-class="{ 'has-error': form.phone.$dirty && form.phone.$error.required }">
-                        <label class="text-center" for="phone">Phone Number <span style="color: red">*</span></label>
-                        <input type="text" name="phone" id="phone" class="form-control" ng-model="phone" required />
+                    <div class="form-group" ng-class="{ 'has-error': form.phoneNumber.$dirty && form.phoneNumber.$error.required }">
+                        <label class="text-center" for="phoneNumber">Phone Number <span style="color: red">*</span></label>
+                        <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" ng-model="phoneNumber" required />
                     </div>
                     <label class="text-center" for="gender">Gender</label>
                     <select name="gender" id="gender" ng-model="gender">
@@ -36,7 +36,7 @@
                     <p class="text-center">Already have an account? <a href="#/login">Login here</a></p>
                 </div>
             </form>
-    
+
         </div>
     </div>
 </div>

@@ -244,71 +244,21 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 }]);
 
 //user details
-mp4Controllers.controller('ProfileController', ['$scope', '$routeParams', 'Users', 'Tasks' , function($scope, $routeParams, Users, Tasks) {
+mp4Controllers.controller('ProfileController', ['$scope', '$routeParams', '$http' , function($scope, $routeParams, $http) {
+   // Passport.js
+   $scope.profile = false;
+   console.log("test controller");
+   $http.get('/profile').success(function(data) {
+    console.log(data);
+    if(!data.error) {
+      $scope.profile = true;
+      $scope.user = data.user;
+    }
+
+   });
+
    $scope.id = $routeParams.userId;
-   $scope.user = {};
-   $scope.showCompleted = true;
-   $scope.completedTaskList = [];
-   $scope.pendingTaskList = [];
-   Users.getUser($routeParams.userId)
-    .success(function(data) {
-      $scope.user = data.data;
-    })
-    .error(function(err) {
-      console.log(err);
-    });
-   Tasks.getPendingTasks($scope.id)
-     .success(function(data){
-       $scope.pendingTaskList = data.data;
-       for (var i = 0; i < $scope.pendingTaskList.length; i++) {
-         $scope.pendingTaskList[i].deadline = dateFormat($scope.pendingTaskList[i].deadline);
-       }
-     })
-     .error(function(err) {
-       console.log(err);
-     });
-
-   $scope.markComplete = function(index) {
-     $scope.pendingTaskList[index].completed = true;
-     Tasks.updateTask($scope.pendingTaskList[index]._id, $scope.pendingTaskList[index])
-      .success(function(data) {
-       console.log("update success");
-       $scope.pendingTaskList.splice(index, 1);
-       data.data.deadline = dateFormat(data.data.deadline);
-       $scope.completedTaskList.push(data.data);
-      })
-      .error(function(err) {
-        console.log(err);
-      });
-
-   }
-
-   $scope.showCompletedList = function(){
-     $scope.showCompleted = !$scope.showCompleted;
-   }
-
-   Tasks.getCompletedTasks($scope.id)
-     .success(function(data){
-       $scope.completedTaskList = data.data;
-       for (var i = 0; i < $scope.completedTaskList.length; i++) {
-         $scope.completedTaskList[i].deadline = dateFormat($scope.completedTaskList[i].deadline);
-       }
-     })
-     .error(function(err) {
-       console.log(err);
-     });
-
-
-   $scope.deleteUser = function(index){
-
-     Users.deleteUser($scope.users[index]._id)
-        .success(function(data) {
-          $scope.users.splice(index,1);
-        })
-        .error(function(err) {
-          console.log(err);
-        });
-   }
+   
 }]);
 
 
@@ -399,4 +349,83 @@ mp4Controllers.controller('SignUpController', ['$scope', function($scope) {
         alert('signedUp!');
     };
 
+}]);
+
+mp4Controllers.controller('AddEventController', ['$scope', '$window', '$routeParams','Events', function($scope, $window, $routeParams, Events) {
+
+$scope.data = {};
+$scope.foodStyles = 'American';
+// $scope.users = {};
+// CommonData.getUsers()
+//   .success(function(data){
+//     $scope.users = data.data;
+// });
+
+// console.log($scope.data);
+
+// $scope.parse = function(){
+//   console.log($scope.data.date);
+//   console.log('inside parse');
+//   $scope.data.date = $scope.data.date.toISOString().substr(0,10);
+// }
+
+$scope.addEvent = function(){
+  // console.log($scope.data.time);
+    $scope.data.host = 'name';
+    console.log($scope.data);
+    // console.log($scope.data.date.valueAsDate);
+    console.log($scope.data.date);
+    console.log($scope.data.time);
+    // console.log($scope.data.date.toISOString());
+    // console.log($scope.data.date.toISOString());
+    console.log($scope.data.date.toISOString().substr(0,10));
+    console.log(($scope.data.time+'').substr(16,17));
+    console.log('to local time?');
+    console.log($scope.data.time.toLocaleTimeString());
+    // console.log($scope.data.hour.toISOString());
+    // console.log($scope.data.hour.toISOString().substr(11,16));
+
+    // console.log($scope.data.hour.length);
+
+    var newData = {
+      name: $scope.data.name,
+      time: $scope.data.date.toLocaleDateString(),
+      hour: $scope.data.time.toLocaleTimeString(),
+      place: $scope.data.place,
+      description: $scope.data.description,
+      host: 'host',
+      attending: [],
+      maximumLimit: $scope.data.limit,
+      completed: false,
+      foodstyle: $scope.foodStyles,
+      occassion: $scope.data.occasion
+    }
+
+    console.log(newData);
+
+    Events.addEvent(newData)
+        .success(function(data){
+        $scope.errorMessage = "";
+        $scope.successMessage = "Event " + data.data.name + " has been added!";
+        if($scope.assignedUser) {
+            $scope.data = {};
+            $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
+
+            Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
+                .success(function(data){
+                    console.log("task added sucesssfully");
+                }).error(function(err){
+                if(err)
+                    console.log("fail to update user " + err);
+            });
+      }
+    }).error(function(err){
+        if(err) {
+          $scope.errorMessage = err.message;
+          $scope.successMessage = "";
+          console.log("fail to add Eveny"+err);
+        }
+    });
+
+};
 }]);
