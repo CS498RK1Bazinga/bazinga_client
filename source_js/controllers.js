@@ -384,29 +384,45 @@ $scope.addEvent = function(){
     // console.log($scope.data.hour.toISOString().substr(11,16));
 
     // console.log($scope.data.hour.length);
-    // Tasks.addTask($scope.data)
-    //     .success(function(data){
-    //     $scope.errorMessage = "";
-    //     $scope.successMessage = "Event " + data.data.name + " has been added!";
-    //     if($scope.assignedUser) {
-    //         $scope.data = {};
-    //         $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
 
-    //         Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
-    //             .success(function(data){
-    //                 console.log("task added sucesssfully");
-    //             }).error(function(err){
-    //             if(err)
-    //                 console.log("fail to update user " + err);
-    //         });
-    //   }
-    // }).error(function(err){
-    //     if(err) {
-    //       $scope.errorMessage = err.message;
-    //       $scope.successMessage = "";
-    //       console.log("fail to add Eveny"+err);
-    //     }
-    // });
+    var newData = {
+      name: $scope.data.name,
+      time: $scope.data.date,
+      hour: $scope.data.time,
+      place: $scope.data.place,
+      description: $scope.data.description,
+      host: 'host',
+      attending: $scope.data.limit,
+      completed: false,
+      foodstyle: $scope.foodStyles,
+      occassion: $scope.data.occasion
+    }
+
+    console.log(newData);
+
+    Events.addEvent(newData)
+        .success(function(data){
+        $scope.errorMessage = "";
+        $scope.successMessage = "Event " + data.data.name + " has been added!";
+        if($scope.assignedUser) {
+            $scope.data = {};
+            $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
+
+            Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
+                .success(function(data){
+                    console.log("task added sucesssfully");
+                }).error(function(err){
+                if(err)
+                    console.log("fail to update user " + err);
+            });
+      }
+    }).error(function(err){
+        if(err) {
+          $scope.errorMessage = err.message;
+          $scope.successMessage = "";
+          console.log("fail to add Eveny"+err);
+        }
+    });
 
 };
 }]);

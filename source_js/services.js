@@ -22,7 +22,8 @@ mp4Services.factory('Users', function($http, $window) {
 });
 
 mp4Services.factory('Events', function($http, $window) {
-    var baseUrl = $window.sessionStorage.baseurl;
+    // var baseUrl = $window.sessionStorage.baseurl;
+    var baseUrl = 'http://localhost:4000';
     return {
         getAllEvents : function() {
             return $http.get(baseUrl+"/api/events");
