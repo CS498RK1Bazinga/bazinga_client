@@ -380,6 +380,8 @@ $scope.addEvent = function(){
     // console.log($scope.data.date.toISOString());
     console.log($scope.data.date.toISOString().substr(0,10));
     console.log(($scope.data.time+'').substr(16,17));
+    console.log('to local time?');
+    console.log($scope.data.time.toLocaleTimeString());
     // console.log($scope.data.hour.toISOString());
     // console.log($scope.data.hour.toISOString().substr(11,16));
 
@@ -387,12 +389,13 @@ $scope.addEvent = function(){
 
     var newData = {
       name: $scope.data.name,
-      time: $scope.data.date,
-      hour: $scope.data.time,
+      time: $scope.data.date.toLocaleDateString(),
+      hour: $scope.data.time.toLocaleTimeString(),
       place: $scope.data.place,
       description: $scope.data.description,
       host: 'host',
-      attending: $scope.data.limit,
+      attending: [],
+      maximumLimit: $scope.data.limit,
       completed: false,
       foodstyle: $scope.foodStyles,
       occassion: $scope.data.occasion
