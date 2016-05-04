@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>MP4 Starter</title>
+    <title>Foodbook</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="./foundation6_lib/css/foundation.css">
@@ -26,27 +26,36 @@
 
 <body ng-app="mp4">
     <!-- Small Navigation -->
-    <div class="title-bar" data-responsive-toggle="nav-menu" data-hide-for="medium">
-      <a class="logo-small show-for-small-only" href="#">
-        <img width="100px" src="./data/pics/foodbook_logo.png" alt="">
-      </a>
-      <button class="menu-icon" type="button" data-toggle></button>
-    </div>
+    <nav>
+        <div class="title-bar" data-responsive-toggle="nav-menu" data-hide-for="medium">
+          <a class="logo-small show-for-small-only" href="#">
+            <img width="100px" src="./data/pics/foodbook_logo.png" alt="">
+          </a>
+          <button class="menu-icon" type="button" data-toggle></button>
+        </div>
 
     <!-- logo -->
         <div class="logo-wrapper hide-for-small-only">
           <div class="logo">
-            <img src="./data/pics/foodbook_logo.png" alt="">
+            <a ng-href="#/newsFeed"><img src="./data/pics/foodbook_logo.png" alt=""></a>
           </div>
         </div>
 
         <!-- topbar -->
         <div class="top-bar-right">
           <ul class="vertical medium-horizontal menu">
-            <li><a href="#/login"><i class="fi-home"></i>Home</a></li>
-            <li><a href="#/users"><i class="fi-torsos-all"></i>User</a></li>
             <li><a href="#/newsFeed"><i class="fi-book"></i>NewsFeed</a></li>
-	          <li><a href="#/event"><i class="fi-comment"></i>Event</a></li>
+            <li>
+                <ul class="dropdown menu" data-dropdown-menu>
+                  <li>
+                    <a ><i class="fa fa-cog" aria-hidden="true"></i></a>
+                    <ul class="menu">
+                      <li><a href="#/editUser/123">Account Settings</a></li>
+                      <li><a href="/logout">Logout</a></li>
+                    </ul>
+                  </li>
+                </ul>
+            </li>
           </ul>
         </div>
     </nav>

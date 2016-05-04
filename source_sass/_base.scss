@@ -12,24 +12,58 @@
   text-transform: uppercase;
 }
 
+.text-center {
+  text-align: center;
+}
+
+.red {
+  color: $red;
+}
+
+button.radius, .button.radius {
+    border-radius: 3px; 
+}
+
+button.round, .button.round {
+    border-radius: 1000px; 
+}
+
+.button {
+  margin-bottom: 0;
+  width: 90px;
+}
 
 h1, h2, h3, h4 {
   text-align: center;
 }
 
+nav {
+  height: 90px;
+}
+
 a {
   letter-spacing: $spacing;
   background:transparent;
-  color: $light;
-  @extend .font-style;
-}
-.top-bar, .top-bar ul, .top-bar a {
-  letter-spacing: $spacing;
-  background:transparent;
-  color: $dark;
+  color: $super-dark;
   @extend .font-style;
 }
 
+.top-bar, .top-bar ul, .top-bar a {
+  letter-spacing: $spacing;
+  background:transparent;
+  color: $super-dark;
+  @extend .font-style;
+}
+
+.dropdown.menu:not(.vertical) .is-dropdown-submenu.first-sub:last-child {
+    left: -210px;
+}
+
+.submenu li:first-child {
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: $light;
+}
 /*
 .navbar-fix {
   padding: 20px 0px;
@@ -81,7 +115,7 @@ a {
 }
 
 /* Medium-Up Navigation */
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 640px) {
 
   .logo-wrapper {
     position: relative;
@@ -109,8 +143,37 @@ a {
   padding: 2rem 0.5rem;
 }
 
+@media only screen and (max-width: 639px) {
+
+  ul.vertical.medium-horizontal.menu > li {
+    border-bottom: solid;
+    border-width: 1px;
+  }
+  
+  ul.vertical.medium-horizontal.menu > li:first-child {
+    border-top: solid;
+    border-width: 1px;
+  }
+
+}
+
+.event-search input {
+  width: 250px;
+}
+
+.event-search i, .event-search input {
+  float: left;
+}
+
+.event-search i {
+  padding: 3px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: $light;
+}
+
 /* carousel */
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 640px) {
 
   .carousel {
     position: relative;
@@ -169,7 +232,7 @@ a {
   max-width: 1400px;
 }
 
-@media only screen and (min-width: 641px) {
+@media only screen and (min-width: 640px) {
   #header {
     width: 100%;
   }
@@ -231,10 +294,16 @@ textarea {
 .profile-detail-container {
 	list-style-type: none;
 	font-size: 18px;
+  position: relative;
 }
 
 .profile-detail-container li {
   margin-bottom: 5px;
+}
+
+.profile-detail-container a {
+  position: absolute;
+  left: 40px;
 }
 
 .events-list, .events-list-details {
@@ -303,12 +372,18 @@ textarea {
   top: 0;
   z-index: -9999;
   position: fixed;
-	background-image: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.3)), url('../data/pics/bg.jpg');
+	background-image: linear-gradient(rgba(255,255,255,0.6),rgba(255,255,255,0.3)), url('../data/pics/bg.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-attachment: fixed;
 	padding-bottom: 50px;
+}
+
+/* NewsFeed */
+
+.newsFeed-header h4{
+  text-align: left;
 }
 
 /* footer */

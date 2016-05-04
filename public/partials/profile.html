@@ -1,45 +1,16 @@
-<div class="list" ng-controller='ProfileController'>
-  <nav class="top-bar navbar" id="nav-menu">
-        
-        <!-- topbar -->
-        <div class="top-bar-center">
-          <ul class="vertical medium-horizontal menu">
-            <li><a href="#/login"><i class="fi-home"></i>Home</a></li>
-            <li><a href="#/users"><i class="fi-torsos-all"></i>User</a></li>
-            <li><a href="#/newsFeed"><i class="fi-book"></i>NewsFeed</a></li>
-            <li><a href="#/event/1"><i class="fi-comment"></i>Event</a></li>
-          </ul>
-        </div>
-    </nav>
-  
+<div class="list" ng-controller='ProfileController'>  
 
 <div class="row">
         <!-- PROFILE INFORMATION -->
             <div class="well" ng-show="profile">
                 <h3><span class="fa fa-user"></span> Profile</h3>
-
-                    <p>
-                        <strong>id</strong>: {{user._id}}<br>
-                        <strong>email</strong>: {{user.local.email}}<br>
-                        <strong>password</strong>: {{user.local.password}}<br>
-                        <strong>name</strong>: {{user.local.name}}<br>
-                        <strong>phoneNumber</strong>: {{user.local.phoneNumber}}</p>
-                        <strong>gender</strong>: {{user.local.gender}}
-
-                    </p>
             </div>
-            <div class="jumbotron text-center" ng-hide="profile">
-                <a href="/login.html" class="button">Login</a>
-                <a href="/signup.html" class="button">Signup</a>
-            </div>
-
-            <a href="/logout" class="button">Logout</a>
-
 </div>
 
 
   <div class="row center">
-    <h2>Nicholasa J. Caruso</h2>
+    <h2>{{user.local.name}} </h2>
+
     <div class="small-6 columns">
       <div class="image-container right">
         <img src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
@@ -48,9 +19,10 @@
     </div>
     <div class="small-6 columns left">
       <ul class="profile-detail-container">
-        <li><i class="fa fa-envelope-o" aria-hidden="true"></i> NJCaruso@hotmail.com</li>
-        <li><i class="fa fa-neuter" aria-hidden="true"></i> Male </li>
-        <li><i class="fa fa-phone" aria-hidden="true"></i> 423-365-5993</li>
+        <li><i class="fa fa-envelope-o" aria-hidden="true"></i> {{user.local.email}}</li>
+        <li><i class="fa fa-neuter" aria-hidden="true"></i> {{user.local.gender}} </li>
+        <li><i class="fa fa-phone" aria-hidden="true"></i> {{user.local.phoneNumber}}</li>
+        <!-- <li>id: {{user._id}}</li> -->
         <li><a class="button" href="#/editUser/123">Edit</a></li>
       </ul>
     </div>
@@ -63,7 +35,7 @@
       <h3>Events Hosting</h3>
       <ul class="events-list">       
           <li>
-            <a ng-href="#/event/123">
+            <a href="#/events/123">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png  ">
               
               <ul class="events-list-details ">
@@ -74,7 +46,7 @@
             </a>
           </li>
         <li>
-          <a ng-href="#/event/123">
+          <a href="#/events/123">
             <img src="https://www.uab.edu/dining/images/NewLogos/PaneraBread.png">
             <ul class="events-list-details ">
               <li><b>Name:</b> Panera</li>
@@ -89,7 +61,7 @@
       <h3>Events Attending</h3>
       <ul class="events-list">
         <li>
-          <a ng-href="#/event/123">
+          <a href="#/events/123">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Jefferson_Apartment_Building_Jun_09.JPG">
             <ul class="events-list-details ">
               <li><b>Name:</b> Apartment Party</li>

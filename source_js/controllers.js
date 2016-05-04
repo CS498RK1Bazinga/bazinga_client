@@ -82,8 +82,17 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 */
 
 // add user
-mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams' , function($scope, $window, $routeParams) {
-   $scope.data = {};
+mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams', '$http', function($scope, $window, $routeParams, $http) {
+   /* Get user data passportjs */
+  $scope.profile = false;
+   
+  $http.get('/profile').success(function(data) {
+    console.log(data);
+    if(!data.error) {
+      $scope.profile = true;
+      $scope.user = data.user;
+    }
+   });
 
 }]);
 
@@ -244,20 +253,22 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 }]);
 
 //user details
-mp4Controllers.controller('ProfileController', ['$scope', '$routeParams', '$http' , function($scope, $routeParams, $http) {
-   // Passport.js
-   $scope.profile = false;
-   console.log("test controller");
-   $http.get('/profile').success(function(data) {
+mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+  /* Check if logged in */
+ 
+
+  /* Get user data passportjs */
+  $scope.profile = false;
+   
+  $http.get('/profile').success(function(data) {
     console.log(data);
     if(!data.error) {
       $scope.profile = true;
       $scope.user = data.user;
     }
-
    });
 
-   $scope.id = $routeParams.userId;
+   //$scope.id = $routeParams.userId;
    
 }]);
 
@@ -314,39 +325,55 @@ mp4Controllers.controller('EditTaskController', ['$scope', '$routeParams' ,'Task
 
 }]);
 
-mp4Controllers.controller('SecondController', ['$scope', 'CommonData' , function($scope, CommonData) {
-  $scope.data = "";
 
-  $scope.getData = function(){
-    $scope.data = CommonData.getData();
+mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
 
-  };
-
-}]);
-
-
-mp4Controllers.controller('LlamaListController', ['$scope', '$http', 'Llamas', '$window' , function($scope, $http,  Llamas, $window) {
-
-  Llamas.get().success(function(data){
-    $scope.llamas = data;
-  });
-
-
-}]);
-
-mp4Controllers.controller('LoginController', ['$scope', function($scope) {
+    $scope.user = {};
 
     $scope.login = function(){
-        alert('login!');
+        $http.post('/login', {
+          email: $scope.user.email,
+          password: $scope.user.password,
+        })
+        .success(function(user){
+          // No error: authentication OK
+          $rootScope.message = 'Authentication successful!';
+          console.log($rootScope.message);
+          $location.url('/users/123');
+        })
+        .error(function(){
+          // Error: authentication failed
+          $rootScope.message = 'Authentication failed.';
+          $location.url('/login');
+        });
     };
 
 }]);
 
 
-mp4Controllers.controller('SignUpController', ['$scope', function($scope) {
+mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
 
+    $scope.user = {};
+    
     $scope.signup = function(){
-        alert('signedUp!');
+        $http.post('/signup', {
+          name: $scope.user.name,
+          email: $scope.user.email,
+          password: $scope.user.password,
+          phoneNumber: $scope.user.phoneNumber,
+          gender: $scope.user.gender
+        })
+        .success(function(user){
+          // No error: authentication OK
+          $rootScope.message = 'Signup successful!';
+          console.log($rootScope.message);
+          $location.url('/users/123');
+        })
+        .error(function(){
+          // Error: authentication failed
+          $rootScope.message = 'Signup failed.';
+          $location.url('/signup');
+        });
     };
 
 }]);

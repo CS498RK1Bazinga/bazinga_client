@@ -1,12 +1,27 @@
 <div ng-controller='NewsFeedController'>
   <div class="row">
     <div class="columns small-8 small-offset-2">
+
       <div class="row">
-        <div class="columns small-1">
-          <h4>NewsFeed </h4>
+
+        <div class="small-10 columns newsFeed-header">
+          <h4>NewsFeed </h4>     
+          
         </div>
+
+        <div class="small-2 columns">
+          <a href="#/event">
+            <button type="button" class="success button"><i class="fa fa-plus" aria-hidden="true"></i> Event</button>    
+          </a>    
+        </div>
+      </div> 
+
+      <hr>
+
+      <div class="row">
         <div class="columns right">
           <fieldset>
+                <input type="text" name="input" placeholder="Search for food event">
                 <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Date</label>
                 <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
                 <select class="sortby-input">
@@ -18,11 +33,13 @@
             </fieldset>
         </div>
       </div>
+
+
          <div class="callout">
               <div class="row panel">
                 <div class="columns small-6">
                   <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                  <a href="#"> &nbsp; <i class="fi-female large"></i> Maddieee</a>
+                  <a href="#/users/123"> &nbsp; <i class="fi-female large"></i> Maddieee</a>
                 </div>
                 <div class="columns small-4 right">
                     <h5><i class="fi-calendar large"></i> 04/27/2016  12:30pm</h5>
@@ -31,7 +48,7 @@
               <div class="centerAlign">
            <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
            <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-           <button class="button secondary">RSVP</button>
+           <a href="#/events/123"><button class="button secondary">RSVP</button></a>
          </div>
         </div>
 
@@ -39,7 +56,7 @@
              <div class="row panel">
                <div class="columns small-6">
                  <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                 <a href="#"> &nbsp; <i class="fi-male large"></i> Matthew</a>
+                 <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Matthew</a>
                </div>
                <div class="columns small-4 right">
                    <h5><i class="fi-calendar large"></i> 04/27/2016  11:30pm</h5>
@@ -48,7 +65,7 @@
              <div class="centerAlign">
           <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
           <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-          <button class="button secondary">RSVP</button>
+          <a href="#/events/123"><button class="button secondary">RSVP</button></a>
         </div>
        </div>
 
@@ -56,7 +73,7 @@
             <div class="row panel">
               <div class="columns small-6">
                 <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                <a href="#"> &nbsp; <i class="fi-male large"></i> Aaron</a>
+                <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Aaron</a>
               </div>
               <div class="columns small-4 right">
                   <h5><i class="fi-calendar large"></i> 04/27/2016  10:30pm</h5>
@@ -65,7 +82,7 @@
             <div class="centerAlign">
          <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
          <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-         <button class="button secondary">RSVP</button>
+         <a href="#/events/123"><button class="button secondary">RSVP</button></a>
        </div>
       </div>
 
@@ -73,7 +90,7 @@
            <div class="row panel">
              <div class="columns small-6">
                <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-               <a href="#"> &nbsp; <i class="fi-male large"></i> Yiminghere </a>
+               <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Yiminghere </a>
              </div>
              <div class="columns small-4 right">
                  <h5><i class="fi-calendar large"></i> 04/27/2016  10:30pm</h5>
@@ -82,7 +99,7 @@
            <div class="centerAlign">
         <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
         <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-        <button class="button secondary">RSVP</button>
+        <a href="#/events/123"><button class="button secondary">RSVP</button></a>
       </div>
      </div>
 

@@ -75,7 +75,7 @@ $button-opacity-disabled: 0.25 !default;
 
 /// Expands a button to make it full-width.
 /// @param {Boolean} $expand [true] - Set to `true` to enable the expand behavior. Set to `false` to reverse this behavior.
-@mixin button-expand($expand: true) {
+@mixin button-expand($expand: false) {
   @if $expand {
     display: block;
     width: 100%;
