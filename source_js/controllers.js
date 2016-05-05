@@ -1,6 +1,7 @@
 var mp4Controllers = angular.module('mp4Controllers', []);
 
 mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScope','$routeParams' , '$window','Events','Users', function($scope, $http,$rootScope,$routeParams, $window,Events,Users) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
   $scope.data = "";
   $scope.user = {};
   $scope.eid = $routeParams.id;
@@ -37,7 +38,8 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('NewsFeedController', ['$scope', '$rootScope', 'Events', function($scope,$rootScope, Events) {
+mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events', function($scope, $window, $rootScope, Events) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
    $scope.showOption = "where={}";
    $scope.order = "1";
@@ -65,7 +67,8 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$rootScope', 'Events
 }]);
 
 //user list
-mp4Controllers.controller('UserController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
+mp4Controllers.controller('UserController', ['$scope', '$window','CommonData', 'Users', 'Tasks', function($scope, $window, CommonData, Users, Tasks) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.users = {};
    CommonData.getUsers()
       .success(function(data) {
@@ -100,6 +103,7 @@ mp4Controllers.controller('UserController', ['$scope', 'CommonData', 'Users', 'T
 
 // add user
 mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routeParams', 'Users'  , function($scope, $window, $routeParams, Users) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.data = {};
    $scope.addUser = function(){
      $scope.data.dateCreated = new Date().getTime();
@@ -130,6 +134,7 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 // add user
 mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$window', '$routeParams', '$http', 'Users', function($scope, $rootScope, $window, $routeParams, $http, Users) {
    /* Get user data passportjs */
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 
    $scope.user = $rootScope.curr_user;
 
@@ -165,7 +170,8 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
 }]);
 
 //task list
-mp4Controllers.controller('TaskController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
+mp4Controllers.controller('TaskController', ['$scope', '$window','CommonData', 'Users', 'Tasks', function($scope, $window, CommonData, Users, Tasks) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 
    $scope.tasks = {};
    $scope.showOption = "where={'completed':false}";
@@ -259,6 +265,7 @@ mp4Controllers.controller('TaskController', ['$scope', 'CommonData', 'Users', 'T
 }]);
 
 mp4Controllers.controller('AddTaskController', ['$scope', '$window', '$routeParams', 'CommonData', 'Users' , 'Tasks', function($scope, $window, $routeParams, CommonData, Users, Tasks) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 
 $scope.data = {};
 $scope.assignedUser = "";
@@ -305,7 +312,8 @@ $scope.addTask = function(){
 }]);
 
 // task details
-mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Tasks', function($scope, $routeParams, Tasks) {
+mp4Controllers.controller('TaskDetailController', ['$scope', '$window','$routeParams' ,'Tasks', function($scope, $window, $routeParams, Tasks) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
     $scope.task = {};
 
     Tasks.getTask($routeParams.taskId)
@@ -323,7 +331,8 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 
 //user details
 
-mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$routeParams', '$http', 'Users', function($scope, $rootScope, $routeParams, $http, Users) {
+mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope', '$routeParams', '$http', 'Users', function($scope, $window, $rootScope, $routeParams, $http, Users) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 
  Users.getUser($routeParams.userId).success(function(data) {
 
@@ -341,7 +350,8 @@ mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$routeP
 
 
 // can we edit the date in edit task?
-mp4Controllers.controller('EditTaskController', ['$scope', '$routeParams' ,'Tasks', 'CommonData', function($scope, $routeParams, Tasks, CommonData) {
+mp4Controllers.controller('EditTaskController', ['$scope', '$window','$routeParams' ,'Tasks', 'CommonData', function($scope, $window, $routeParams, Tasks, CommonData) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
     $scope.task = {};
     $scope.users = {};
     $scope.userIndex = 0;
@@ -393,7 +403,7 @@ mp4Controllers.controller('EditTaskController', ['$scope', '$routeParams' ,'Task
 }]);
 
 
-mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
+mp4Controllers.controller('LoginController', ['$scope', '$window','$rootScope', '$http', '$location', function($scope, $window, $rootScope, $http, $location) {
 
     $scope.user = {};
     $rootScope.curr_user = '';
@@ -408,6 +418,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
           $rootScope.message = 'Authentication successful!';
 
           $rootScope.curr_user = user;
+            $window.sessionStorage.setItem('curr_user', JSON.stringify(user));
           $location.url('/users/'+user._id);
         })
         .error(function(){
@@ -420,7 +431,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
 }]);
 
 
-mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
+mp4Controllers.controller('SignUpController', ['$scope', '$window','$http', '$rootScope', '$location', function($scope, $window, $http, $rootScope, $location) {
 
 
     $scope.user = '';
@@ -441,6 +452,7 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
         .success(function(user){
           // No error: authentication OK
           $rootScope.curr_user = user;
+            $window.sessionStorage.setItem('curr_user', JSON.stringify(user));
           $location.url('/users/'+user._id);
         })
         .error(function(){
@@ -453,6 +465,7 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
 }]);
 
 mp4Controllers.controller('AddEventController', ['$scope', '$window', '$rootScope', '$routeParams','Users','Events','$http', function($scope, $window,$rootScope, $routeParams,Users, Events,$http) {
+    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 $scope.data = {};
 $scope.foodStyles = 'American';
 
