@@ -376,6 +376,7 @@ mp4Controllers.controller('EditTaskController', ['$scope', '$routeParams' ,'Task
 mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '$location', function($scope, $rootScope, $http, $location) {
 
     $scope.user = {};
+    $rootScope.curr_user = '';
 
     $scope.login = function(){
         $http.post('/login', {
@@ -401,6 +402,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
 mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
 
     $scope.user = '';
+    $rootScope.curr_user = '';
     
     $scope.signup = function(){
         $http.post('/signup', {
