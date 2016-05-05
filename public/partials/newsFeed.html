@@ -5,16 +5,16 @@
       <div class="row">
 
         <div class="small-10 columns newsFeed-header">
-          <h4>NewsFeed </h4>     
-          
+          <h4>NewsFeed </h4>
+
         </div>
 
         <div class="small-2 columns">
           <a href="#/event">
-            <button type="button" class="success button"><i class="fa fa-plus" aria-hidden="true"></i> Event</button>    
-          </a>    
+            <button type="button" class="success button"><i class="fa fa-plus" aria-hidden="true"></i> Event</button>
+          </a>
         </div>
-      </div> 
+      </div>
 
       <hr>
 
@@ -38,9 +38,9 @@
                     <div class="row panel">
                       <div class="columns small-6">
                         <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                        <a href="#"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
+                        <a href="#/users/{{event.hostId}}"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
                       </div>
-                   
+
                       <div class="columns small-4 right">
                           <h5><i class="fi-calendar large"></i> {{event.time}} <hr> {{event.hour}}</h5>
                       </div>
@@ -52,11 +52,11 @@
                     <div class="centerAlign">
                  <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
                  <h5><i class="fi-male-female large"></i> Attendee : {{event.attending}}  </h5>
-                 <button class="button secondary">RSVP</button>
+                 <button ng-model="rsvp" type="button" class="button" ng-class="{true: 'success', false:'secondary'}[isActive]" ng-click="toggleActive()">{{rsvpText}}</button>
                </div>
               </div>
 
-<!-- 
+<!--
          <div class="callout">
               <div class="row panel">
                 <div class="columns small-6">
@@ -126,7 +126,7 @@
      </div>
  -->
 
-      <!-- 
+      <!--
 </div>
     </div>
  -->
@@ -145,10 +145,10 @@
     </div>
   </div>
 
- 
- <!-- 
 
- 
+ <!--
+
+
  <div ng-controller='NewsFeedController'>
   <div class="row">
     <div class="columns small-8 small-offset-2">
@@ -182,7 +182,7 @@
                         <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
                         <a href="#"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
                       </div>
-                   
+
                       <div class="columns small-4 right">
                           <h5><i class="fi-calendar large"></i> {{event.time}} <hr> {{event.hour}}</h5>
                       </div>
@@ -193,10 +193,10 @@
                     <hr>
                     <div class="centerAlign">
                  <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
-                 <h5><i class="fi-male-female large"></i> Attendee 
+                 <h5><i class="fi-male-female large"></i> Attendee
                  <!~~ <span class="success label"> {{num}}left</span> ~~>
                     <!~~ <i class="fa fa-flag fa-2x pull-left" aria-hidden="true"></i> Font Awesome<br>Version 4.6.2</a> ~~>
-                    : {{event.attending}} 
+                    : {{event.attending}}
                     <!~~ <i class="fi-arrow-down"></i> ~~>
                     </h5>
                  <button class="button secondary">RSVP</button>
