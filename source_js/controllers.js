@@ -110,7 +110,7 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 */
 
 // add user
-mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$window', '$routeParams', '$http', function($scope, $rootScope, $window, $routeParams, $http) {
+mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$window', '$routeParams', '$http', 'Users', function($scope, $rootScope, $window, $routeParams, $http, Users) {
    /* Get user data passportjs */
    $scope.user = $rootScope.curr_user;
    
@@ -132,6 +132,14 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
         following: $scope.user.local.following
       };
       // console.log($scope.editUser);
+      Users.updateUser($scope.user._id, $scope.editUser).success(function(data) {
+        $rootScope.curr_user = data.data;
+        $scope.user = data.data;
+        $scope.name = $scope.user.local.name;
+        $scope.email = $scope.user.local.email;
+        $scope.phoneNumber = $scope.user.local.phoneNumber;
+        $scope.gender = $scope.user.local.gender;
+      }).error();
    };
    
 

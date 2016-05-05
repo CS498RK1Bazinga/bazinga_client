@@ -22,8 +22,7 @@
         <li><i class="fa fa-envelope-o" aria-hidden="true"></i> {{user.local.email}}</li>
         <li><i class="fa fa-neuter" aria-hidden="true"></i> {{user.local.gender}} </li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> {{user.local.phoneNumber}}</li>
-        <li>id: {{user._id}}</li>
-        <li><a class="button" href="#/editUser/123">Edit</a></li>
+        <!-- <li>id: {{user._id}}</li> -->
       </ul>
     </div>
   </div>
@@ -74,5 +73,6 @@
     </div>
   </div>
 
+  <button type="submit" class="button" ng-click="follow()" style="background-color:red;">Follow</button>
 </div>
 
