@@ -93,6 +93,13 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
     templateUrl: 'partials/signup.html',
     controller: 'SignUpController'
   }).
+  when('/event-detail/:id',{
+    templateUrl: 'partials/eventDetail.html',
+    controller: 'EventDetailController',
+    resolve: {
+       loggedin: checkLoggedin
+    }
+  }).
   when('/newsFeed', {
     templateUrl: 'partials/newsFeed.html',
     controller: 'NewsFeedController',

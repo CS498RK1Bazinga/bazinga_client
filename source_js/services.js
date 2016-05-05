@@ -1,7 +1,8 @@
 var mp4Services = angular.module('mp4Services', []);
 
 mp4Services.factory('Users', function($http, $window) {
-    var baseUrl = $window.sessionStorage.baseurl;
+//     var baseUrl = $window.sessionStorage.baseurl;
+var baseUrl = 'http://localhost:4000';
     return {
         getAllUsers : function() {
             return $http.get(baseUrl+'/api/users');

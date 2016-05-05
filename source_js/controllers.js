@@ -1,9 +1,32 @@
 var mp4Controllers = angular.module('mp4Controllers', []);
 
-mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routeParams' , '$window', function($scope, $http,$routeParams, $window) {
+mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routeParams' , '$window','Events','Users', function($scope, $http,$routeParams, $window,Events,Users) {
   $scope.data = "";
+  $scope.user = {};
   $scope.eid = $routeParams.id;
   $scope.id = $routeParams.id;
+  $scope.hid = "";
+  console.log($routeParams.id);
+
+  $scope.event = {};
+  Events.getEvent($routeParams.id).success(function(data){
+      console.log(data.data._id);
+      console.log(data.data._id === $routeParams.id);
+      $scope.event = data.data;
+      Users.getUser($scope.event.hostId).success(function(data){
+      $scope.user = data.data.local;
+      console.log($scope.user);
+      $scope.hid = data.data._id;
+
+       });
+
+
+  });
+  // console.log($scope.hid);
+ 
+
+
+
         //   $scope.map = new google.maps.Map(document.getElementById('map'), {
         //   center: {lat: 40.10195230000001, lng: -88.22716149999997},
         //   // (40.10195230000001, -88.22716149999997)
@@ -14,7 +37,20 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routePar
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('NewsFeedController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
+mp4Controllers.controller('NewsFeedController', ['$scope', 'Events', function($scope, Events) {
+  
+   $scope.events = {};
+   $scope.showOption = "where={'completed':false}";
+   $scope.order = "1";
+   $scope.sortBy = "time"
+   $scope.tasksLength = 0;
+   Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
+     .success(function(data){
+       console.log("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10");
+       $scope.events = data.data;
+       console.log($scope.events.length);
+   });
+
   
 }]);
 
@@ -378,41 +414,47 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
 
 }]);
 
-mp4Controllers.controller('AddEventController', ['$scope', '$window', '$routeParams','Events', function($scope, $window, $routeParams, Events) {
-
+mp4Controllers.controller('AddEventController', ['$scope', '$window', '$routeParams','Users','Events','$http', function($scope, $window, $routeParams,Users, Events,$http) {
 $scope.data = {};
-$scope.foodStyles = 'American';
-// $scope.users = {};
-// CommonData.getUsers()
-//   .success(function(data){
-//     $scope.users = data.data;
-// });
 
-// console.log($scope.data);
-
-// $scope.parse = function(){
-//   console.log($scope.data.date);
-//   console.log('inside parse');
-//   $scope.data.date = $scope.data.date.toISOString().substr(0,10);
+// $scope.verified = true;
+// 
+// function showView(userLoggedIn){
+//   if(!userLoggedIn){
+//     $scope.verified = false;
+//   }else{
+//     $scope.verified = true;
+//   }
 // }
 
-$scope.addEvent = function(){
-  // console.log($scope.data.time);
-    $scope.data.host = 'name';
-    console.log($scope.data);
-    // console.log($scope.data.date.valueAsDate);
-    console.log($scope.data.date);
-    console.log($scope.data.time);
-    // console.log($scope.data.date.toISOString());
-    // console.log($scope.data.date.toISOString());
-    console.log($scope.data.date.toISOString().substr(0,10));
-    console.log(($scope.data.time+'').substr(16,17));
-    console.log('to local time?');
-    console.log($scope.data.time.toLocaleTimeString());
-    // console.log($scope.data.hour.toISOString());
-    // console.log($scope.data.hour.toISOString().substr(11,16));
+$http.get('/profile').success(function(data) {
+      // console.log(data);
+      if(!data.error) {
+        $scope.profile = true;
+        sessionStorage.setItem("name",data.user.local.name);
+        sessionStorage.setItem("uid",data.user._id);
 
-    // console.log($scope.data.hour.length);
+        // $window.sessionStorage.setItem('user',data.user.local);
+         // = data.user.local;
+        // console.log(data.user.local);
+        // console.log($window.sessionStorage.getItem('user').email);
+      }
+      });
+
+// showView(sessionStorage.getItem("name"));
+
+console.log('global');
+console.log('name: '+sessionStorage.getItem("name"));
+console.log('id: '+sessionStorage.getItem("uid"));
+$scope.uname = sessionStorage.getItem("name");
+
+// console.log($window.sessionStorage.user);
+// $scope.user = $window.sessionStorage.user;
+
+
+$scope.foodStyles = 'American';
+
+$scope.addEvent = function(){
 
     var newData = {
       name: $scope.data.name,
@@ -420,7 +462,8 @@ $scope.addEvent = function(){
       hour: $scope.data.time.toLocaleTimeString(),
       place: $scope.data.place,
       description: $scope.data.description,
-      host: 'host',
+      host: sessionStorage.getItem("name"),
+      hostId: sessionStorage.getItem("uid"),
       attending: [],
       maximumLimit: $scope.data.limit,
       completed: false,
@@ -434,23 +477,22 @@ $scope.addEvent = function(){
         .success(function(data){
         $scope.errorMessage = "";
         $scope.successMessage = "Event " + data.data.name + " has been added!";
-        if($scope.assignedUser) {
-            $scope.data = {};
-            $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
-
-            Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
-                .success(function(data){
-                    console.log("task added sucesssfully");
-                }).error(function(err){
-                if(err)
-                    console.log("fail to update user " + err);
-            });
-      }
+      //   if($scope.assignedUser) {
+      //       $scope.data = {};
+      //       $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
+      //       Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
+      //           .success(function(data){
+      //               console.log("task added sucesssfully");
+      //           }).error(function(err){
+      //           if(err)
+      //               console.log("fail to update user " + err);
+      //       });
+      // }
     }).error(function(err){
         if(err) {
           $scope.errorMessage = err.message;
           $scope.successMessage = "";
-          console.log("fail to add Eveny"+err);
+          console.log("fail to add Event"+err);
         }
     });
 
