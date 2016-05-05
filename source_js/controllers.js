@@ -17,23 +17,15 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routePar
       $scope.user = data.data.local;
       console.log($scope.user);
       $scope.hid = data.data._id;
-
        });
-
-
   });
   // console.log($scope.hid);
- 
-
-
-
         //   $scope.map = new google.maps.Map(document.getElementById('map'), {
         //   center: {lat: 40.10195230000001, lng: -88.22716149999997},
         //   // (40.10195230000001, -88.22716149999997)
         //   zoom: 13
         // });
  // $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
@@ -415,56 +407,22 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
 
 }]);
 
-mp4Controllers.controller('AddEventController', ['$scope', '$window', '$routeParams','Users','Events','$http', function($scope, $window, $routeParams,Users, Events,$http) {
+mp4Controllers.controller('AddEventController', ['$scope', '$window','$rootScope', '$routeParams','Users','Events','$http', function($scope, $window,$rootScope, $routeParams,Users, Events,$http) {
 $scope.data = {};
-
-// $scope.verified = true;
-// 
-// function showView(userLoggedIn){
-//   if(!userLoggedIn){
-//     $scope.verified = false;
-//   }else{
-//     $scope.verified = true;
-//   }
-// }
-
-$http.get('/profile').success(function(data) {
-      // console.log(data);
-      if(!data.error) {
-        $scope.profile = true;
-        sessionStorage.setItem("name",data.user.local.name);
-        sessionStorage.setItem("uid",data.user._id);
-
-        // $window.sessionStorage.setItem('user',data.user.local);
-         // = data.user.local;
-        // console.log(data.user.local);
-        // console.log($window.sessionStorage.getItem('user').email);
-      }
-      });
-
-// showView(sessionStorage.getItem("name"));
-
-console.log('global');
-console.log('name: '+sessionStorage.getItem("name"));
-console.log('id: '+sessionStorage.getItem("uid"));
-$scope.uname = sessionStorage.getItem("name");
-
-// console.log($window.sessionStorage.user);
-// $scope.user = $window.sessionStorage.user;
-
-
+console.log($rootScope.user);
 $scope.foodStyles = 'American';
 
 $scope.addEvent = function(){
-
+	console.log($rootScope.user.local.name);
+	console.log($rootScope.user._id);
     var newData = {
       name: $scope.data.name,
       time: $scope.data.date.toLocaleDateString(),
       hour: $scope.data.time.toLocaleTimeString(),
       place: $scope.data.place,
       description: $scope.data.description,
-      host: sessionStorage.getItem("name"),
-      hostId: sessionStorage.getItem("uid"),
+      host: $rootScope.user.local.name,
+      hostId: $rootScope.user._id,
       attending: [],
       maximumLimit: $scope.data.limit,
       completed: false,
