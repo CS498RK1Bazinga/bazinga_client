@@ -347,6 +347,16 @@ textarea {
 }
 
 /* login form */
+.medium-6.medium-centered.large-4.large-centered.columns{
+	border-radius:10px;
+}
+input[type]{
+	border-radius:10px;
+}
+select{
+	border-radius:10px;
+	outline: none;
+}
 .log-in-form {
 	padding: 1rem;
 	border-radius: 3px;
