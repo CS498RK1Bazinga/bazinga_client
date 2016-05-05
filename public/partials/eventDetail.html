@@ -1,21 +1,21 @@
 <!-- <div ng-controller='EventDetailController'> -->
 <div ng-app='app' ng-controller='EventDetailController' style="z-index:99;padding-bottom: 200px;">
 <div class="row" style="background-color: white;padding: 20px;">
-	<h2>Event Detail</h2>
+	<h2>{{event.name}}</h2>
      <hr>
      <p><button type="submit" class="button warning">Edit Detail</button></p>
    	<img style="margin:0 auto;display: table-cell;text-align:center;vertical-align: middle;" src="http://placekitten.com/200/200" alt="user profile pic">
-   	<h3 style="text-align:center;vertical-align: middle;">Hosted by:</h3>
-   	<h4 style="text-align:center;vertical-align: middle;">James Rockstar</h4>
-   	<h5  style="text-align:center;vertical-align: middle;"><i class="fa fa-male" aria-hidden="true"></i>Male</h5>	
+   	<h3 style="text-align:center;vertical-align: middle;">Hosted by: </h3>
+   	<h4 style="text-align:center;vertical-align: middle;">{{user.local.name}}</h4>
+   	<h5  style="text-align:center;vertical-align: middle;"><i class="fa fa-male" aria-hidden="true"></i>Male</h5>
 
  	<div class="row small-up-1 medium-up-1 text-center" style="display:inline;background-color: white;padding-bottom: 30px;">
  		<div class="callout primary shrink columns">
  		<section>
-			 		<i class="fa fa-calendar-o" aria-hidden="true"></i> Time: Monday April 25th 			
+			 		<i class="fa fa-calendar-o" aria-hidden="true"></i> Time: {{event.time}} {{event.date}}
  		</section>
  		<section>
-			 		<i class="fa fa-location-arrow" aria-hidden="true"></i> Place: UIUC Grainger Library 4th Floor 			
+			 		<i class="fa fa-location-arrow" aria-hidden="true"></i> Place: {{event.place}}
  		</section>
 
 
@@ -24,25 +24,25 @@
  		<!-- <div class="columns">Monday April 25th</div> -->
  	</div>
  	<div class="row small-up-1 medium-up-1 text-center" style="background-color: white;padding: 20px;">
- 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis id congue risus. Donec interdum lacus purus, eu commodo augue rutrum vel. Quisque pulvinar nisi eu tortor eleifend, id mattis urna tempus. Quisque eget pulvinar felis. Quisque scelerisque, risus vitae tristique molestie, quam quam hendrerit sapien, a elementum leo quam quis tellus. Phasellus commodo mauris vel augue sollicitudin accumsan. Praesent in pulvinar est, eu tristique quam. Suspendisse et urna in mi cursus vestibulum id in leo. Suspendisse eget enim tortor. Etiam ut ullamcorper tortor. In non tortor ligula. Nulla a massa vitae orci venenatis congue nec id diam. Integer non aliquet enim. Aenean pretium ligula velit, eget malesuada augue tristique ac.</p>
- 	</div>		
+ 		<p> {{event.description}}</p>
+ 	</div>
 </div>
 
 <!-- <div class="row small-up-1 medium-up-1 text-center" style="display: inline;">
 	  <div class="shrink columns">
-	  		<h3>Hosted by:</h3>	
+	  		<h3>Hosted by:</h3>
 	  	</div>
 	  	 <div class="shrink columns">
 	  	 	<img src="http://placekitten.com/200/200" alt="user profile pic">
 	  	</div>
 	  	 <div class="shrink columns">
-	  		<h4>James Rockstar</h4>	
+	  		<h4>James Rockstar</h4>
 	  	</div>
 	  	<div class="shrink columns">
-	  		<h5><i class="fa fa-male" aria-hidden="true"></i>Male</h5>	
+	  		<h5><i class="fa fa-male" aria-hidden="true"></i>Male</h5>
 	  	</div>
 	</div> -->
-	
+
 
 
 
@@ -50,7 +50,7 @@
  		<div class="text-center row" style="padding-top: 20px;">
       		<button type="submit" class="button success">Going</button>
    		</div>
-<!-- 
+<!--
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>
 	{{map}}
 </ui-gmap-google-map> -->
@@ -58,7 +58,7 @@
 <!-- {"center":{"latitude":45,"longitude":-73},"zoom":8} -->
 </div>
 
-<!-- GOOGLE MAP API --><!-- 
+<!-- GOOGLE MAP API --><!--
 <input id="pac-input" class="controls" type="text"
         placeholder="Enter a location">
     <div id="type-selector" class="controls">
@@ -76,7 +76,7 @@
     </div>
     <div id="map"></div>
      -->
-<!-- 
+<!--
 <div>Google Places Autocomplte integration in Angular</div>
     <div>To Test, start typing the name of any Indian city</div>
     <div>selection is: {{chosenPlace}}</div>
@@ -172,4 +172,3 @@
 			<label>Deadline: {{tsk.deadline}}</label>
 		</div>
 	</div>
-

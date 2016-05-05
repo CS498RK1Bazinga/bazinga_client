@@ -22,15 +22,26 @@
         <div class="columns right">
           <fieldset>
                 <input type="text" name="input" placeholder="Search for food event">
-                <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Date</label>
-                <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
-                <select class="sortby-input">
-                  <option value="ascending">Ascending</option>
-                  <option value="descending">Descending</option>
-                </select>
-              Female <input type="checkbox">
-              Male <input type="checkbox">
-            </fieldset>
+          </fieldset>
+              <div class="row">
+                <div class="small-3 columns">
+                <label>
+                 <select ng-model="sortBy">
+                   <option value="name">name</option>
+                   <option value="date">date</option>
+                 </select>
+               </label>
+             </div>
+              <div class="small-4 columns">
+                <input type="radio" value = "1" ng-model="order" id="ascending"><label for="ascending">ascending</label>
+                <input type="radio" value = "-1" ng-model="order" id="descending"><label for="descending">descending</label>
+              </div>
+              <div class="small-5 columns">
+                <input type="radio" value="where={'gender':male}" ng-model="showOption" id="male"><label for="male">Male</label>
+                <input type="radio" value="where={'gender':female}" ng-model="showOption" id="female"><label for="female">Female</label>
+                <input type="radio" value="where={}" ng-model="showOption" id="all"><label for="all">All</label>
+              </div>
+            </div>
         </div>
       </div>
 
@@ -42,19 +53,20 @@
                       </div>
 
                       <div class="columns small-4 right">
-                          <h5><i class="fi-calendar large"></i> {{event.time}} <hr> {{event.hour}}</h5>
+                          <h6><i class="fi-calendar large"></i> {{event.time}} {{event.hour}}</h6>
                       </div>
                     </div>
+
                     <div class="centerAlign">
-                      <a href="#/event-detail/{{event._id}}"><h3> {{event.name}}</h3></a>
+                      <a href="#/event-detail/{{event._id}}"><h2> {{event.name}}</h2></a>
                     </div>
                     <hr>
                     <div class="centerAlign">
-                 <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
-                 <h5><i class="fi-male-female large"></i> Attendee : {{event.attending}}  </h5>
-                 <button ng-model="rsvp" type="button" class="button" ng-class="{true: 'success', false:'secondary'}[isActive]" ng-click="toggleActive()">{{rsvpText}}</button>
-               </div>
-              </div>
+                     <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
+                     <h5><i class="fi-male-female large"></i> Attendee : {{event.attending.length}}  </h5>
+                     <button type="button" class="button" ng-class="{true:'success', false:'secondary'}[{{event.isActive}}]" ng-click="toggleActive($index)">{{event.rsvpText}}</button>
+                    </div>
+      </div>
 
 <!--
          <div class="callout">
