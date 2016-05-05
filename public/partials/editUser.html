@@ -11,32 +11,32 @@
       <div class="profile-detail-container">
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="email" placeholder="Email" ng-value="user.local.email">
+          <input class="input-group-field" type="email" placeholder="Email" ng-model="email">
         </div>
 
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-user" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="text" placeholder="Name" ng-value="user.local.name">
+          <input class="input-group-field" type="text" placeholder="Name" ng-model="name">
         </div>
 
         <!-- PASSWORD only on correct user -->
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-lock" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="text" placeholder="Password">
+          <input class="input-group-field" type="text" placeholder="Password" ng-model="password">
         </div>
 
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-neuter" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="text" placeholder="Gender" ng-value="user.local.gender">
+          <input class="input-group-field" type="text" placeholder="Gender" ng-model="gender">
         </div>
 
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-phone" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="text" placeholder="Phone Number" ng-value="user.local.phoneNumber">
+          <input class="input-group-field" type="text" placeholder="Phone Number" ng-model="phoneNumber">
         </div>
 
         <div class="input-group-button left">
-            <input type="submit" class="button" value="Submit">
+            <input type="submit" class="button" value="Submit" ng-click="edit_user()">
         </div>
       </div>
     </div>

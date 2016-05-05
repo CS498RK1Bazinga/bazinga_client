@@ -8,7 +8,11 @@ var userSchema = mongoose.Schema({
   		password: {type: String, required: [true, 'A password is required!']},
   		phoneNumber: {type: String, required: [true, 'A phone number is required!']},
   		gender: {type: String},
-  		image: {type: String, default: ''}
+  		image: {type: String, default: ''},
+    	attending: {type: [String], default: []},
+    	hosting: {type: [String], default: []},
+    	history: {type: [String], default: []},
+    	following: {type: [String], default: []}
 	}
 });
 

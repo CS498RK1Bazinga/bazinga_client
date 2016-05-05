@@ -14,6 +14,7 @@ var baseUrl = 'http://localhost:4000';
             return $http.delete(baseUrl+'/api/users/'+userId);
         },
         getUser : function(userId) {
+            console.log(baseUrl+'/api/users/'+userId);
             return $http.get(baseUrl+'/api/users/'+userId);
         },
         updateUser : function(userId, data) {
