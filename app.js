@@ -95,7 +95,11 @@ app.get('/loggedin', function(req, res) {
 });
 
 app.post('/signup', passport.authenticate('local-signup'), function(req, res) {
-	res.redirect('./#/users/123');
+	//res.redirect('./#/users/');
+	/*res.json({
+		user req.user
+	});*/
+	res.send(req.user);
 });
 
 app.post('/login', passport.authenticate('local-login'), function(req, res) {

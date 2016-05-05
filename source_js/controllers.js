@@ -110,17 +110,30 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 */
 
 // add user
-mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams', '$http', function($scope, $window, $routeParams, $http) {
+mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$window', '$routeParams', '$http', function($scope, $rootScope, $window, $routeParams, $http) {
    /* Get user data passportjs */
-  $scope.profile = false;
+   $scope.user = $rootScope.curr_user;
    
-  $http.get('/profile').success(function(data) {
-    console.log(data);
-    if(!data.error) {
-      $scope.profile = true;
-      $scope.user = data.user;
-    }
-   });
+   $scope.name = $scope.user.local.name;
+   $scope.email = $scope.user.local.email;
+   $scope.phoneNumber = $scope.user.local.phoneNumber;
+   $scope.gender = $scope.user.local.gender;
+   $scope.edit_user = function(user) {
+      $scope.editUser = {
+        name: $scope.name,
+        email: $scope.email,
+        password: $scope.user.local.password,
+        phoneNumber: $scope.phoneNumber,
+        gender: $scope.gender,
+        image: $scope.user.local.image,
+        attending: $scope.user.local.attending,
+        hosting: $scope.user.local.hosting,
+        history: $scope.user.local.history,
+        following: $scope.user.local.following
+      };
+      // console.log($scope.editUser);
+   };
+   
 
 }]);
 
@@ -281,20 +294,18 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 }]);
 
 //user details
-mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
-  /* Check if logged in */
- 
+mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$routeParams', '$http', 'Users', function($scope, $rootScope, $routeParams, $http, Users) {
+  
+ Users.getUser($routeParams.userId).success(function(data) {
+  
+    $scope.user = data.data;
+    }).error(function(err) {
+      if (err)
+        console.log(err);
+ });
 
   /* Get user data passportjs */
-  $scope.profile = false;
-   
-  $http.get('/profile').success(function(data) {
-    console.log(data);
-    if(!data.error) {
-      $scope.profile = true;
-      $rootScope.user = data.user;
-    }
-   });
+ 
 
    //$scope.id = $routeParams.userId;
    
@@ -366,8 +377,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
         .success(function(user){
           // No error: authentication OK
           $rootScope.message = 'Authentication successful!';
-          console.log($rootScope.message);
-          //$rootScope.user = user.data;
+          $rootScope.curr_user = user;
           $location.url('/users/'+user._id);
         })
         .error(function(){
@@ -382,7 +392,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
 
 mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
 
-    $scope.user = {};
+    $scope.user = '';
     
     $scope.signup = function(){
         $http.post('/signup', {
@@ -394,9 +404,8 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
         })
         .success(function(user){
           // No error: authentication OK
-          $rootScope.message = 'Signup successful!';
-          console.log($rootScope.message);
-          $location.url('/users/123');
+          $rootScope.curr_user = user;
+          $location.url('/users/'+user._id);
         })
         .error(function(){
           // Error: authentication failed
@@ -409,20 +418,19 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
 
 mp4Controllers.controller('AddEventController', ['$scope', '$window','$rootScope', '$routeParams','Users','Events','$http', function($scope, $window,$rootScope, $routeParams,Users, Events,$http) {
 $scope.data = {};
-console.log($rootScope.user);
 $scope.foodStyles = 'American';
 
 $scope.addEvent = function(){
-	console.log($rootScope.user.local.name);
-	console.log($rootScope.user._id);
+	console.log($rootScope.curr_user.local.name);
+	console.log($rootScope.curr_user._id);
     var newData = {
       name: $scope.data.name,
       time: $scope.data.date.toLocaleDateString(),
       hour: $scope.data.time.toLocaleTimeString(),
       place: $scope.data.place,
       description: $scope.data.description,
-      host: $rootScope.user.local.name,
-      hostId: $rootScope.user._id,
+      host: $rootScope.curr_user.local.name,
+      hostId: $rootScope.curr_user._id,
       attending: [],
       maximumLimit: $scope.data.limit,
       completed: false,
