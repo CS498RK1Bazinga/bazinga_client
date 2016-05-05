@@ -1,6 +1,6 @@
 var mp4Controllers = angular.module('mp4Controllers', []);
 
-mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routeParams' , '$window','Events','Users', function($scope, $http,$routeParams, $window,Events,Users) {
+mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScope','$routeParams' , '$window','Events','Users', function($scope, $http,$rootScope,$routeParams, $window,Events,Users) {
   $scope.data = "";
   $scope.user = {};
   $scope.eid = $routeParams.id;
@@ -17,33 +17,51 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$routePar
       $scope.user = data.data.local;
       console.log($scope.user);
       $scope.hid = data.data._id;
+
        });
+
+
   });
   // console.log($scope.hid);
+
+
+
+
         //   $scope.map = new google.maps.Map(document.getElementById('map'), {
         //   center: {lat: 40.10195230000001, lng: -88.22716149999997},
         //   // (40.10195230000001, -88.22716149999997)
         //   zoom: 13
         // });
  // $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('NewsFeedController', ['$scope', 'Events', function($scope, Events) {
-  
+mp4Controllers.controller('NewsFeedController', ['$scope', '$rootScope', 'Events', function($scope,$rootScope, Events) {
    $scope.events = {};
-   $scope.showOption = "where={'completed':false}";
+   $scope.showOption = "where={}";
    $scope.order = "1";
-   $scope.sortBy = "time"
-   $scope.tasksLength = 0;
+   $scope.sortBy = "name";
+   $scope.events = {};
    Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
-       console.log("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10");
        $scope.events = data.data;
-       console.log($scope.events.length);
-   });
+       for (var i = 0; i < $scope.events.length; i++) {
+           $scope.events[i].isActive = true;
+           $scope.events[i].rsvpText = "RSVP";
+       }
 
-  
+   });
+   $scope.toggleActive = function(index) {
+     console.log($scope.events[index]);
+       $scope.events[index].isActive = !$scope.events[index].isActive;
+       if($scope.events[index].isActive)
+         $scope.events[index].rsvpText = "RSVP";
+       else
+         $scope.events[index].rsvpText = "Cancel";
+     };
+
+
 }]);
 
 //user list
@@ -113,7 +131,7 @@ mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routePara
 mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routeParams', '$http', function($scope, $window, $routeParams, $http) {
    /* Get user data passportjs */
   $scope.profile = false;
-   
+
   $http.get('/profile').success(function(data) {
     console.log(data);
     if(!data.error) {
@@ -126,6 +144,7 @@ mp4Controllers.controller('EditUserController', ['$scope', '$window', '$routePar
 
 //task list
 mp4Controllers.controller('TaskController', ['$scope', 'CommonData', 'Users', 'Tasks', function($scope, CommonData, Users, Tasks) {
+
    $scope.tasks = {};
    $scope.showOption = "where={'completed':false}";
    $scope.order = "1";
@@ -283,21 +302,21 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$routeParams' ,'Ta
 //user details
 mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
   /* Check if logged in */
- 
+
 
   /* Get user data passportjs */
   $scope.profile = false;
-   
+
   $http.get('/profile').success(function(data) {
     console.log(data);
     if(!data.error) {
       $scope.profile = true;
-      $rootScope.user = data.user;
+      $scope.user = data.user;
     }
    });
 
    //$scope.id = $routeParams.userId;
-   
+
 }]);
 
 
@@ -367,8 +386,7 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
           // No error: authentication OK
           $rootScope.message = 'Authentication successful!';
           console.log($rootScope.message);
-          //$rootScope.user = user.data;
-          $location.url('/users/'+user._id);
+          $location.url('/users/123');
         })
         .error(function(){
           // Error: authentication failed
@@ -383,14 +401,19 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
 mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', '$location', function($scope, $http, $rootScope, $location) {
 
     $scope.user = {};
-    
+
     $scope.signup = function(){
         $http.post('/signup', {
           name: $scope.user.name,
           email: $scope.user.email,
           password: $scope.user.password,
           phoneNumber: $scope.user.phoneNumber,
-          gender: $scope.user.gender
+          gender: $scope.user.gender,
+          image: "",
+          attending: [],
+          hosting: [],
+          history: [],
+          following: []
         })
         .success(function(user){
           // No error: authentication OK
@@ -407,14 +430,13 @@ mp4Controllers.controller('SignUpController', ['$scope', '$http', '$rootScope', 
 
 }]);
 
-mp4Controllers.controller('AddEventController', ['$scope', '$window','$rootScope', '$routeParams','Users','Events','$http', function($scope, $window,$rootScope, $routeParams,Users, Events,$http) {
+mp4Controllers.controller('AddEventController', ['$scope', '$window', '$rootScope', '$routeParams','Users','Events','$http', function($scope, $window,$rootScope, $routeParams,Users, Events,$http) {
 $scope.data = {};
 console.log($rootScope.user);
 $scope.foodStyles = 'American';
 
 $scope.addEvent = function(){
-	console.log($rootScope.user.local.name);
-	console.log($rootScope.user._id);
+
     var newData = {
       name: $scope.data.name,
       time: $scope.data.date.toLocaleDateString(),
