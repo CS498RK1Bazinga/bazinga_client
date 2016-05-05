@@ -300,7 +300,7 @@ mp4Controllers.controller('ProfileController', ['$scope', '$rootScope', '$http',
     console.log(data);
     if(!data.error) {
       $scope.profile = true;
-      $scope.user = data.user;
+      $rootScope.user = data.user;
     }
    });
 
@@ -375,7 +375,8 @@ mp4Controllers.controller('LoginController', ['$scope', '$rootScope', '$http', '
           // No error: authentication OK
           $rootScope.message = 'Authentication successful!';
           console.log($rootScope.message);
-          $location.url('/users/123');
+          //$rootScope.user = user.data;
+          $location.url('/users/'+user._id);
         })
         .error(function(){
           // Error: authentication failed
