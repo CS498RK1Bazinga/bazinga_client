@@ -6,7 +6,7 @@
      <p><button type="submit" class="button warning">Edit Detail</button></p>
    	<img style="margin:0 auto;display: table-cell;text-align:center;vertical-align: middle;" src="http://placekitten.com/200/200" alt="user profile pic">
    	<h3 style="text-align:center;vertical-align: middle;">Hosted by: </h3>
-   	<h4 style="text-align:center;vertical-align: middle;">{{user.local.name}}</h4>
+   	<h4 style="text-align:center;vertical-align: middle;">{{curr_user.local.name}}</h4>
    	<h5  style="text-align:center;vertical-align: middle;"><i class="fa fa-male" aria-hidden="true"></i>Male</h5>
 
  	<div class="row small-up-1 medium-up-1 text-center" style="display:inline;background-color: white;padding-bottom: 30px;">
@@ -26,6 +26,9 @@
  	<div class="row small-up-1 medium-up-1 text-center" style="background-color: white;padding: 20px;">
  		<p> {{event.description}}</p>
  	</div>
+	<div class="row small-up-1 medium-up-1 text-center" style="background-color: white;padding: 20px;">
+		<p> {{event.attending}}</p>
+	</div>
 </div>
 
 <!-- <div class="row small-up-1 medium-up-1 text-center" style="display: inline;">
