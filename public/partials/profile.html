@@ -23,7 +23,7 @@
         <li><i class="fa fa-neuter" aria-hidden="true"></i> {{user.local.gender}} </li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> {{user.local.phoneNumber}}</li>
         <!-- <li>id: {{user._id}}</li> -->
-        <li><button type="submit" class="button round warning" ng-click="follow()">Follow</button></li>
+        <li><button type="submit" class="button round warning" ng-click="follow()" ng-hide="curr_user._id==user._id">Follow</button></li>
       </ul>
     </div>
   </div>
