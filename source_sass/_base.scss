@@ -269,9 +269,12 @@ a {
       text-decoration: none;
       display: inline-block !important;
       @include breakpoint(small down) {
-      padding-top: 10px;
+      
       display: block !important;
       }
+    }
+    li:hover {
+      background-color: $beige;
     }
   }
 }

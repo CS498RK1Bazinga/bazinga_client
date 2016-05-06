@@ -198,6 +198,7 @@ mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope'
 
       Events.updateEvent($routeParams.eventId,newData).success(function(data){
             console.log('updated');
+            $scope.successMessage = 'Event edited!';
       });
   };
 
