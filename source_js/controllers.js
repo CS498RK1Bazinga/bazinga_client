@@ -43,6 +43,31 @@ mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope'
   console.log('edit event' + $routeParams.eventId);
   $scope.data = {};
 
+
+  $scope.editEvent = function(){
+
+    console.log($scope.data);
+    var newData = {
+      name: $scope.data.name,
+      time: $scope.data.time,
+      hour: $scope.data.hour.toLocaleTimeString(),
+      place: $scope.data.place,
+      description: $scope.data.description,
+      host: $scope.data.host,
+      hostId: $scope.data.hostId,
+      attending: $scope.data.attending,
+      maximumLimit: $scope.data.maximumLimit,
+      completed: $scope.data.completed,
+      foodstyle: $scope.data.foodstyle,
+      occassion: $scope.data.occassion
+    }
+    console.log(newData);
+
+      Events.updateEvent($routeParams.eventId,newData).success(function(data){
+            console.log('updated');
+      });
+  };
+
   Events.getEvent($routeParams.eventId).success(function(data){
     $scope.data = data.data;
     $scope.data.time = new Date($scope.data.time);
@@ -87,32 +112,6 @@ mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope'
   //
   //
   // });
-
-  $scope.editEvent = function(){
-
-    console.log($scope.data);
-
-    // var newData = {
-    //   name: $scope.data.name,
-    //   time: $scope.data.time,
-    //   hour: $scope.data.hour.toLocaleTimeString(),
-    //   place: $scope.data.place,
-    //   description: $scope.data.description,
-    //   host: $scope.data.host,
-    //   hostId: $scope.data.hostId,
-    //   attending: $scope.data.attending,
-    //   maximumLimit: $scope.data.maximumLimit,
-    //   completed: $scope.data.completed,
-    //   foodstyle: $scope.data.foodstyle,
-    //   occassion: $scope.data.occassion
-    // }
-    // console.log(newData);
-
-      Events.updateEvent($routeParams.eventId,$scope.data).success(function(data){
-            console.log('updated');
-            console.log(data);
-      });
-  };
 }]);
 
 mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
@@ -227,21 +226,43 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
 mp4Controllers.controller('UserController', ['$scope', '$rootScope', '$window', 'Users', function($scope, $rootScope, $window, Users) {
     $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.users = {};
-
    $scope.predicate = 'name';
 
    Users.getAllUsers().success(function(users) {
-      console.log(users.data);
       $scope.users = users.data;
+      for(var i = 0; i < $scope.users.length; i++){
+        if($rootScope.curr_user.local.following.indexOf($scope.users[i]._id) === -1) {
+          $scope.users[i].isActive = true;
+          $scope.users[i].followText = "follow";
+        } else {
+         $scope.users[i].isActive = false;
+         $scope.users[i].followText = "unfollow";
+       }
+      }
    }).error(function(err) {
     if (err)
       console.log("error");
    });
 
-   $scope.follow = function(userID){
-          Users.getUser($rootScope.curr_user._id).success(function(data){
-          data.data.local.following.push(userID);
+   $scope.follow = function(userID, index){
+     console.log($scope.users[index]);
+      //toggle active
+       $scope.users[index].isActive = !$scope.users[index].isActive;
+       if($scope.users[index].isActive)
+         $scope.users[index].followText = "follow";
+       else
+         $scope.users[index].followText = "unfollow";
+
+       Users.getUser($rootScope.curr_user._id).success(function(data){
+          if(data.data.local.following.indexOf(userID) === -1)
+              data.data.local.following.push(userID);
+          else
+              data.data.local.following.slice(data.data.local.following.indexOf(userID), 1);
           Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
+            Users.getUser($rootScope.curr_user._id).success(function(user){
+                $rootScope.curr_user = user.data;
+                $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+            });
                 console.log("Updated user's friends []");
           });
      });

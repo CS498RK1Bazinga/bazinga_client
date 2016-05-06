@@ -5,10 +5,10 @@
 	  <div class="row">
           <div class="small-4 small-offset-4 columns">
 						<h3><b>Edit Event</b></h3>
-            <h5>Event name: </h5><input ng-model="data.name" required type="text" placeholder="Event name">
-            <h5>Event place: </h5><input ng-model="data.place" required type="text" placeholder="Event place">
+            <h5>Event name: </h5><input ng-model="event.name" required type="text" placeholder="Event name">
+            <h5>Event place: </h5><input ng-model="event.place" required type="text" placeholder="Event place">
             <h5>Hosted By: {{curr_user.local.name}}</h5>
-               <h5>Food style: </h5></h5><select ng-model="data.foodstyle" >
+               <h5>Food style: </h5></h5><select ng-model="event.foodstyle" >
               			<option value="Japanese">Japanese</option>
                         <option value="Chinese">Chinese</option>
                         <option value="Thai">Thai</option>
@@ -21,14 +21,13 @@
                         <option value="American">American</option>
                         <option value="Other">Other</option>
                       </select>
-              <h5>Date: {{data.time}}</h5>
-              <input type="date" name="date" ng-model="data.time"
-      			placeholder="yyyy-MM-dd" min="2016-05-01" required />
+              <h5>Date: {{event.time}}</h5>
+              <input ng-model="event.time" required />
               <!-- <input type="date" ng-model="data.date" min="2016-05-01"> -->
-              <h5>Time: {{data.hour.length}}</h5><input type="time" ng-model="data.hour" />
-              <h5>Occasion: </h5><input ng-model="data.occassion" required type="text" placeholder="Event Occasion">
-              <h5>Desired Maximum Attendee: {{data.maximumLimit}}</h5><input ng-model="data.maximumLimit" required type="number" min="0" />
-            <h5>Description: </h5><textarea ng-model="data.description" placeholder="Description"></textarea>
+              <h5>Time: {{event.hour.length}}</h5><input ng-model="event.hour" />
+              <h5>Occasion: </h5><input ng-model="event.occassion" required type="text" placeholder="Event Occasion">
+              <h5>Desired Maximum Attendee: {{event.maximumLimit}}</h5><input ng-model="event.maximumLimit" required type="number" min="0" />
+            <h5>Description: </h5><textarea ng-model="event.description" placeholder="Description"></textarea>
 						<div ng-if="errorMessage">
 							<p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">{{ errorMessage }}</p>
 						</div>
