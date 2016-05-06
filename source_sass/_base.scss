@@ -181,6 +181,10 @@ a {
     border-width: 1px;
   }
 
+  .top-bar-right ul li:hover {
+      background-color: $beige;
+    }
+
 }
 
 .event-search input {
@@ -279,6 +283,7 @@ a {
       display: block !important;
       }
     }
+
   }
 }
 
