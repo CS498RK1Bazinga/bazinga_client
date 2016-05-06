@@ -14,6 +14,14 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   Events.getEvent($routeParams.id).success(function(data){
 
       $scope.event = data.data;
+      if($scope.event.attending.indexOf($rootScope.curr_user._id) === -1){
+          $scope.isActive = true;
+          $scope.rsvpText = "RSVP";
+      }
+        else {
+          $scope.isActive = false;
+          $scope.rsvpText = "Cancel";
+      }
     //  console.log("event: "+$scope.event);
       Users.getUser($scope.event.hostId).success(function(data){
 
@@ -36,6 +44,86 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   }
 
   });
+
+  $scope.rsvpUser = function(uid,eid) {
+
+    //update the event.attending[] to include the uid.
+    //update the user's attending [] to include eid
+
+    Events.getEvent(eid).success(function(data){
+      $scope.isActive = !$scope.isActive;
+      if($scope.isActive)
+        $scope.rsvpText = "RSVP";
+      else
+        $scope.rsvpText = "Cancel";
+        console.log("waaaa" + data.data.attending);
+
+          if(data.data.attending.indexOf(uid) === -1){
+            console.log("xixixi" + data.data.attending);
+             data.data.attending.push(uid);
+             console.log("after" + data.data.attending);
+          }else {
+            data.data.attending.splice(data.data.attending.indexOf(uid), 1);
+          }
+            Events.updateEvent(eid,data.data).success(function(data_0){
+              Events.getEvent($routeParams.id)
+                .success(function(data){
+                  $scope.event = data.data;
+                  console.log($scope.event.attending);
+                  $scope.event.time = dateFormat($scope.event.time);
+                  $scope.event.hour = timeFormat($scope.event.hour);
+                    if($scope.event.attending.indexOf($rootScope.curr_user._id) === -1) {
+                       $scope.isActive = true;
+                       $scope.rsvpText = "RSVP"
+                    }
+                    else {
+                       $scope.isActive = false;
+                       $scope.rsvpText = "Cancel";
+                   }
+                  
+                   Users.getUser($scope.event.hostId).success(function(data){
+
+                       $scope.user = data.data.local;
+                       $scope.hid = data.data._id;
+
+                    });
+
+                   for (var i = 0; i < $scope.event.attending.length; i++) {
+                   Users.getUser($scope.event.attending[i]).success(function(data){
+                       $scope.attendents.push(data.data.local.name);
+                   });
+
+                   // if(!$scope.event.attending){
+                   //   $scope.attendents = '';
+                   // }
+                   // $scope.event.attending[i]
+               }
+
+              });
+            });
+
+    });
+
+
+
+
+    Users.getUser(uid).success(function(data){
+       if(data.data.local.attending.indexOf(eid) === -1){
+           data.data.local.attending.push(eid);
+       } else {
+         data.data.local.attending.splice(data.data.local.attending.indexOf(eid), 1);
+       }
+           Users.updateUser(uid,data.data.local).success(function(data_0){
+               Users.getUser($rootScope.curr_user._id).success(function(user){
+                   $rootScope.curr_user = user.data;
+                   $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+               });
+           });
+    });
+
+  }
+
+
 
   $scope.remove = function(eid){
       console.log(eid);
