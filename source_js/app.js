@@ -69,22 +69,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
        loggedin: checkLoggedin
     }
   }).
-  when('/tasks', {
-    templateUrl: './partials/tasks.html',
-    controller: 'TaskController'
-  }).
-  when('/tasks/add', {
-    templateUrl: './partials/addTask.html',
-    controller: 'TaskController'
-  }).
-  when('/tasks/:taskId', {
-   templateUrl: 'partials/taskDetail.html',
-   controller: 'TaskDetailController'
-  }).
-  when('/editTask/:taskId', {
-  templateUrl: 'partials/editTask.html',
-  controller: 'EditTaskController'
-  }).
   when('/login', {
     templateUrl: 'partials/login.html',
     controller: 'LoginController'
@@ -103,13 +87,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
   when('/newsFeed', {
     templateUrl: 'partials/newsFeed.html',
     controller: 'NewsFeedController',
-    resolve: {
-       loggedin: checkLoggedin
-    }
-  }).
-  when('/events/:eventId', {
-    templateUrl: 'partials/eventDetail.html',
-    controller: 'EventDetailController',
     resolve: {
        loggedin: checkLoggedin
     }

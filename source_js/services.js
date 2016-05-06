@@ -34,15 +34,6 @@ mp4Services.factory('Events', function($http, $window) {
         getEventsByHost : function(userId) {
             return $http.get(baseUrl+"/api/events?where={'host':'" + userId + "}");
         },
-        /*
-        *****Maybe not needed since we can just filter these out through the front-end...might be easier****
-
-         getAttendingEvents : function(userId) {
-           return $http.get(baseUrl+"/api/events?where={'assignedUser':'" + userId + "','completed':false}");
-         },
-        getEventsHistory : function(userId) {
-            return $http.get(baseUrl+"/api/events?where={'assignedUser':'" + userId + "','completed':true}");
-        },*/
          updateEvent : function(eventId, data) {
            return $http.put(baseUrl+'/api/events/'+ eventId, data);
          },
