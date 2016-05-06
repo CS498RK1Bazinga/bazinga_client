@@ -16,7 +16,10 @@ function highlightThis(event) {
 }
 
 function dateFormat (format) {
-  var tempStr = new Date(format.toString()).toString().split(" ");
-  format = tempStr[1]+ " " + tempStr[2] + ", " + tempStr[3];
+  var tempStr = new Date(format.toString()).toLocaleDateString();
+  // .toString().split(" ");
+  // console.log(tempStr);
+  format = tempStr;
+  // tempStr[1]+ " " + tempStr[2] + ", " + tempStr[3];
   return format;
 };
