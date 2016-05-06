@@ -595,10 +595,16 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$window','$routePa
 
 mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope', '$routeParams', '$http', 'Users', 'Events', function($scope, $window, $rootScope, $routeParams, $http, Users, Events) {
     $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
-
  Users.getUser($routeParams.userId).success(function(data) {
-
     $scope.user = data.data;
+    if($rootScope.curr_user.local.following.indexOf($scope.user._id) === -1){
+        $scope.isActive = true;
+        $scope.followText = "follow";
+    }
+      else {
+        $scope.isActive = false;
+        $scope.followText = "unfollow";
+    }
     var hostingIds;
       if($scope.user.local.hosting.length == 0)
         hostingIds = "";
@@ -629,6 +635,29 @@ mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope'
  });
 
 
+ /*follow*/
+
+    $scope.follow = function(userID){
+        $scope.isActive = !$scope.isActive;
+        if($scope.isActive)
+          $scope.followText = "follow";
+        else
+          $scope.followText = "unfollow";
+
+        Users.getUser($rootScope.curr_user._id).success(function(data){
+           if(data.data.local.following.indexOf(userID) === -1)
+               data.data.local.following.push(userID);
+           else
+               data.data.local.following.splice(data.data.local.following.indexOf(userID), 1);
+           Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
+             Users.getUser($rootScope.curr_user._id).success(function(user){
+                 $rootScope.curr_user = user.data;
+                 $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+             });
+                 console.log("Updated user's friends in list");
+           });
+      });
+     }
 
   /* Get user data passportjs */
 

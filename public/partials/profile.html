@@ -1,4 +1,4 @@
-<div class="list" ng-controller='ProfileController'>  
+<div class="list" ng-controller='ProfileController'>
 
 <div class="row">
         <!-- PROFILE INFORMATION -->
@@ -14,7 +14,6 @@
     <div class="small-6 columns">
       <div class="image-container right">
         <img src="{{user.local.image}}"/>
-        
       </div>
     </div>
     <div class="small-6 columns left">
@@ -23,7 +22,7 @@
         <li><i class="fa fa-neuter" aria-hidden="true"></i> {{user.local.gender}} </li>
         <li><i class="fa fa-phone" aria-hidden="true"></i> {{user.local.phoneNumber}}</li>
         <!-- <li>id: {{user._id}}</li> -->
-        <li><button type="submit" class="button round warning" ng-click="follow()" ng-hide="curr_user._id==user._id">Follow</button></li>
+        <li><button type="submit" class="button round" ng-class="{true:'success', false:'secondary'}[isActive]" ng-click="follow(user._id)" ng-hide="curr_user._id==user._id">{{followText}}</button></li>
       </ul>
     </div>
   </div>
@@ -37,14 +36,14 @@
           <li ng-repeat="event in eventsHosting">
             <a ng-href="#/event-detail/{{event._id}}">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png">
-  
+
               <ul class="events-list-details">
                 <li><b>Name:</b> {{event.name}}</li>
                 <li><b>Setting:</b> {{event.occassion}}</li>
                 <li><b>Number of Attendees:</b> {{event.attending.length}}</li>
               </ul>
             </a>
-          </li>     
+          </li>
       </ul>
     </div>
     <div class="small-6 columns">
@@ -60,11 +59,10 @@
               <li><b>Number of Attendees:</b> {{event.attending.length}}</li>
             </ul>
           </a>
-        </li>  
+        </li>
       </ul>
     </div>
   </div>
 
-  
-</div>
 
+</div>
