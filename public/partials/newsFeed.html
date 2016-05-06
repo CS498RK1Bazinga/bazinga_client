@@ -49,10 +49,11 @@
                     <button ng-hide=skip==0 ng-click="prev()" class="round button info left"><i class="fi-arrow-left"></i> Prev</button>
                     <button ng-hide=nextFlag() ng-click="next()" class="round button info right">Next <i class="fi-arrow-right"></i></button>
                 </div>
+        <br>
 		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events">
                     <div class="row panel">
                       <div class="columns small-6">
-                        <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
+                          <img width="40px" class="left" ng-src="{{event.image}}"/>
                         <a href="#/users/{{event.hostId}}"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
                       </div>
 

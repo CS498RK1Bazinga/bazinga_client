@@ -2,7 +2,8 @@
   <div class="row center">
     <div class="small-4 columns">
       <div class="image-container right">
-        <img src="{{image}}"/>
+        <img src="{{image}}" style="border-radius: 50%;margin-bottom:5px;"/>
+
         <input type="text" placeholder="Image URL" ng-model="image">
       </div>
 
@@ -17,12 +18,6 @@
         <div class="input-group">
           <span class="input-group-label"><i class="fa fa-user" aria-hidden="true"></i></span>
           <input class="input-group-field" type="text" placeholder="Name" ng-model="name">
-        </div>
-
-        <!-- PASSWORD only on correct user -->
-        <div class="input-group">
-          <span class="input-group-label"><i class="fa fa-lock" aria-hidden="true"></i></span>
-          <input class="input-group-field" type="text" placeholder="Password" ng-model="password">
         </div>
 
         <div class="input-group">

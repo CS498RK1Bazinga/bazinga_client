@@ -192,12 +192,14 @@ mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope'
       maximumLimit: $scope.data.maximumLimit,
       completed: $scope.data.completed,
       foodstyle: $scope.data.foodstyle,
-      occassion: $scope.data.occassion
+      occassion: $scope.data.occassion,
+        image: $scope.data.image
     }
     console.log(newData);
 
       Events.updateEvent($routeParams.eventId,newData).success(function(data){
             console.log('updated');
+          console.log(data.data);
       });
   };
 
@@ -916,7 +918,7 @@ $scope.foodStyles = 'American';
 $scope.addEvent = function(){
 
 	console.log($rootScope.curr_user.local.name);
-	console.log($rootScope.curr_user._id);
+	console.log($scope.data.image);
     var newData = {
       name: $scope.data.name,
       time: $scope.data.date,
@@ -929,7 +931,8 @@ $scope.addEvent = function(){
       maximumLimit: $scope.data.limit,
       completed: false,
       foodstyle: $scope.foodStyles,
-      occassion: $scope.data.occasion
+      occassion: $scope.data.occasion,
+        image: $scope.data.image
     }
 
     console.log(newData);

@@ -92,6 +92,8 @@
 						<div ng-if="errorMessage">
 							<p style="border:3px; border-style:solid; border-color:#FF0000; padding: 1em;">{{ errorMessage }}</p>
 						</div>
+              <h5>Link to image: </h5>
+              <input type="text" class="form-control" ng-model="data.image"/>
           </div>
 
       </div>
@@ -99,7 +101,7 @@
     <div class="text-center">
 			<div class="row">
 				<div class="small-4 small-offset-4 columns">
-	      <button ng-click="addEvent()" class="button info">Add Event</button>
+	      <button ng-click="addEvent()" class="button info round">Add Event</button>
 				<div ng-if="successMessage">
 					<p style="border:3px; border-style:solid; border-color:#00ff00; padding: 1em;">{{ successMessage }}</p>
 				</div>
