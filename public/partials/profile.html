@@ -33,43 +33,34 @@
   <div class="row center">
     <div class="small-6 columns">
       <h3>Events Hosting</h3>
-      <ul class="events-list">       
-          <li>
-            <a href="#/events/123">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png  ">
-              
-              <ul class="events-list-details ">
-                <li><b>Name:</b> McDonalds</li>
-                <li><b>Setting:</b> Lunch</li>
-                <li><b>Number of Attendees:</b> 6</li>
+      <ul class="events-list">
+          <li ng-repeat="event in eventsHosting">
+            <a ng-href="#/event-detail/{{event._id}}">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png">
+  
+              <ul class="events-list-details">
+                <li><b>Name:</b> {{event.name}}</li>
+                <li><b>Setting:</b> {{event.occassion}}</li>
+                <li><b>Number of Attendees:</b> {{event.attending.length}}</li>
               </ul>
             </a>
-          </li>
-        <li>
-          <a href="#/events/123">
-            <img src="https://www.uab.edu/dining/images/NewLogos/PaneraBread.png">
-            <ul class="events-list-details ">
-              <li><b>Name:</b> Panera</li>
-              <li><b>Setting:</b> Dinner</li>
-              <li><b>Number of Attendees:</b> 3</li>
-            </ul>
-          </a>
-        </li>
+          </li>     
       </ul>
     </div>
     <div class="small-6 columns">
       <h3>Events Attending</h3>
       <ul class="events-list">
-        <li>
-          <a href="#/events/123">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Jefferson_Apartment_Building_Jun_09.JPG">
-            <ul class="events-list-details ">
-              <li><b>Name:</b> Apartment Party</li>
-              <li><b>Setting:</b> Dinner</li>
-              <li><b>Number of Attendees:</b> 7</li>
+        <li ng-repeat="event in eventsAttending">
+          <a ng-href="#/event-detail/{{event._id}}">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Mcdonalds-90s-logo.svg/2000px-Mcdonalds-90s-logo.svg.png">
+
+            <ul class="events-list-details">
+              <li><b>Name:</b> {{event.name}}</li>
+              <li><b>Setting:</b> {{event.occassion}}</li>
+              <li><b>Number of Attendees:</b> {{event.attending.length}}</li>
             </ul>
           </a>
-        </li>
+        </li>  
       </ul>
     </div>
   </div>

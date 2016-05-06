@@ -1,13 +1,18 @@
 <!-- <div ng-controller='EventDetailController'> -->
 <div ng-app='app' ng-controller='EventDetailController' style="z-index:99;padding-bottom: 200px;">
 <div class="row" style="background-color: white;padding: 20px;">
-	<h2>{{event.name}}</h2>
+	<div class="event-detail-header-container">
+		<h2>{{event.name}} </h2>
+		<button type="submit" class="button warning round edit-event-button" style="float: right;">Edit Detail</button>
+	</div>
      <hr>
-     <p><a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning">Edit Detail</button></a></p>
+
+     <a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning">Edit Detail</button></a>
+
    	<img style="margin:0 auto;display: table-cell;text-align:center;vertical-align: middle;" src="http://placekitten.com/200/200" alt="user profile pic">
    	<h3 style="text-align:center;vertical-align: middle;">Hosted by: </h3>
-   	<h4 style="text-align:center;vertical-align: middle;">{{curr_user.local.name}}</h4>
-   	<h5  style="text-align:center;vertical-align: middle;"><i class="fa fa-male" aria-hidden="true"></i>Male</h5>
+   	<h4 style="text-align:center;vertical-align: middle;">{{user.local.name}}</h4>
+   	<h5  style="text-align:center;vertical-align: middle;"><i class="fa fa-male" aria-hidden="true"></i>{{user.local.gender}}</h5>
 
  	<div class="row small-up-1 medium-up-1 text-center" style="display:inline;background-color: white;padding-bottom: 30px;">
  		<div class="callout primary shrink columns">
@@ -17,6 +22,9 @@
  		<section>
 			 		<i class="fa fa-location-arrow" aria-hidden="true"></i> Place: {{event.place}}
  		</section>
+ 		<section>
+ 			<i class="fa fa-home" aria-hidden="true"></i>Description: {{event.description}}
+ 		</section>
 
 
  		</div>
@@ -24,10 +32,15 @@
  		<!-- <div class="columns">Monday April 25th</div> -->
  	</div>
  	<div class="row small-up-1 medium-up-1 text-center" style="background-color: white;padding: 20px;">
- 		<p> {{event.description}}</p>
+ 		
  	</div>
-	<div class="row small-up-1 medium-up-1 text-center" style="background-color: white;padding: 20px;">
-		<p> {{event.attending}}</p>
+	<div class="row small-up-1 medium-up-1 text-center attendees-container" style="background-color: white;padding: 20px;">
+		<ul>
+			<li ng-repeat="attender in attendingUsers">
+				<a ng-href="#/users/{{attender._id}}">{{attender.local.name}}</a>
+			</li>
+
+		</ul>
 	</div>
 </div>
 
@@ -51,7 +64,7 @@
 
 
  		<div class="text-center row" style="padding-top: 20px;">
-      		<button type="submit" class="button success">Going</button>
+      		<button type="submit" class="button success round">Going</button>
    		</div>
 <!--
 <ui-gmap-google-map center='map.center' zoom='map.zoom'>

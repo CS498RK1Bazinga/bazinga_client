@@ -76,6 +76,10 @@ a {
   z-index: 1;
 }*/
 
+.userlist {
+  width: 80%;
+}
+
 @media(min-width:40em) {
   .navbar-fix {
     @include transition(padding .3s);
@@ -340,7 +344,16 @@ textarea {
   padding-left: 60px;
 }
 
+.edit-event-button {
+  width: 100px;
+  position:absolute;
+  right: 5px;
+  top: 0px;
+}
 
+.event-detail-header-container {
+  position: relative;
+}
 
 /* User List */
 
@@ -435,6 +448,10 @@ select{
 			padding: 0 0.4rem 0 0.8rem;
 		}
 	}
+}
+
+.attendees-container ul >li{
+  list-style-type: none;
 }
 
 .footer {

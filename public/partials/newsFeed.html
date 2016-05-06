@@ -24,17 +24,21 @@
                 <input type="text" name="input" placeholder="Search for food event" ng-model="searchEvent">
           </fieldset>
               <div class="row">
-                <div class="small-6 columns">
-                <label>
+                <div class="small-4 columns">
+                <label>Sort by:
                  <select ng-model="sortBy">
                    <option value="name">name</option>
                    <option value="time">date</option>
                  </select>
                </label>
              </div>
-              <div class="small-6 columns">
-                <input type="radio" value = "1" ng-model="order" id="ascending"><label for="ascending">ascending</label>
+              <div class="small-4 columns">
+                <input type="radio" value = "1" ng-model="order" id="ascending"><label for="ascending">ascending</label><br>
                 <input type="radio" value = "-1" ng-model="order" id="descending"><label for="descending">descending</label>
+              </div>
+              <div class="small-4 columns">
+                <input type="radio" value = "1" ng-model="friends" id="all" ng-change="update()" default><label for="all">All</label><br>
+                <input type="radio" value = "-1" ng-model="friends" id="friends" ng-change="update()"><label for="friends">Following</label>
               </div>
             </div>
         </div>
