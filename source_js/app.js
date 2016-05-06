@@ -107,13 +107,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
        loggedin: checkLoggedin
     }
   }).
-  when('/events/:eventId', {
-    templateUrl: 'partials/eventDetail.html',
-    controller: 'EventDetailController',
-    resolve: {
-       loggedin: checkLoggedin
-    }
-  }).
   when('/event',{
     templateUrl: 'partials/addEvent.html',
     controller: 'AddEventController',
