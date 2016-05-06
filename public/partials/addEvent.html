@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <div class="list" ng-controller='AddEventController'>
 	<form>
 	  <div class="row">
@@ -6,7 +6,7 @@
 						<h3><b>Add Event</b></h3>
             <h5>Event name: </h5><input ng-model="data.name" required type="text" placeholder="Event name">
             <h5>Event place: </h5><input ng-model="data.place" required type="text" placeholder="Event place">
-            <h5>Hosted By: Host</h5><!~~ 
+            <h5>Hosted By: Host</h5><!~~
                       <select ng-model="assignedUser" >
                         <option ng-repeat = "user in users" value="{{$index}}">{{user.name}}</option>
                       </select> ~~>
@@ -63,7 +63,7 @@
             <!-- <h1>{{user._id}}.</h1> -->
             <h5>Event name: </h5><input ng-model="data.name" required type="text" placeholder="Event name">
             <h5>Event place: </h5><input ng-model="data.place" required type="text" placeholder="Event place">
-            <h5>Hosted By: {{user.local.name}}</h5><!-- 
+            <h5>Hosted By: {{curr_user.local.name}}</h5><!-- 
                       <select ng-model="assignedUser" >
                         <option ng-repeat = "user in users" value="{{$index}}">{{user.name}}</option>
                       </select> -->

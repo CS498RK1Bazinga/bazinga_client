@@ -37,12 +37,39 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('NewsFeedController', ['$scope', '$rootScope', 'Events', function($scope,$rootScope, Events) {
+mp4Controllers.controller('NewsFeedController', ['$scope', '$rootScope', 'Events','Users', function($scope,$rootScope, Events,Users) {
    $scope.events = {};
    $scope.showOption = "where={}";
    $scope.order = "1";
    $scope.sortBy = "name";
    $scope.events = {};
+
+   $scope.rsvpUser = function(uid,eid) {
+     console.log('id'+ uid);
+     console.log('eid' + eid);
+
+     //update the event.attending[] to include the uid.
+     //update the user's attending [] to include eid
+
+     Events.getEvent(eid).success(function(data){
+           data.data.attending.push(uid);
+           Events.updateEvent(eid,data.data).success(function(data_0){
+                console.log("updated attendee");
+           });
+     });
+
+
+     Users.getUser(uid).success(function(data){
+          console.log(data.data.local.attending);
+          data.data.local.attending.push(eid);
+          console.log(data.data.local.attending);
+          Users.updateUser(uid,data.data.local).success(function(data_0){
+                console.log("Updated user's attending []");
+          });
+     });
+
+   }
+
    Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
        $scope.events = data.data;
