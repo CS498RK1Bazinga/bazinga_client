@@ -53,197 +53,55 @@
 		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events| filter:searchEvent">
                     <div class="row panel">
                       <div class="columns small-6">
-                        <a href="#/users/{{event.hostId}}"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
+                        <a href="#/users/{{event.hostId}}"> &nbsp; <i class="fi-male large"></i> Hosted by: {{event.host}}</a>
                       </div>
 
                       <div class="columns small-4 right">
-                          <h6><i class="fi-calendar large"></i> {{event.time}} {{event.hours}}</h6>
+                          <h6><i class="fi-calendar large"></i> Date: {{event.time}} {{event.hours}}</h6>
                       </div>
                     </div>
 
                     <div class="centerAlign">
-                      <a href="#/event-detail/{{event._id}}"><h2><img width="80px" style="border-radius: 50%;" ng-src="{{event.image}}"/> {{event.name}}</h2></a>
+                      <a href="#/event-detail/{{event._id}}"><h2><img style="border-radius: 50%;width: 80px;height: 80px;" ng-src="{{event.image}}"/> {{event.name}}</h2></a>
                     </div>
                     <hr>
                     <div class="centerAlign">
                      <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
                      <h5><i class="fi-male-female large"></i> Attendee : {{event.attending.length}}  </h5>
-
-                     <h5><i class="fi-marker large"></i> foodStyle : {{event.foodstyle}}  </h5>
+                     <h5><i class="fa fa-cutlery" aria-hidden="true"></i> Food style: {{event.foodstyle}}  </h5>
+                        <h5><i class="fa fa-clock-o" aria-hidden="true"></i> Occasion: {{event.occassion}}  </h5>
                      <button type="button" class="button round" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
 
                     </div>
 
       </div>
 
-<!--
-         <div class="callout">
-              <div class="row panel">
-                <div class="columns small-6">
-                  <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                  <a href="#/users/123"> &nbsp; <i class="fi-female large"></i> Maddieee</a>
-                </div>
-                <div class="columns small-4 right">
-                    <h5><i class="fi-calendar large"></i> 04/27/2016  12:30pm</h5>
-                </div>
-              </div><hr>
-              <div class="centerAlign">
-           <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
-           <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-           <a href="#/events/123"><button class="button secondary">RSVP</button></a>
-         </div>
-        </div>
-
-        <div class="callout">
-             <div class="row panel">
-               <div class="columns small-6">
-                 <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                 <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Matthew</a>
-               </div>
-               <div class="columns small-4 right">
-                   <h5><i class="fi-calendar large"></i> 04/27/2016  11:30pm</h5>
-               </div>
-             </div><hr>
-             <div class="centerAlign">
-          <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
-          <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-          <a href="#/events/123"><button class="button secondary">RSVP</button></a>
-        </div>
-       </div>
-
-       <div class="callout">
-            <div class="row panel">
-              <div class="columns small-6">
-                <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Aaron</a>
-              </div>
-              <div class="columns small-4 right">
-                  <h5><i class="fi-calendar large"></i> 04/27/2016  10:30pm</h5>
-              </div>
-            </div><hr>
-            <div class="centerAlign">
-         <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
-         <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-         <a href="#/events/123"><button class="button secondary">RSVP</button></a>
-       </div>
-      </div>
-
-      <div class="callout">
-           <div class="row panel">
-             <div class="columns small-6">
-               <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-               <a href="#/users/123"> &nbsp; <i class="fi-male large"></i> Yiminghere </a>
-             </div>
-             <div class="columns small-4 right">
-                 <h5><i class="fi-calendar large"></i> 04/27/2016  10:30pm</h5>
-             </div>
-           </div><hr>
-           <div class="centerAlign">
-        <h5><i class="fi-marker large"></i> Place: Sakanaya</h5>
-        <h5><i class="fi-male-female large"></i> Attendee 10: Aaron, Yiming, Matthew <i class="fi-arrow-down"></i></h5>
-        <a href="#/events/123"><button class="button secondary">RSVP</button></a>
-      </div>
-     </div>
- -->
-
-      <!--
-</div>
-    </div>
- -->
-<!--     <div class="centerAlign">
-      <ul class="pagination">
-        <li class="arrow unavailable"><a href="">&laquo;</a></li>
-        <li class="current"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li class="unavailable"><a href="">&hellip;</a></li>
-        <li><a href="">12</a></li>
-        <li><a href="">13</a></li>
-        <li class="arrow"><a href="">&raquo;</a></li>
-      </ul>
-    </div>
-  </div> -->
-
-
- <!--
-
-
- <div ng-controller='NewsFeedController'>
-  <div class="row">
-    <div class="columns small-8 small-offset-2">
-      <div class="row">
-        <div class="columns small-1">
-          <h4>NewsFeed </h4>
-        </div>
-        <div class="columns right">
-          <fieldset>
-                <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Date</label>
-                <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
-                <select class="sortby-input">
-                  <option value="ascending">Ascending</option>
-                  <option value="descending">Descending</option>
-                </select>
-              Female <input type="checkbox">
-              Male <input type="checkbox">
-            </fieldset>
-        </div>
-      </div>
-                <div class="row">
-                    <button ng-hide=skip==0 ng-click="prev()" class="button info left"><i class="fi-arrow-left"></i> Prev</button>
-                    <button ng-hide=nextFlag() ng-click="next()" class="button info right">Next <i class="fi-arrow-right"></i></button>
-                </div>
-      <div>
-                <!~~ waited to be pulled from db ~~>
-
-                <div class="callout" ng-repeat="event in events">
-                    <div class="row panel">
-                      <div class="columns small-6">
-                        <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
-                        <a href="#"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
-                      </div>
-
-                      <div class="columns small-4 right">
-                          <h5><i class="fi-calendar large"></i> {{event.time}} <hr> {{event.hour}}</h5>
-                      </div>
-                    </div>
-                    <div class="centerAlign">
-                      <a href="#/event-detail/{{event._id}}"><h3> {{event.name}}</h3></a>
-                    </div>
-                    <hr>
-                    <div class="centerAlign">
-                 <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
-                 <h5><i class="fi-male-female large"></i> Attendee
-                 <!~~ <span class="success label"> {{num}}left</span> ~~>
-                    <!~~ <i class="fa fa-flag fa-2x pull-left" aria-hidden="true"></i> Font Awesome<br>Version 4.6.2</a> ~~>
-                    : {{event.attending}}
-                    <!~~ <i class="fi-arrow-down"></i> ~~>
-                    </h5>
-                 <button class="button secondary">RSVP</button>
-               </div>
-              </div>
-      </div>
-
-      </div>
-    </div>
-    <div class="centerAlign">
-      <ul class="pagination">
-        <li class="arrow unavailable"><a href="">&laquo;</a></li>
-        <li class="current"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li class="unavailable"><a href="">&hellip;</a></li>
-        <li><a href="">12</a></li>
-        <li><a href="">13</a></li>
-        <li class="arrow"><a href="">&raquo;</a></li>
-      </ul>
-    </div>
-  </div>
-
- -->
  <div class="row">
                     <button ng-hide=skip==0 ng-click="prev()" class="round button info left"><i class="fi-arrow-left"></i> Prev</button>
                     <button ng-hide=nextFlag() ng-click="next()" class="round button info right">Next <i class="fi-arrow-right"></i></button>
                 </div>
  </div>
+</div>
+    <footer class="section footer color2" style="background-color:lightgrey;margin-top:10px;">
+        <div class="row full-width">
+            <div class="small-12 medium-4 large-4 columns">
+                <h4>Note</h4>
+    <span class="places">This site was built for educational purposes only.</span>
+</div>
+<div class="small-12 medium-4 large-4 columns">
+    <h4>Follow Us</h4>
+    <ul class="inline-list" style="list-style-type:none;">
+        <li><a href="http://www.github.com"><i class="fi-social-github"></i></a></li>
+        <li><a href="http://www.facebook.com"><i class="fi-social-facebook"></i></a></li>
+        <li><a href="http://www.yelp.com"><i class="fi-social-yelp"></i></a></li>
+        <li><a href="http://www.instagram.com"><i class="fi-social-instagram"></i></a></li>
+    </ul>
+</div>
+<div class="small-12 medium-4 large-4 columns">
+    <h4>Location</h4><br>
+    <span class="places">1300 Standiford Ave, <br>Modesto, CA 95350</span><br>
+    <span class="places"><br>Tel: (209) 342-6798</span>
+</div>
+</div>
+</footer>
+    </div>

@@ -3,7 +3,7 @@
 <div class="row" style="background-color: white;padding: 20px;">
 	<div class="event-detail-header-container">
 		<button type="submit" style="float: left;" class="button alert round delete-event-button" ng-if="event.hostId === curr_user._id" ng-click="remove(event._id)">Delete</button>
-		<h2><img ng-src="{{event.image}}" style="width:80px; border-radius: 50%;"> {{event.name}}  </h2>
+		<h2><img ng-src="{{event.image}}" style="border-radius: 50%;width: 150px;height: 150px;"> {{event.name}}  </h2>
 		<a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning round edit-event-button" style="float: right;" ng-if="event.hostId === curr_user._id">Edit Detail</button></a>
 	</div>
      <hr>
@@ -47,153 +47,28 @@
 			</div>
 		</div>
 	</div>
+
 </div>
-
-<!-- <div class="row small-up-1 medium-up-1 text-center" style="display: inline;">
-	  <div class="shrink columns">
-	  		<h3>Hosted by:</h3>
-	  	</div>
-	  	 <div class="shrink columns">
-	  	 	<img src="http://placekitten.com/200/200" alt="user profile pic">
-	  	</div>
-	  	 <div class="shrink columns">
-	  		<h4>James Rockstar</h4>
-	  	</div>
-	  	<div class="shrink columns">
-	  		<h5><i class="fa fa-male" aria-hidden="true"></i>Male</h5>
-	  	</div>
-	</div> -->
-
-
-
-
-<!--
- 		<div class="text-center row" style="padding-top: 20px;">
-<<<<<<< HEAD
-      		<button type="submit" class="button success round">Going</button>
-   		</div>
-=======
-      		<button type="submit" class="button success">Going</button>
-   		</div> -->
-<!--
-<ui-gmap-google-map center='map.center' zoom='map.zoom'>
-	{{map}}
-</ui-gmap-google-map> -->
-<!-- {{map}} -->
-<!-- {"center":{"latitude":45,"longitude":-73},"zoom":8} -->
+	<footer class="section footer color2" style="background-color:lightgrey;margin-top:10px;">
+		<div class="row full-width">
+			<div class="small-12 medium-4 large-4 columns">
+				<h4>Note</h4>
+				<span class="places">This site was built for educational purposes only.</span>
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h4>Follow Us</h4>
+				<ul class="inline-list" style="list-style-type:none;">
+					<li><a href="http://www.github.com"><i class="fi-social-github"></i></a></li>
+					<li><a href="http://www.facebook.com"><i class="fi-social-facebook"></i></a></li>
+					<li><a href="http://www.yelp.com"><i class="fi-social-yelp"></i></a></li>
+					<li><a href="http://www.instagram.com"><i class="fi-social-instagram"></i></a></li>
+				</ul>
+			</div>
+			<div class="small-12 medium-4 large-4 columns">
+				<h4>Location</h4><br>
+				<span class="places">1300 Standiford Ave, <br>Modesto, CA 95350</span><br>
+				<span class="places"><br>Tel: (209) 342-6798</span>
+			</div>
+		</div>
+	</footer>
 </div>
-
-<!-- GOOGLE MAP API --><!--
-<input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
-    <div id="type-selector" class="controls">
-      <input type="radio" name="type" id="changetype-all" checked="checked">
-      <label for="changetype-all">All</label>
-
-      <input type="radio" name="type" id="changetype-establishment">
-      <label for="changetype-establishment">Establishments</label>
-
-      <input type="radio" name="type" id="changetype-address">
-      <label for="changetype-address">Addresses</label>
-
-      <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geocodes</label>
-    </div>
-    <div id="map"></div>
-     -->
-<!--
-<div>Google Places Autocomplte integration in Angular</div>
-    <div>To Test, start typing the name of any Indian city</div>
-    <div>selection is: {{chosenPlace}}</div>
-    <div>{{ll}}</div>
-    <div><input ng-model="chosenPlace" googleplace/></div>
-
-</div> -->
-
-<!-- <div>{{map}}</div> -->
-
-
-<!-- <div class="map-sm align-center">
-        <input id="pac-input" class="controls" type="text"
-        placeholder="Enter a location">
-    <div id="type-selector" class="controls">
-      <input type="radio" name="type" id="changetype-all" checked="checked">
-      <label for="changetype-all">All</label>
-
-      <input type="radio" name="type" id="changetype-establishment">
-      <label for="changetype-establishment">Establishments</label>
-
-      <input type="radio" name="type" id="changetype-address">
-      <label for="changetype-address">Addresses</label>
-
-      <input type="radio" name="type" id="changetype-geocode">
-      <label for="changetype-geocode">Geocodes</label>
-    </div>
-    <div id="map" style="width:80%;height:80%">
-    </div>
-</div> -->
-
-
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXf-2sXUVskkj1ZmIIgUe_XZ8Ew9wZJ8w&libraries=places&callback=initMap"  async defer></script> -->
-
-
-<!-- AIzaSyBXf-2sXUVskkj1ZmIIgUe_XZ8Ew9wZJ8w -->
-
-
-
-<!--  	<div class="row" style="display: inline-block;">
-	  <div class="shrink columns">Shrink!</div>
-	  <div class="columns">Expand!ExpandExpandExpandExpand</div>
-	</div> -->
-
-<!-- <div class="row"> -->
-<!-- 	<div class="row">
-		<div class="shrink columns">
-			<img src="http://placehold.it/140x100&text=Profile Picture" alt="image of a planet called Pegasi B">
-		</div>
-		<div class="large-expand columns">
-			<p><h5>UserName</h5></p>
-			<p><h5>Male</h5></p>
-		</div>
-	</div> -->
-<!-- 	<div class="row align-stretch">
-		<div class="small-1 medium-2 columns">
-			<h3>hi</h3>
-		</div>
-		<div class="small-1 medium-2 columns">
-			<h3>hi</h3>
-		</div>
-	</div> -->
-<!-- </div> -->
-
-
-
-<!-- <div class="row">
-	<h2>Pending Tasks</h2>
-	<div class="row" ng-repeat='tsk in pendingTasks'>
-		<div class="medium-3 column">
-			<a href="#/editTask/{{tsk._id}}">{{tsk.name}}</a>
-		</div>
-		<div class="medium-3 column">
-			<label>Deadline: {{tsk.deadline}}</label>
-		</div>
-		<div class="medium-3 column">
-				<a class="button alert" ng-click="removeTask(tsk._id)">Completed</a>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<button class="info button" ng-click="setTrue()">Show Complete</button>
-</div>
-
-<div class="row">
-	<h2>Completed Tasks</h2>
-	<div class="row" ng-repeat='tsk in finishedTasks' ng-if="clicked">
-		<div class="medium-3 column">
-			<a href="#/editTask/{{tsk._id}}">{{tsk.name}}</a>
-		</div>
-		<div class="medium-3 column">
-			<label>Deadline: {{tsk.deadline}}</label>
-		</div>
-	</div>

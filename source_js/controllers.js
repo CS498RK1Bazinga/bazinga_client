@@ -551,7 +551,7 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
         $scope.phoneNumber = $scope.user.local.phoneNumber;
         $scope.gender = $scope.user.local.gender;
 
-          $scope.message = "User edited!";
+          $scope.message2 = "User edited!";
       }).error(function(err) {
           console.log("Couldn't edit user");
       });

@@ -1,7 +1,9 @@
 // Add any custom Sass & CSS here
 body {
   font-family: 'Lato', serif;
+  height:100%;
 }
+
 .left {
   float: left;
 }
@@ -474,17 +476,6 @@ select{
   list-style-type: none;
 }
 
-.footer {
-
-	position:absolute;
-
-	bottom: 0;
-
-	width: 100%;
-
-	height: 50px;
-
-}
 
 .signup-button{
 	border-radius: 25px;
