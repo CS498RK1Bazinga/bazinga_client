@@ -38,8 +38,8 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events', function($scope, $window, $rootScope, Events) {
-    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
+mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
+  $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
    $scope.showOption = "where={}";
    $scope.order = "1";
@@ -54,20 +54,22 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
      //update the user's attending [] to include eid
 
      Events.getEvent(eid).success(function(data){
-           data.data.attending.push(uid);
-           Events.updateEvent(eid,data.data).success(function(data_0){
-                console.log("updated attendee");
-           });
+           if(data.data.attending.indexOf(uid) === -1){
+              data.data.attending.push(uid);
+             Events.updateEvent(eid,data.data).success(function(data_0){
+                  console.log("updated attendee");
+             });
+            }
      });
 
 
      Users.getUser(uid).success(function(data){
-          console.log(data.data.local.attending);
-          data.data.local.attending.push(eid);
-          console.log(data.data.local.attending);
-          Users.updateUser(uid,data.data.local).success(function(data_0){
-                console.log("Updated user's attending []");
-          });
+        if(data.data.local.attending.indexOf(eid) === -1){
+            data.data.local.attending.push(eid);
+            Users.updateUser(uid,data.data.local).success(function(data_0){
+                  console.log("Updated user's attending []");
+            });
+          }
      });
 
    }
@@ -81,6 +83,8 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
        }
 
    });
+
+
    $scope.toggleActive = function(index) {
      console.log($scope.events[index]);
        $scope.events[index].isActive = !$scope.events[index].isActive;
