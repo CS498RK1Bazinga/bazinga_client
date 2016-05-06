@@ -31,7 +31,7 @@
   			</thead>
   			<tr ng-repeat="user in users | filter:searchUser | orderBy:predicate:reverse" ng-if="user._id !== curr_user._id">
   				<td><a ng-href="#/users/{{user._id}}"><img src="{{user.local.image}}">{{user.local.name}}</a></td>
-  				<td>{{user.local.gender}}</td>
+  				<td><i ng-show="user.local.gender == 'male'" class="fa fa-mars blue" aria-hidden="true"></i><i ng-show="user.local.gender == 'female'" class="fa fa-venus pink" aria-hidden="true"></i> {{user.local.gender}}</td>
   				<td>
   					<button type="submit" class="button round" ng-class="{true:'success', false:'secondary'}[user.isActive]" ng-click="follow(user._id, $index)" >{{user.followText}}</button>
   				</td>
