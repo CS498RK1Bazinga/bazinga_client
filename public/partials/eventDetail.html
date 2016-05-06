@@ -3,7 +3,7 @@
 <div class="row" style="background-color: white;padding: 20px;">
 	<div class="event-detail-header-container">
 		<h2>{{event.name}} </h2>
-		<a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning round edit-event-button" style="float: right;">Edit Detail</button></a>
+		<a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning round edit-event-button" style="float: right;" ng-if="event.hostId === curr_user._id">Edit Detail</button></a>
 	</div>
      <hr>
      </a>

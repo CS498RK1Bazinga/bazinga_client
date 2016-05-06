@@ -731,7 +731,7 @@ mp4Controllers.controller('SignUpController', ['$scope', '$window','$http', '$ro
           password: $scope.user.password,
           phoneNumber: $scope.user.phoneNumber,
           gender: $scope.user.gender,
-          image: "",
+          image: $scope.user.image,
           attending: [],
           hosting: [],
           history: [],
