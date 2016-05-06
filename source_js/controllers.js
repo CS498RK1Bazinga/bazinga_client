@@ -38,6 +38,83 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
+mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope','$routeParams' , '$window','Events','Users', function($scope, $http,$rootScope,$routeParams, $window,Events,Users) {
+  $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
+  console.log('edit event' + $routeParams.eventId);
+  $scope.data = {};
+
+  Events.getEvent($routeParams.eventId).success(function(data){
+    $scope.data = data.data;
+    $scope.data.time = new Date($scope.data.time);
+    $scope.data.maximumLimit = parseInt($scope.data.maximumLimit);
+    var str = $scope.data.hour.split(":");
+    var str_1 = str[2].substr(2,3);
+    // console.log('hour'+str[0]);
+
+    var hourHand = 0;
+    // console.log("str1==" + str_1);
+    if(str_1 === " PM"){
+      hourHand = parseInt(str[0]) + 12;
+      // console.log('pm'+hourHand);
+    }else{
+      hourHand = parseInt(str[0]);
+      // console.log('am'+hourHand);
+    }
+    // console.log(hourHand);
+    $scope.data.hour = new Date($scope.data.time.getYear(),$scope.data.time.getMonth(),$scope.data.time.getDate(),hourHand,str[1],str[2].substr(0,2));
+    // $scope.data.hour = new Date($scope.data.hour); 08:00:00PM
+
+    // $scope.data.time = dateFormat($scope.data.time);
+  });
+  // $scope.data = "";
+  // $scope.user = {};
+  // $scope.eid = $routeParams.id;
+  // $scope.id = $routeParams.id;
+  // $scope.hid = "";
+  // console.log($routeParams.id);
+  //
+  // $scope.event = {};
+  // Events.getEvent($routeParams.id).success(function(data){
+  //     console.log(data.data._id);
+  //     console.log(data.data._id === $routeParams.id);
+  //     $scope.event = data.data;
+  //     Users.getUser($scope.event.hostId).success(function(data){
+  //     $scope.user = data.data.local;
+  //     console.log($scope.user);
+  //     $scope.hid = data.data._id;
+  //
+  //      });
+  //
+  //
+  // });
+
+  $scope.editEvent = function(){
+
+    console.log($scope.data);
+
+    // var newData = {
+    //   name: $scope.data.name,
+    //   time: $scope.data.time,
+    //   hour: $scope.data.hour.toLocaleTimeString(),
+    //   place: $scope.data.place,
+    //   description: $scope.data.description,
+    //   host: $scope.data.host,
+    //   hostId: $scope.data.hostId,
+    //   attending: $scope.data.attending,
+    //   maximumLimit: $scope.data.maximumLimit,
+    //   completed: $scope.data.completed,
+    //   foodstyle: $scope.data.foodstyle,
+    //   occassion: $scope.data.occassion
+    // }
+    // console.log(newData);
+
+      Events.updateEvent($routeParams.eventId,$scope.data).success(function(data){
+            console.log('updated');
+            console.log(data);
+      });
+  };
+}]);
+
 mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
@@ -160,7 +237,7 @@ mp4Controllers.controller('UserController', ['$scope', '$rootScope', '$window', 
     if (err)
       console.log("error");
    });
-   
+
    $scope.follow = function(userID){
           Users.getUser($rootScope.curr_user._id).success(function(data){
           data.data.local.following.push(userID);

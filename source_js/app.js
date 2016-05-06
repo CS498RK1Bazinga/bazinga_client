@@ -28,7 +28,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
     return deferred.promise;
   };
   //================================================
-  
+
   //================================================
   // Add an interceptor for AJAX errors
   //================================================
@@ -114,6 +114,13 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
        loggedin: checkLoggedin
     }
   }).
+  when('/edit-event/:eventId',{
+    templateUrl: 'partials/editEvent.html',
+    controller: 'EditEventController',
+    resolve: {
+       loggedin: checkLoggedin
+    }
+  }).
   when('/event',{
     templateUrl: 'partials/addEvent.html',
     controller: 'AddEventController',
@@ -135,6 +142,3 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function($ro
     $http.post('/logout');
   };
 });
-
-
-
