@@ -151,15 +151,21 @@ mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope'
 mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
-  // $scope.showOption = "where={}";
+   // $scope.showOption = "where={}";
    $scope.order = "1";
    $scope.sortBy = "name";
    $scope.friends = 1;
    $scope.events = {};
+   $scope.skip = 0;
+   $scope.eventsLength =0;
 
    Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
        $scope.events = data.data;
+       Events.getAllEvents().success(function(d1){
+          $scope.eventsLength = d1.data.length;
+       });
+       console.log($scope.eventsLength);
        for (var i = 0; i < $scope.events.length; i++) {
 
           $scope.events[i].time = dateFormat($scope.events[i].time);
@@ -198,6 +204,9 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
       Events.getEvent(("?where={" + where + "}&sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
        $scope.events = data.data;
+       Events.getAllEvents().success(function(d1){
+          $scope.eventsLength = d1.data.length;
+       });
        for (var i = 0; i < $scope.events.length; i++) {
 
           $scope.events[i].time = dateFormat($scope.events[i].time);
@@ -301,6 +310,26 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
 
        });
      }, true);
+
+   $scope.prev = function() {
+     $scope.skip -= 10;
+     if($scope.skip < 0)
+        $scope.skip = 0;
+   };
+   $scope.next = function() {
+     if($scope.events.length == 10) {
+        $scope.skip += 10;
+      }
+   };
+
+   $scope.nextFlag = function() {
+     if($scope.eventsLength > ($scope.skip + 10)){
+        // console.log($scope.eventsLength);
+       return false;
+     }
+     else
+       return true;
+   };
 
 
 }]);
