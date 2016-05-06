@@ -20,9 +20,9 @@
 
       <div class="row">
         <div class="columns right">
-<!--           <fieldset>
+          <fieldset>
                 <input type="text" name="input" placeholder="Search for food event" ng-model="searchEvent">
-          </fieldset> -->
+          </fieldset>
               <div class="row">
                 <div class="small-4 columns">
                 <label>Sort by:
@@ -50,10 +50,9 @@
                     <button ng-hide=nextFlag() ng-click="next()" class="round button info right">Next <i class="fi-arrow-right"></i></button>
                 </div>
         <br>
-		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events">
+		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events| filter:searchEvent">
                     <div class="row panel">
                       <div class="columns small-6">
-                          <img width="40px" class="left" ng-src="{{event.image}}"/>
                         <a href="#/users/{{event.hostId}}"> &nbsp; <i class="fi-male large"></i> {{event.host}}</a>
                       </div>
 
@@ -63,7 +62,7 @@
                     </div>
 
                     <div class="centerAlign">
-                      <a href="#/event-detail/{{event._id}}"><h2> {{event.name}}</h2></a>
+                      <a href="#/event-detail/{{event._id}}"><h2><img width="80px" style="border-radius: 50%;" ng-src="{{event.image}}"/> {{event.name}}</h2></a>
                     </div>
                     <hr>
                     <div class="centerAlign">

@@ -1,4 +1,7 @@
 // Add any custom Sass & CSS here
+body {
+  font-family: 'Lato', serif;
+}
 .left {
   float: left;
 }
@@ -51,6 +54,7 @@ button.round, .button.round, button {
 
 h1, h2, h3, h4 {
   text-align: center;
+  font-family: 'Lato';
 }
 
 nav {
@@ -346,8 +350,8 @@ textarea {
 }
 
 .events-list img {
-  height: 76px;
-  width: 76px;
+  height: 75px;
+  width: 75px;
   position: absolute;
 }
 
@@ -441,7 +445,7 @@ select{
 .footer {
 	text-align: center;
 	font-size: 1.2rem;
-	//padding: 4rem;
+	padding: 4rem;
 	p {
 		&.copywrite {
       letter-spacing: $spacing;

@@ -3,7 +3,7 @@
 <div class="row" style="background-color: white;padding: 20px;">
 	<div class="event-detail-header-container">
 		<button type="submit" style="float: left;" class="button alert round delete-event-button" ng-if="event.hostId === curr_user._id" ng-click="remove(event._id)">Delete</button>
-		<h2>{{event.name}} </h2>
+		<h2><img ng-src="{{event.image}}" style="width:80px; border-radius: 50%;"> {{event.name}}  </h2>
 		<a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning round edit-event-button" style="float: right;" ng-if="event.hostId === curr_user._id">Edit Detail</button></a>
 	</div>
      <hr>
