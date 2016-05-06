@@ -298,6 +298,9 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
        for (var i = 0; i < $scope.events.length; i++) {
 
           $scope.events[i].time = dateFormat($scope.events[i].time);
+          if($scope.events[i].hour){
+                      $scope.events[i].hours = timeFormat($scope.events[i].hour);
+          }
             // initialize attending
            if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
               $scope.events[i].isActive = true;
@@ -333,6 +336,9 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
                    for (var i = 0; i < $scope.events.length; i++) {
                         // initialize attending
                        $scope.events[i].time = dateFormat($scope.events[i].time);
+                       if($scope.events[i].hour){
+                      $scope.events[i].hours = timeFormat($scope.events[i].hour);
+          }
                        if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
                           $scope.events[i].isActive = true;
                           $scope.events[i].rsvpText = "RSVP"
@@ -385,6 +391,9 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
            for (var i = 0; i < $scope.events.length; i++) {
                 // initialize attending
                $scope.events[i].time = dateFormat($scope.events[i].time);
+               if($scope.events[i].hour){
+                      $scope.events[i].hours = timeFormat($scope.events[i].hour);
+          }
                if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
                   $scope.events[i].isActive = true;
                   $scope.events[i].rsvpText = "RSVP"
