@@ -10,34 +10,59 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //console.log($routeParams.id);
 
   $scope.event = {};
+  $scope.attendents=[];
   Events.getEvent($routeParams.id).success(function(data){
       
       $scope.event = data.data;
     //  console.log("event: "+$scope.event);
       Users.getUser($scope.event.hostId).success(function(data){
-        $scope.user = data.data;
-      //  console.log("user: "+$scope.user);
-        $scope.hid = data.data._id;
 
+      $scope.user = data.data.local;
+      console.log($scope.user);
+      $scope.hid = data.data._id;
+      $scope.event.time = dateFormat($scope.event.time);
+      $scope.event.hour = timeFormat($scope.event.hour);
        });
 
-      var attendingIds;
-      if(data.data.attending.length == 0)
-        attendingIds = "";
-      else
-        attendingIds = '"' + data.data.attending.join('","') + '"';
-          where = '"_id": {"$in":[' + attendingIds+ ']}';
-      Users.getUser('?where={' + where + '}').success(function(attending){
-        $scope.attendingUsers = attending.data;
-
-
-      }).error(function(err){
-        if(err)
-          console.log(err);
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          $scope.attendents.push(data.data.local.name);
       });
 
+      // if(!$scope.event.attending){
+      //   $scope.attendents = '';
+      // }
+      // $scope.event.attending[i]
+  }
 
   });
+
+  $scope.remove = function(eid){
+      console.log(eid);
+      //remove the event from users 
+      //remove from host user
+      //remove the event
+
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          data.data.local.attending.splice(eid,1);
+          Users.updateUser(data.data._id,data.data).success(function(d1){
+              console.log('removed from list');
+          });
+      });
+    }
+
+      Users.getUser($rootScope.curr_user._id).success(function(data){
+            data.data.local.hosting.splice(eid,1);
+            console.log('removed from host');
+      });
+
+      Events.deleteEvent(eid).success(function(d1){
+          console.log("event removed");
+      });
+
+  }
+
   // console.log($scope.hid);
 
 
