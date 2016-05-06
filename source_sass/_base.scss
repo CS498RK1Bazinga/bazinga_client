@@ -175,7 +175,7 @@ a {
     border-bottom: solid;
     border-width: 1px;
   }
-  
+
   ul.vertical.medium-horizontal.menu > li:first-child {
     border-top: solid;
     border-width: 1px;
@@ -444,34 +444,6 @@ select{
 }
 
 
-.footer {
-	text-align: center;
-	font-size: 1.2rem;
-	padding: 4rem;
-	p {
-		&.copywrite {
-      letter-spacing: $spacing;
-      color: $super-dark;
-      @extend .font-style;
-		}
-	}
-	.links a {
-		list-style: none;
-		font-weight: bold;
-		color: blue;
-		padding: 3rem 0 2rem;
-		margin: 0;
-		&::after {
-			content: "•";
-			padding: 0 0.4rem 0 0.8rem;
-		}
-		&:last-child::after {
-			content: "";
-			padding: 0 0.4rem 0 0.8rem;
-		}
-	}
-}
-
 .attendees-container ul >li{
   list-style-type: none;
 }
@@ -483,4 +455,43 @@ select{
 	left: 50%;
 	transform: translate(-50%);
 	outline: 0 !important;
+}
+
+.inline-list {
+  list-style-type: none;
+  display: inline-flex;
+  text-align: center;
+  @include breakpoint (medium up) {
+    display: inline-block;
+  }
+  @include breakpoint (small down) {
+    display: inline-flex;
+  }
+}
+
+.footer {
+  padding: 2rem 4rem;
+  text-align: center;
+  display: block;
+  background-color: $light;
+  color: $super-dark;
+  a {
+    color: $super-dark;
+    &:hover {
+      color: $super-dark;
+
+    }
+  }
+  i {
+    font-size: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  h4 {
+    font-size: $font-small;
+    @extend .font-style;
+    margin-top: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
 }
