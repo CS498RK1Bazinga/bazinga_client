@@ -65,7 +65,7 @@
                      <h5><i class="fi-male-female large"></i> Attendee : {{event.attending.length}}  </h5>
 
                      <h5><i class="fi-marker large"></i> foodStyle : {{event.foodstyle}}  </h5>
-                     <button type="button" class="button" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
+                     <button type="button" class="button round" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
 
                     </div>
       </div>

@@ -27,7 +27,8 @@
 }
 
 button.round, .button.round, button {
-    border-radius: 1000px; 
+    border-radius: 1000px;
+    outline: 0 !important;
 }
 
 .button {
