@@ -42,7 +42,13 @@
               </div>
             </div>
         </div>
+
       </div>
+                <div class="row">
+                    <button ng-hide=skip==0 ng-click="prev()" class="button info left"><i class="fi-arrow-left"></i> Prev</button>
+                    <button ng-hide=nextFlag() ng-click="next()" class="button info right">Next <i class="fi-arrow-right"></i></button>
+                </div>
+
 
 		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events">
                     <div class="row panel">
@@ -144,7 +150,7 @@
 </div>
     </div>
  -->
-    <div class="centerAlign">
+<!--     <div class="centerAlign">
       <ul class="pagination">
         <li class="arrow unavailable"><a href="">&laquo;</a></li>
         <li class="current"><a href="">1</a></li>
@@ -157,7 +163,7 @@
         <li class="arrow"><a href="">&raquo;</a></li>
       </ul>
     </div>
-  </div>
+  </div> -->
 
 
  <!--
