@@ -43,13 +43,12 @@
             </div>
         </div>
 
+
       </div>
-                <div class="row">
-                    <button ng-hide=skip==0 ng-click="prev()" class="button info left"><i class="fi-arrow-left"></i> Prev</button>
-                    <button ng-hide=nextFlag() ng-click="next()" class="button info right">Next <i class="fi-arrow-right"></i></button>
+<div class="row">
+                    <button ng-hide=skip==0 ng-click="prev()" class="round button info left"><i class="fi-arrow-left"></i> Prev</button>
+                    <button ng-hide=nextFlag() ng-click="next()" class="round button info right">Next <i class="fi-arrow-right"></i></button>
                 </div>
-
-
 		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events">
                     <div class="row panel">
                       <div class="columns small-6">
@@ -58,7 +57,7 @@
                       </div>
 
                       <div class="columns small-4 right">
-                          <h6><i class="fi-calendar large"></i> {{event.time}}  {{event.hours}}</h6>
+                          <h6><i class="fi-calendar large"></i> {{event.time}} {{event.hours}}</h6>
                       </div>
                     </div>
 
@@ -74,6 +73,7 @@
                      <button type="button" class="button round" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
 
                     </div>
+
       </div>
 
 <!--
@@ -242,3 +242,8 @@
   </div>
 
  -->
+ <div class="row">
+                    <button ng-hide=skip==0 ng-click="prev()" class="round button info left"><i class="fi-arrow-left"></i> Prev</button>
+                    <button ng-hide=nextFlag() ng-click="next()" class="round button info right">Next <i class="fi-arrow-right"></i></button>
+                </div>
+ </div>
