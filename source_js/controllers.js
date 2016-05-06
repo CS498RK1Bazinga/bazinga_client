@@ -87,7 +87,7 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
                        $scope.hid = data.data._id;
 
                     });
-
+                   $scope.attendents = [];
                    for (var i = 0; i < $scope.event.attending.length; i++) {
                    Users.getUser($scope.event.attending[i]).success(function(data){
                        $scope.attendents.push(data.data.local.name);
