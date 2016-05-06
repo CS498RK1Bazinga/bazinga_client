@@ -459,9 +459,9 @@ select{
 
 .inline-list {
   list-style-type: none;
-  display: inline-flex;
   text-align: center;
-  @include breakpoint (medium up) {
+  display: inline-flex;
+  @include breakpoint (medium only) {
     display: inline-block;
   }
   @include breakpoint (small down) {
