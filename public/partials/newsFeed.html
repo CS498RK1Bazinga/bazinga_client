@@ -21,7 +21,7 @@
       <div class="row">
         <div class="columns right">
           <fieldset>
-                <input type="text" name="input" placeholder="Search for food event">
+                <input type="text" name="input" placeholder="Search for food event" ng-model="searchEvent">
           </fieldset>
               <div class="row">
                 <div class="small-6 columns">
@@ -40,7 +40,7 @@
         </div>
       </div>
 
-		<div class="callout" ng-repeat="event in events" ng-if="event.hostId !== curr_user._id">
+		<div class="callout" ng-if="event.hostId !== curr_user._id" ng-repeat="event in events| filter:searchEvent">
                     <div class="row panel">
                       <div class="columns small-6">
                         <img width="40px" class="left" src="https://bucketlist.org/static/images/generic-profile-pic.png"/>
@@ -59,6 +59,7 @@
                     <div class="centerAlign">
                      <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
                      <h5><i class="fi-male-female large"></i> Attendee : {{event.attending.length}}  </h5>
+                     <h5><i class="fi-marker large"></i> foodStyle : {{event.foodstyle}}  </h5>
                      <button type="button" class="button" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
                     </div>
       </div>
