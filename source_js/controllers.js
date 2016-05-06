@@ -41,15 +41,17 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
 mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
    $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
-   $scope.showOption = "where={}";
+  // $scope.showOption = "where={}";
    $scope.order = "1";
    $scope.sortBy = "name";
    $scope.events = {};
 
-   Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
+   Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
        $scope.events = data.data;
        for (var i = 0; i < $scope.events.length; i++) {
+
+          $scope.events[i].time = dateFormat($scope.events[i].time);
             // initialize attending
            if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
               $scope.events[i].isActive = true;
@@ -75,11 +77,12 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
              data.data.attending.splice(data.data.attending.indexOf(uid), 1);
            }
              Events.updateEvent(eid,data.data).success(function(data_0){
-               Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
+               Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
                  .success(function(data){
                    $scope.events = data.data;
                    for (var i = 0; i < $scope.events.length; i++) {
                         // initialize attending
+                       $scope.events[i].time = dateFormat($scope.events[i].time);
                        if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
                           $scope.events[i].isActive = true;
                           $scope.events[i].rsvpText = "RSVP"
@@ -117,7 +120,28 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
          $scope.events[index].rsvpText = "RSVP";
        else
          $scope.events[index].rsvpText = "Cancel";
-     };
+  };
+  //
+  $scope.$watchGroup(['sortBy','showOption','order','skip'], function (newVal, oldVal) {
+       Events.getEvent("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10")
+         .success(function(data){
+           $scope.events = data.data;
+           for (var i = 0; i < $scope.events.length; i++) {
+                // initialize attending
+               $scope.events[i].time = dateFormat($scope.events[i].time);
+               if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
+                  $scope.events[i].isActive = true;
+                  $scope.events[i].rsvpText = "RSVP"
+               }
+               else {
+                  $scope.events[i].isActive = false;
+                  $scope.events[i].rsvpText = "Cancel";
+              }
+
+           }
+
+       });
+     }, true);
 
 
 }]);
@@ -528,7 +552,7 @@ $scope.addEvent = function(){
 	console.log($rootScope.curr_user._id);
     var newData = {
       name: $scope.data.name,
-      time: $scope.data.date.toLocaleDateString(),
+      time: $scope.data.date,
       hour: $scope.data.time.toLocaleTimeString(),
       place: $scope.data.place,
       description: $scope.data.description,
