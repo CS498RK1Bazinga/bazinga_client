@@ -3,7 +3,7 @@
     <div class="row signup-v-center">
         <div class="medium-6 medium-centered large-4 large-centered columns" style="background-color: white;">
     
-            <form name="form" role="form">
+            <form name="form" role="form" ng-submit="signup()">
                 <div class="row column log-in-form">
                     <h4 class="text-center">Sign up</h4>
                     <p class="text-center red">{{message}}</p>
@@ -33,7 +33,7 @@
                     <label class="text-center">Link to profile picture</label>
                     <input type="text" class="form-control" ng-model="user.profilePicture"/>
     
-                    <button type="submit" class="button" ng-click="signup()">Signup</button>
+                    <button type="submit" class="button">Signup</button>
                     <p class="text-center">Already have an account? <a href="#/login">Login here</a></p>
                 </div>
             </form>
