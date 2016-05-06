@@ -30,7 +30,7 @@
 
  		</div>
 		<div class="centerAlign">
-			<button type="submit" class="button round" ng-class="{true:'success', false:'secondary'}[isActive]" ng-click="rsvpUser(curr_user._id,event._id)" >{{rsvpText}}</button>
+			<button type="submit" class="button round" ng-class="{true:'success', false:'secondary'}[isActive]" ng-click="rsvpUser(curr_user._id,event._id)" ng-hide="curr_user._id==event.hostId">{{rsvpText}}</button>
 		</div>
  		<!-- <div class="callout shrink columns">Place: UIUC Grainger Library 4th Floor</div> -->
  		<!-- <div class="columns">Monday April 25th</div> -->
