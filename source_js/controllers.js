@@ -482,6 +482,7 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
    $scope.email = $scope.user.local.email;
    $scope.phoneNumber = $scope.user.local.phoneNumber;
    $scope.gender = $scope.user.local.gender;
+    $scope.image = $scope.user.local.image;
    $scope.edit_user = function(user) {
       $scope.editUser = {
         name: $scope.name,
@@ -489,7 +490,7 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
         password: $scope.user.local.password,
         phoneNumber: $scope.phoneNumber,
         gender: $scope.gender,
-        image: $scope.user.local.image,
+        image: $scope.image,
         attending: $scope.user.local.attending,
         hosting: $scope.user.local.hosting,
         history: $scope.user.local.history,
@@ -848,7 +849,7 @@ mp4Controllers.controller('SignUpController', ['$scope', '$window','$http', '$ro
           password: $scope.user.password,
           phoneNumber: $scope.user.phoneNumber,
           gender: $scope.user.gender,
-          image: "",
+          image: $scope.user.image,
           attending: [],
           hosting: [],
           history: [],
