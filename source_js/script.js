@@ -53,8 +53,6 @@ function timeFormat (format) {
     precM = '0';
   }
 
-
-
   format = precH+hour+":"+precM+min+" "+apm;
   return format;
 };

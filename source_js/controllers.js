@@ -7,22 +7,62 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   $scope.eid = $routeParams.id;
   $scope.id = $routeParams.id;
   $scope.hid = "";
-  console.log($routeParams.id);
+  //console.log($routeParams.id);
 
   $scope.event = {};
+  $scope.attendents=[];
   Events.getEvent($routeParams.id).success(function(data){
-      console.log(data.data._id);
-      console.log(data.data._id === $routeParams.id);
+
       $scope.event = data.data;
+    //  console.log("event: "+$scope.event);
       Users.getUser($scope.event.hostId).success(function(data){
+
       $scope.user = data.data.local;
       console.log($scope.user);
       $scope.hid = data.data._id;
-
+      $scope.event.time = dateFormat($scope.event.time);
+      $scope.event.hour = timeFormat($scope.event.hour);
        });
 
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          $scope.attendents.push(data.data.local.name);
+      });
+
+      // if(!$scope.event.attending){
+      //   $scope.attendents = '';
+      // }
+      // $scope.event.attending[i]
+  }
 
   });
+
+  $scope.remove = function(eid){
+      console.log(eid);
+      //remove the event from users
+      //remove from host user
+      //remove the event
+
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          data.data.local.attending.splice(eid,1);
+          Users.updateUser(data.data._id,data.data).success(function(d1){
+              console.log('removed from list');
+          });
+      });
+    }
+
+      Users.getUser($rootScope.curr_user._id).success(function(data){
+            data.data.local.hosting.splice(eid,1);
+            console.log('removed from host');
+      });
+
+      Events.deleteEvent(eid).success(function(d1){
+          console.log("event removed");
+      });
+
+  }
+
   // console.log($scope.hid);
 
 
@@ -110,6 +150,7 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
   // $scope.showOption = "where={}";
    $scope.order = "1";
    $scope.sortBy = "name";
+   $scope.friends = 1;
    $scope.events = {};
 
    Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
@@ -133,6 +174,45 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
        }
 
    });
+
+     $scope.update = function() {
+      var where;
+      if($scope.friends == 1) //all
+      {
+          where = '';
+      }
+      else //friends
+      {
+        var temp;
+        if($rootScope.curr_user.local.following.length == 0)
+          temp = "";
+        else
+          temp = '"' + $rootScope.curr_user.local.following.join('","') + '"';
+        where = '"hostId": {"$in":[' + temp + ']}';
+      }
+
+      Events.getEvent(("?where={" + where + "}&sort={" + $scope.sortBy + ":" + $scope.order + "}"+"&skip=" +$scope.skip+"&limit=10"))
+     .success(function(data){
+       $scope.events = data.data;
+       for (var i = 0; i < $scope.events.length; i++) {
+
+          $scope.events[i].time = dateFormat($scope.events[i].time);
+            // initialize attending
+           if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
+              $scope.events[i].isActive = true;
+              $scope.events[i].rsvpText = "RSVP"
+           }
+           else {
+              $scope.events[i].isActive = false;
+              $scope.events[i].rsvpText = "Cancel";
+          }
+       }
+
+   });
+
+
+
+     };
 
    $scope.rsvpUser = function(uid,eid) {
 
@@ -168,6 +248,8 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
      });
 
 
+
+
      Users.getUser(uid).success(function(data){
         if(data.data.local.attending.indexOf(eid) === -1){
             data.data.local.attending.push(eid);
@@ -183,7 +265,7 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
 
 
    $scope.toggleActive = function(index) {
-     console.log($scope.events[index]);
+    // console.log($scope.events[index]);
        $scope.events[index].isActive = !$scope.events[index].isActive;
        if($scope.events[index].isActive)
          $scope.events[index].rsvpText = "RSVP";
@@ -348,7 +430,7 @@ mp4Controllers.controller('TaskController', ['$scope', '$window','CommonData', '
    $scope.tasksLength = 0;
    CommonData.getTasks("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10")
      .success(function(data){
-       console.log("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10");
+       //console.log("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10");
        $scope.tasks = data.data;
        for (var i = 0; i < $scope.tasks.length; i++) {
          $scope.tasks[i].deadline = dateFormat($scope.tasks[i].deadline);
@@ -382,7 +464,7 @@ mp4Controllers.controller('TaskController', ['$scope', '$window','CommonData', '
         .success(function() {
           $scope.tasks = {};
           $scope.tasksLength -= 1;
-          console.log("delete" + $scope.tasksLength);
+         // console.log("delete" + $scope.tasksLength);
           CommonData.getTasks("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10")
             .success(function(data){
               $scope.tasks = data.data;
@@ -499,16 +581,42 @@ mp4Controllers.controller('TaskDetailController', ['$scope', '$window','$routePa
 
 //user details
 
-mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope', '$routeParams', '$http', 'Users', function($scope, $window, $rootScope, $routeParams, $http, Users) {
+mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope', '$routeParams', '$http', 'Users', 'Events', function($scope, $window, $rootScope, $routeParams, $http, Users, Events) {
     $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
 
  Users.getUser($routeParams.userId).success(function(data) {
 
     $scope.user = data.data;
+    var hostingIds;
+      if($scope.user.local.hosting.length == 0)
+        hostingIds = "";
+      else
+        hostingIds = '"' + $scope.user.local.hosting.join('","') + '"';
+
+          var where = '"_id": {"$in":[' + hostingIds+ ']}';
+         // console.log('?where={' + where + '}');
+          Events.getEvent('?where={' + where + '}').success(function(data){
+          $scope.eventsHosting = data.data;
+         // console.log($scope.eventsHosting);
+      });
+
+      var attendingIds;
+      if($scope.user.local.attending.length == 0)
+        attendingIds = "";
+      else
+        attendingIds = '"' + $scope.user.local.attending.join('","') + '"';
+          where = '"_id": {"$in":[' + attendingIds+ ']}';
+          Events.getEvent('?where={' + where + '}').success(function(data){
+          $scope.eventsAttending = data.data;
+        //  console.log($scope.eventsAttending);
+      });
+
     }).error(function(err) {
       if (err)
         console.log(err);
  });
+
+
 
   /* Get user data passportjs */
 

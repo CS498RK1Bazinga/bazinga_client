@@ -11,7 +11,7 @@
 
         <div class="small-2 columns">
           <a href="#/event">
-            <button type="button" class="success button"><i class="fa fa-plus" aria-hidden="true"></i> Event</button>
+            <button type="button" class="success button round"><i class="fa fa-plus" aria-hidden="true"></i> Event</button>
           </a>
         </div>
       </div>
@@ -20,21 +20,25 @@
 
       <div class="row">
         <div class="columns right">
-          <fieldset>
+<!--           <fieldset>
                 <input type="text" name="input" placeholder="Search for food event" ng-model="searchEvent">
-          </fieldset>
+          </fieldset> -->
               <div class="row">
-                <div class="small-6 columns">
-                <label>
+                <div class="small-4 columns">
+                <label>Sort by:
                  <select ng-model="sortBy">
                    <option value="name">name</option>
                    <option value="time">date</option>
                  </select>
                </label>
              </div>
-              <div class="small-6 columns">
-                <input type="radio" value = "1" ng-model="order" id="ascending"><label for="ascending">ascending</label>
+              <div class="small-4 columns">
+                <input type="radio" value = "1" ng-model="order" id="ascending"><label for="ascending">ascending</label><br>
                 <input type="radio" value = "-1" ng-model="order" id="descending"><label for="descending">descending</label>
+              </div>
+              <div class="small-4 columns">
+                <input type="radio" value = "1" ng-model="friends" id="all" ng-change="update()" default><label for="all">All</label><br>
+                <input type="radio" value = "-1" ng-model="friends" id="friends" ng-change="update()"><label for="friends">Following</label>
               </div>
             </div>
         </div>
@@ -59,8 +63,10 @@
                     <div class="centerAlign">
                      <h5><i class="fi-marker large"></i> Place: {{event.place}}</h5>
                      <h5><i class="fi-male-female large"></i> Attendee : {{event.attending.length}}  </h5>
+
                      <h5><i class="fi-marker large"></i> foodStyle : {{event.foodstyle}}  </h5>
                      <button type="button" class="button" ng-class="{true:'success', false:'secondary'}[event.isActive]" ng-click="toggleActive($index);rsvpUser(curr_user._id,event._id);">{{event.rsvpText}}</button>
+
                     </div>
       </div>
 
