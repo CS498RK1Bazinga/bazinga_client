@@ -5,10 +5,10 @@
 	  <div class="row">
           <div class="small-4 small-offset-4 columns">
 						<h3><b>Edit Event</b></h3>
-            <h5>Event name: </h5><input ng-model="data.name" required type="text" placeholder="Event name">
-            <h5>Event place: </h5><input ng-model="data.place" required type="text" placeholder="Event place">
+            <h5>Event name: </h5><input ng-model="event.name" required type="text" placeholder="Event name">
+            <h5>Event place: </h5><input ng-model="event.place" required type="text" placeholder="Event place">
             <h5>Hosted By: {{curr_user.local.name}}</h5>
-               <h5>Food style: </h5></h5><select ng-model="data.foodstyle" >
+               <h5>Food style: </h5></h5><select ng-model="event.foodstyle" >
               			<option value="Japanese">Japanese</option>
                         <option value="Chinese">Chinese</option>
                         <option value="Thai">Thai</option>
