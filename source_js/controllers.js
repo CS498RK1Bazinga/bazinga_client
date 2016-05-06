@@ -39,16 +39,31 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
 }]);
 
 mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope', 'Events','Users', function($scope, $window, $rootScope, Events, Users) {
-  $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
+   $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.events = {};
    $scope.showOption = "where={}";
    $scope.order = "1";
    $scope.sortBy = "name";
    $scope.events = {};
 
+   Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
+     .success(function(data){
+       $scope.events = data.data;
+       for (var i = 0; i < $scope.events.length; i++) {
+            // initialize attending
+           if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
+              $scope.events[i].isActive = true;
+              $scope.events[i].rsvpText = "RSVP"
+           }
+           else {
+              $scope.events[i].isActive = false;
+              $scope.events[i].rsvpText = "Cancel";
+          }
+       }
+
+   });
+
    $scope.rsvpUser = function(uid,eid) {
-     console.log('id'+ uid);
-     console.log('eid' + eid);
 
      //update the event.attending[] to include the uid.
      //update the user's attending [] to include eid
@@ -56,33 +71,43 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
      Events.getEvent(eid).success(function(data){
            if(data.data.attending.indexOf(uid) === -1){
               data.data.attending.push(uid);
+           }else {
+             data.data.attending.splice(data.data.attending.indexOf(uid), 1);
+           }
              Events.updateEvent(eid,data.data).success(function(data_0){
-                  console.log("updated attendee");
+               Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
+                 .success(function(data){
+                   $scope.events = data.data;
+                   for (var i = 0; i < $scope.events.length; i++) {
+                        // initialize attending
+                       if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
+                          $scope.events[i].isActive = true;
+                          $scope.events[i].rsvpText = "RSVP"
+                       }
+                       else {
+                          $scope.events[i].isActive = false;
+                          $scope.events[i].rsvpText = "Cancel";
+                      }
+
+                   }
+               });
              });
-            }
+
      });
 
 
      Users.getUser(uid).success(function(data){
         if(data.data.local.attending.indexOf(eid) === -1){
             data.data.local.attending.push(eid);
+        } else {
+          data.data.local.attending.splice(data.data.local.attending.indexOf(eid), 1);
+        }
             Users.updateUser(uid,data.data.local).success(function(data_0){
                   console.log("Updated user's attending []");
             });
-          }
      });
 
    }
-
-   Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
-     .success(function(data){
-       $scope.events = data.data;
-       for (var i = 0; i < $scope.events.length; i++) {
-           $scope.events[i].isActive = true;
-           $scope.events[i].rsvpText = "RSVP";
-       }
-
-   });
 
 
    $scope.toggleActive = function(index) {
@@ -369,15 +394,6 @@ mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope'
       if (err)
         console.log(err);
  });
-
-    $scope.follow = function(){
-           Users.getUser($rootScope.curr_user._id).success(function(data){
-          data.data.local.following.push($routeParams.userId);
-          Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
-                console.log("Updated user's friends []");
-          });
-     });
-    }
 
   /* Get user data passportjs */
 
