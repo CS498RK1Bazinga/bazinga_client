@@ -3,48 +3,40 @@
 <div class="list" ng-controller='UserController'>
 	<div class="row center">
 		<fieldset>
-  		    <legend>Sort by:</legend>
-  		    <input type="radio" name="sortby" value="email" id="user-email" required><label for="user-email">Email</label>
-  		    <input type="radio" name="sortby" value="name" id="user-name"><label for="user-name">Name</label>
-  		    <input type="radio" name="sortby" value="gender" id="user-gender"><label for="user-gender">Gender</label>
 
-  		    <br>
+    		<label class="user_input_container">
+			  <input type="text" placeholder="Search for users" ng-model="searchUser">
+			</label>
 
-  		    <select class="sortby-input">
- 			  <option value="ascending">Ascending</option>
- 			  <option value="descending">Descending</option>
- 			</select>
-  		</fieldset>
+			<label class="user_input_container">Sort by:
+			    <select ng-model="predicate">
+			    	<option value="local.name">Name</option>
+			        <option value="local.email">Email</option>
+			        <option value="local.gender">Gender</option>
+			    </select>
+
+		  		<fieldset>
+    				<input type="radio" name="order_by" value="ascending" id="ascending" required checked ng-click="reverse = false"><label for="ascending">Ascending</label>
+    				<input type="radio" name="order_by" value="descending" id="descending" ng-click="reverse = true"><label for="descending">Descending</label>
+    			</fieldset>
+    		</label>
 
   		<table class="hover">
-		  <thead>
-		    <tr>
-		      <th width="100">Name</th>
-		      <th width="100">Email</th>
-		      <th width="50">Gender</th>
-		      <th width="100">Phone Number</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td><a ng-href="#/users/123">Samuel J. Henson</a></td>
-		      <td>SamuelJHenson@hotmail.com</td>
-		      <td>Male</td>
-		      <td>806-665-9317</td>
-		    </tr>
-		    <tr>
-		      <td><a ng-href="#/users/123">Edith T. Thomas</a></td>
-		      <td>EdithTThomas@aol.com</td>
-		      <td>Male</td>
-		      <td>718-421-5583</td>
-		    </tr>
-		    <tr>
-		      <td><a ng-href="#/users/123">Rose G. Fisher</a></td>
-		      <td>RoseGFisher@gmail.com</td>
-		      <td>Female</td>
-		      <td>724-247-6007</td>
-		    </tr>
-		  </tbody>
-		</table>
+  			<thead>
+  				<tr>
+  					<th>Name</th>
+  					<th>Gender</th>
+  					<th></th>
+  				</tr>
+  			</thead>
+  			<tr ng-repeat="user in users | filter:searchUser | orderBy:predicate:reverse">
+  				<td><a ng-href="#/users/{{user._id}}">{{user.local.name}}</a></td>
+  				<td>{{user.local.gender}}</td>
+  				<td>
+  					<button type="submit" class="button round warning" ng-click="follow(user._id)" >Follow</button>
+  				</td>
+  			</tr>
+  		</table>
+
   	</div>
 </div>

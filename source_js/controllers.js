@@ -98,44 +98,35 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
 }]);
 
 //user list
-mp4Controllers.controller('UserController', ['$scope', '$window','CommonData', 'Users', 'Tasks', function($scope, $window, CommonData, Users, Tasks) {
+mp4Controllers.controller('UserController', ['$scope', '$rootScope', '$window', 'Users', function($scope, $rootScope, $window, Users) {
     $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.users = {};
-   CommonData.getUsers()
-      .success(function(data) {
-        $scope.users = data.data;
-      });
 
-   $scope.deleteUser = function(index){
-     // update task to be unassigned
-     for(var i = 0; i < $scope.users[index].pendingTasks.length; i++) {
-       Tasks.getTask($scope.users[index].pendingTasks[i])
-          .success(function (data) {
-            data.data.assignedUser = "";
-            data.data.assignedUserName = "unassigned";
-            Tasks.updateTask(data.data._id, data.data)
-              .error(function (err) {
-                console.log("Fail to update tasks with deleted user" + err);
-              });
-          }).error(function(err) {
-              console.log("fail to get user's pending tasks" + err);
+   $scope.predicate = 'name';
+
+   Users.getAllUsers().success(function(users) {
+      console.log(users.data);
+      $scope.users = users.data;
+   }).error(function(err) {
+    if (err)
+      console.log("error");
+   });
+   
+   $scope.follow = function(userID){
+          Users.getUser($rootScope.curr_user._id).success(function(data){
+          data.data.local.following.push(userID);
+          Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
+                console.log("Updated user's friends []");
           });
-     }
-
-     Users.deleteUser($scope.users[index]._id)
-        .success(function(data) {
-          $scope.users.splice(index,1);
-        })
-        .error(function(err) {
-          console.log(err);
-        });
-   }
+     });
+    }
 }]);
 
 // add user
 mp4Controllers.controller('AddUserController', ['$scope', '$window', '$routeParams', 'Users'  , function($scope, $window, $routeParams, Users) {
     $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
    $scope.data = {};
+
    $scope.addUser = function(){
      $scope.data.dateCreated = new Date().getTime();
     // console.log($scope.data);
