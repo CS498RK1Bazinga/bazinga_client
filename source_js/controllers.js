@@ -38,79 +38,45 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   //Tasks.getSpecific($routeParams.id).success(function(usr,detail){$scope.task = usr.data;});
 }]);
 
-mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope','$routeParams' , '$window','Events','Users', function($scope, $http,$rootScope,$routeParams, $window,Events,Users) {
+mp4Controllers.controller('EditEventController', ['$scope', '$http','$rootScope','$routeParams' ,'$window','Events','Users', function($scope, $http,$rootScope,$routeParams, $window,Events,Users) {
   $rootScope.curr_user = JSON.parse($window.sessionStorage.curr_user);
   console.log('edit event' + $routeParams.eventId);
+  // console.log($scope.data.hour);
   $scope.data = {};
 
   Events.getEvent($routeParams.eventId).success(function(data){
     $scope.data = data.data;
+        console.log($scope.data);
+
     $scope.data.time = new Date($scope.data.time);
+    $scope.data.hour = new Date($scope.data.hour);
     $scope.data.maximumLimit = parseInt($scope.data.maximumLimit);
-    var str = $scope.data.hour.split(":");
-    var str_1 = str[2].substr(2,3);
+    // var str = $scope.data.hour.split(":");
+    // var str_1 = str[2].substr(2,3);
     // console.log('hour'+str[0]);
-
-    var hourHand = 0;
+    // var hourHand = 0;
     // console.log("str1==" + str_1);
-    if(str_1 === " PM"){
-      hourHand = parseInt(str[0]) + 12;
-      // console.log('pm'+hourHand);
-    }else{
-      hourHand = parseInt(str[0]);
-      // console.log('am'+hourHand);
-    }
-    // console.log(hourHand);
-    $scope.data.hour = new Date($scope.data.time.getYear(),$scope.data.time.getMonth(),$scope.data.time.getDate(),hourHand,str[1],str[2].substr(0,2));
-    // $scope.data.hour = new Date($scope.data.hour); 08:00:00PM
+    // if(str_1 === " PM"){
+      // hourHand = parseInt(str[0]) + 12;
+    // }else{
+      // hourHand = parseInt(str[0]);
+    // }
+    // $scope.data.hourl = new Date($scope.data.time.getYear(),$scope.data.time.getMonth(),$scope.data.time.getDate(),hourHand,str[1],str[2].substr(0,2));
 
-    // $scope.data.time = dateFormat($scope.data.time);
   });
-  // $scope.data = "";
-  // $scope.user = {};
-  // $scope.eid = $routeParams.id;
-  // $scope.id = $routeParams.id;
-  // $scope.hid = "";
-  // console.log($routeParams.id);
-  //
-  // $scope.event = {};
-  // Events.getEvent($routeParams.id).success(function(data){
-  //     console.log(data.data._id);
-  //     console.log(data.data._id === $routeParams.id);
-  //     $scope.event = data.data;
-  //     Users.getUser($scope.event.hostId).success(function(data){
-  //     $scope.user = data.data.local;
-  //     console.log($scope.user);
-  //     $scope.hid = data.data._id;
-  //
-  //      });
-  //
-  //
-  // });
+
 
   $scope.editEvent = function(){
-
     console.log($scope.data);
+    // var lmt = $scope.data.maximumLimit;
+    // console.log(lmt);
+    // var c = $scope.data.hourl.getHours() + " "+$scope.data.hourl.getMinutes();
+    // console.log(c);
+    var b = $scope.data;
 
-    // var newData = {
-    //   name: $scope.data.name,
-    //   time: $scope.data.time,
-    //   hour: $scope.data.hour.toLocaleTimeString(),
-    //   place: $scope.data.place,
-    //   description: $scope.data.description,
-    //   host: $scope.data.host,
-    //   hostId: $scope.data.hostId,
-    //   attending: $scope.data.attending,
-    //   maximumLimit: $scope.data.maximumLimit,
-    //   completed: $scope.data.completed,
-    //   foodstyle: $scope.data.foodstyle,
-    //   occassion: $scope.data.occassion
-    // }
-    // console.log(newData);
-
-      Events.updateEvent($routeParams.eventId,$scope.data).success(function(data){
+      Events.updateEvent($routeParams.eventId,b).success(function(dat1a){
             console.log('updated');
-            console.log(data);
+            console.log(dat1a);
       });
   };
 }]);
@@ -129,6 +95,9 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
        for (var i = 0; i < $scope.events.length; i++) {
 
           $scope.events[i].time = dateFormat($scope.events[i].time);
+          if($scope.events[i].hour){
+                      $scope.events[i].hours = timeFormat($scope.events[i].hour);
+          }
             // initialize attending
            if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
               $scope.events[i].isActive = true;
@@ -630,7 +599,7 @@ $scope.addEvent = function(){
     var newData = {
       name: $scope.data.name,
       time: $scope.data.date,
-      hour: $scope.data.time.toLocaleTimeString(),
+      hour: $scope.data.time,
       place: $scope.data.place,
       description: $scope.data.description,
       host: $rootScope.curr_user.local.name,
@@ -648,17 +617,14 @@ $scope.addEvent = function(){
         .success(function(data){
         $scope.errorMessage = "";
         $scope.successMessage = "Event " + data.data.name + " has been added!";
-      //   if($scope.assignedUser) {
-      //       $scope.data = {};
-      //       $scope.users[$scope.assignedUser].pendingTasks.push(data.data._id);
-      //       Users.updateUser($scope.users[$scope.assignedUser]._id,$scope.users[$scope.assignedUser])
-      //           .success(function(data){
-      //               console.log("task added sucesssfully");
-      //           }).error(function(err){
-      //           if(err)
-      //               console.log("fail to update user " + err);
-      //       });
-      // }
+
+        Users.getUser($rootScope.curr_user._id).success(function(data1){
+            data1.data.local.hosting.push(data.data._id);
+            Users.updateUser($rootScope.curr_user._id,data1.data.local).success(function(data2){
+                console.log('updated to host events array');
+            });
+        });
+
     }).error(function(err){
         if(err) {
           $scope.errorMessage = err.message;
