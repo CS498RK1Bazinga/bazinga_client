@@ -10,6 +10,7 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
   console.log($routeParams.id);
 
   $scope.event = {};
+  $scope.attendents=[];
   Events.getEvent($routeParams.id).success(function(data){
       console.log(data.data._id);
       console.log(data.data._id === $routeParams.id);
@@ -18,11 +19,49 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
       $scope.user = data.data.local;
       console.log($scope.user);
       $scope.hid = data.data._id;
-
+      $scope.event.time = dateFormat($scope.event.time);
+      $scope.event.hour = timeFormat($scope.event.hour);
        });
 
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          $scope.attendents.push(data.data.local.name);
+      });
+
+      // if(!$scope.event.attending){
+      //   $scope.attendents = '';
+      // }
+      // $scope.event.attending[i]
+  }
 
   });
+
+  $scope.remove = function(eid){
+      console.log(eid);
+      //remove the event from users 
+      //remove from host user
+      //remove the event
+
+      for (var i = 0; i < $scope.event.attending.length; i++) {
+      Users.getUser($scope.event.attending[i]).success(function(data){
+          data.data.local.attending.splice(eid,1);
+          Users.updateUser(data.data._id,data.data).success(function(d1){
+              console.log('removed from list');
+          });
+      });
+    }
+
+      Users.getUser($rootScope.curr_user._id).success(function(data){
+            data.data.local.hosting.splice(eid,1);
+            console.log('removed from host');
+      });
+
+      Events.deleteEvent(eid).success(function(d1){
+          console.log("event removed");
+      });
+
+  }
+
   // console.log($scope.hid);
 
 
