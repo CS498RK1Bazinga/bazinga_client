@@ -49,13 +49,8 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
    Events.getEvent(("?sort={" + $scope.sortBy + ":" + $scope.order + "}&" + $scope.showOption +"&skip=" +$scope.skip+"&limit=10"))
      .success(function(data){
        $scope.events = data.data;
-       var index = []
        for (var i = 0; i < $scope.events.length; i++) {
             // initialize attending
-            if($scope.events[i].hostId === $rootScope.curr_user._id) {
-              console.log($scope.events[i].name);
-              index.push(i);
-            }
            if($scope.events[i].attending.indexOf($rootScope.curr_user._id) === -1) {
               $scope.events[i].isActive = true;
               $scope.events[i].rsvpText = "RSVP"
@@ -64,10 +59,6 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
               $scope.events[i].isActive = false;
               $scope.events[i].rsvpText = "Cancel";
           }
-       }
-
-       for (var i = 0; i < index.length; i++) {
-               $scope.events.splice(index[i], 1);
        }
 
    });
