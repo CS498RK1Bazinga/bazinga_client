@@ -3,11 +3,9 @@
 <div class="row" style="background-color: white;padding: 20px;">
 	<div class="event-detail-header-container">
 		<h2>{{event.name}} </h2>
-		<button type="submit" class="button warning round edit-event-button" style="float: right;">Edit Detail</button>
+		<a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning round edit-event-button" style="float: right;">Edit Detail</button></a>
 	</div>
      <hr>
-
-     <p><a href="#/edit-event/{{event._id}}"><button type="submit" class="button warning">Edit Detail</button>
      </a>
      <button type="submit" class="button alert" ng-if="event.hostId === curr_user._id" ng-click="remove(event._id)">Remove Event</button>
      </p>
