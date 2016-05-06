@@ -185,12 +185,18 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
       // console.log($scope.editUser);
       Users.updateUser($scope.user._id, $scope.editUser).success(function(data) {
         $rootScope.curr_user = data.data;
+          $window.sessionStorage.setItem('curr_user', JSON.stringify(data.data));
         $scope.user = data.data;
         $scope.name = $scope.user.local.name;
+          console.log($scope.name);
         $scope.email = $scope.user.local.email;
         $scope.phoneNumber = $scope.user.local.phoneNumber;
         $scope.gender = $scope.user.local.gender;
-      }).error();
+
+          $scope.message = "User edited!";
+      }).error(function(err) {
+          console.log("Couldn't edit user");
+      });
    };
 
 
