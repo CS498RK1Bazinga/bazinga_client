@@ -47,6 +47,10 @@ mp4Controllers.controller('EventDetailController', ['$scope', '$http','$rootScop
       Users.getUser($scope.event.attending[i]).success(function(data){
           data.data.local.attending.splice(eid,1);
           Users.updateUser(data.data._id,data.data).success(function(d1){
+              Users.getUser($rootScope.curr_user._id).success(function(user){
+                  $rootScope.curr_user = user.data;
+                  $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+              });
               console.log('removed from list');
           });
       });
@@ -257,6 +261,10 @@ mp4Controllers.controller('NewsFeedController', ['$scope', '$window','$rootScope
           data.data.local.attending.splice(data.data.local.attending.indexOf(eid), 1);
         }
             Users.updateUser(uid,data.data.local).success(function(data_0){
+                Users.getUser($rootScope.curr_user._id).success(function(user){
+                    $rootScope.curr_user = user.data;
+                    $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+                });
                   console.log("Updated user's attending []");
             });
      });
@@ -332,7 +340,7 @@ mp4Controllers.controller('UserController', ['$scope', '$rootScope', '$window', 
           if(data.data.local.following.indexOf(userID) === -1)
               data.data.local.following.push(userID);
           else
-              data.data.local.following.slice(data.data.local.following.indexOf(userID), 1);
+              data.data.local.following.splice(data.data.local.following.indexOf(userID), 1);
           Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
             Users.getUser($rootScope.curr_user._id).success(function(user){
                 $rootScope.curr_user = user.data;
@@ -401,9 +409,13 @@ mp4Controllers.controller('EditUserController', ['$scope', '$rootScope', '$windo
       };
       // console.log($scope.editUser);
       Users.updateUser($scope.user._id, $scope.editUser).success(function(data) {
-        $rootScope.curr_user = data.data;
-          $window.sessionStorage.setItem('curr_user', JSON.stringify(data.data));
-        $scope.user = data.data;
+          Users.getUser($rootScope.curr_user._id).success(function(user){
+              $rootScope.curr_user = user.data;
+              $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+              $scope.user = user.data;
+          });
+
+
         $scope.name = $scope.user.local.name;
           console.log($scope.name);
         $scope.email = $scope.user.local.email;
@@ -774,6 +786,10 @@ $scope.addEvent = function(){
         Users.getUser($rootScope.curr_user._id).success(function(data1){
             data1.data.local.hosting.push(data.data._id);
             Users.updateUser($rootScope.curr_user._id,data1.data.local).success(function(data2){
+                Users.getUser($rootScope.curr_user._id).success(function(user){
+                    $rootScope.curr_user = user.data;
+                    $window.sessionStorage.setItem('curr_user', JSON.stringify(user.data));
+                });
                 console.log('updated to host events array');
             });
         });
