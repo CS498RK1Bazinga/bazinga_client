@@ -375,6 +375,15 @@ mp4Controllers.controller('ProfileController', ['$scope', '$window','$rootScope'
         console.log(err);
  });
 
+    $scope.follow = function(){
+           Users.getUser($rootScope.curr_user._id).success(function(data){
+          data.data.local.following.push($routeParams.userId);
+          Users.updateUser($rootScope.curr_user._id, data.data.local).success(function(data_0){
+                console.log("Updated user's friends []");
+          });
+     });
+    }
+
   /* Get user data passportjs */
 
    //$scope.id = $routeParams.userId;
